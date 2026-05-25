@@ -1,0 +1,17 @@
+CoBeQuangKhanDo.png
+size:1316,416
+filter:Linear,Linear
+pma:true
+2_BODY
+bounds:517,57,373,355
+2_COAT
+bounds:892,204,302,208
+2_HAND_L
+bounds:892,25,186,177
+2_HAND_R
+bounds:1080,11,209,149
+2_HEAD
+bounds:2,2,513,410
+2_SD
+bounds:1196,162,250,118
+rotate:90

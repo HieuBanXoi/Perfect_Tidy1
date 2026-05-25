@@ -1,0 +1,232 @@
+{
+    "BuildID": "39fd8091-d546-4b3f-b862-d80a61deaef3",
+    "Command": "project:upload",
+    "ProjectID": "54ab6df5d24ca13458b7b8f24e7d8130",
+    "ProjectStateHash": "6be3a71a1eae15c0e2ad9a1e08a2132a59e9d23a99fa2edbeab9c25c9163787f",
+    "StageCompletedAt": 3,
+    "EarliestFatalError": 0,
+    "StartTime": 1779259227935,
+    "EndTime": 1779259399082,
+    "PlaygroundUserID": 33919,
+    "OperatingSystem": "win32",
+    "UnityPackageID": null,
+    "TargetPlatform": "playground",
+    "UnityVersion": "6000.0.38f1",
+    "LunaVersion": "7.1.0",
+    "LogCount": 7,
+    "Logs": [
+        {
+            "LogID": "8a581e7a-56e4-4211-ac69-f763f8fcc8b3",
+            "Order": 6,
+            "Timestamp": 1779259402774,
+            "Stage": 3,
+            "ErrorType": 3,
+            "ErrorCode": "LP3007",
+            "Description": "You are not using any custom events",
+            "Details": [
+                "You are not using any custom events. It is recommended to use custom events to have a better understanding of the playable."
+            ],
+            "DescriptionValues": [
+                ""
+            ],
+            "DetailsValues": [
+                ""
+            ],
+            "LogCount": 1,
+            "LinePosition": null,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "d85b56fa-6e1e-4975-b18b-72ec155ad2e9",
+            "Order": 6,
+            "Timestamp": 1779259402776,
+            "Stage": 3,
+            "ErrorType": 3,
+            "ErrorCode": "LP3011",
+            "Description": "You are not using any LunaPlaygroundFields attributes.",
+            "Details": [
+                "You are not using any LunaPlaygroundFields attributes, it allows you to configure your playable to different concepts to find the best variation, which can drastically improve playable performance on all ad networks."
+            ],
+            "DescriptionValues": null,
+            "DetailsValues": null,
+            "LogCount": 1,
+            "LinePosition": null,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "9dfd01c1-916d-4918-82cf-82b872b76595",
+            "Order": 0,
+            "Timestamp": 1779259249278,
+            "Stage": 1,
+            "ErrorType": 2,
+            "ErrorCode": "LP1014",
+            "Description": "We recommend running Runtime Analysis to find and remove all unused code",
+            "Details": [
+                "Navigate to the Runtime Analysis → Code tab to enable code stripping. Before uploading the playable, please make sure to have played all scenario’s of the playable in a development build to make Runtime Analysis work properly."
+            ],
+            "DescriptionValues": [],
+            "DetailsValues": [],
+            "LogCount": 1,
+            "LinePosition": 0,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "18bab37d-4fa5-4048-96f4-6f83f9a46fda",
+            "Order": 1,
+            "Timestamp": 1779259249310,
+            "Stage": 1,
+            "ErrorType": 0,
+            "ErrorCode": "LP1027",
+            "Description": "This DOTween version is not supported",
+            "Details": [
+                "The incorrect DOTween version for this Unity version is in use, please update or downgrade to the recommended version {0} in the package manager. Go to Window → Package Manager."
+            ],
+            "DescriptionValues": [],
+            "DetailsValues": [
+                ""
+            ],
+            "LogCount": 1,
+            "LinePosition": 0,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "be5a786f-6a45-4ecb-9fcd-c40725711b09",
+            "Order": 2,
+            "Timestamp": 1779259249310,
+            "Stage": 1,
+            "ErrorType": 0,
+            "ErrorCode": "LP1015",
+            "Description": "This TMP version is not fully supported",
+            "Details": [
+                "The incorrect Text Mesh Pro for this Unity version is in use, please update or downgrade to the recommended version {0} in the package manager. Go to Window → Package Manager"
+            ],
+            "DescriptionValues": [],
+            "DetailsValues": [
+                ""
+            ],
+            "LogCount": 1,
+            "LinePosition": 0,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "a9b6d745-c10b-4f53-b655-651c594d6e0e",
+            "Order": 3,
+            "Timestamp": 1779259249310,
+            "Stage": 1,
+            "ErrorType": 0,
+            "ErrorCode": "LP1032",
+            "Description": "Package(s) is not supported in Luna",
+            "Details": [
+                "Currently package(s) com.unity.timeline are not supported in Luna. We recommend you to remove it and workaround it's functionality."
+            ],
+            "DescriptionValues": [
+                "com.unity.timeline (1.8.7)"
+            ],
+            "DetailsValues": [
+                "com.unity.timeline"
+            ],
+            "LogCount": 1,
+            "LinePosition": 0,
+            "FilePath": "D:/PlayableAds/DreamyRoom/Packages\\manifest.json",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "caa2e261-4d08-40b9-b312-6bd5b64def33",
+            "Order": 4,
+            "Timestamp": 1779259249310,
+            "Stage": 1,
+            "ErrorType": 2,
+            "ErrorCode": "LP1010",
+            "Description": "Looks like a collider was scaled, this might affect performance.",
+            "Details": [
+                "71_bed",
+                "1_day leo",
+                "69_ban",
+                "72_goi",
+                "73_pillow",
+                "74_men",
+                "75_den ngu",
+                "co be",
+                "60_lan_can",
+                "17_ke",
+                "64_may_may",
+                "59_lan_can",
+                "1_",
+                "10_den tuong",
+                "11_book",
+                "63_chi",
+                "62_ghe",
+                "14_book",
+                "70_slipper",
+                "61_cay",
+                "58_clock",
+                "66_ke",
+                "13_book",
+                "4_dep_hong copy",
+                "12_book",
+                "65_vai",
+                "16_book",
+                "68_chi",
+                "67_chi",
+                "Layer 188",
+                "Holder_60_lan_can",
+                "Holder_70_slipper",
+                "Holder_12_book",
+                "Holder_65_vai",
+                "Holder_17_ke",
+                "Holder_67_chi",
+                "Holder_74_men",
+                "Holder_10_den tuong",
+                "Holder_11_book",
+                "Holder_16_book",
+                "Holder_72_goi",
+                "Shadow",
+                "Holder_58_clock",
+                "Holder_64_may_may",
+                "Holder_59_lan_can",
+                "Holder_75_den ngu",
+                "Holder_Layer 188",
+                "Holder_co be",
+                "Holder_73_pillow",
+                "Holder_68_chi",
+                "Holder_71_bed",
+                "Holder_66_ke",
+                "Holder_1_",
+                "Shadow",
+                "Holder_63_chi",
+                "Holder_62_ghe",
+                "Holder_14_book",
+                "Holder_69_ban",
+                "Holder_1_day leo",
+                "Holder_61_cay",
+                "Holder_13_book",
+                "Holder_4_dep_hong copy"
+            ],
+            "DescriptionValues": [],
+            "DetailsValues": [],
+            "LogCount": 62,
+            "LinePosition": 0,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        }
+    ]
+}
