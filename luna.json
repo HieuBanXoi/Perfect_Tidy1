@@ -2,7 +2,7 @@
     "version": "7.1.0",
     "projectId": "54ab6df5d24ca13458b7b8f24e7d8130",
     "applicationID": 27329,
-    "creativeName": "PLY_DreamyRoom_120526_Hieu_Lv197_V1",
+    "creativeName": "PLY_DreamyRoom_Lv711_PrideMonth",
     "pgServer": "EU",
     "window": {
         "‐⁙": true
@@ -131,10 +131,10 @@
             ]
         },
         "scenes": [
-            "Assets/_GamePlay_/Scenes/LV711.unity"
+            "Assets/_GamePlay_/Scenes/SampleScene.unity"
         ],
         "disabledScenes": [
-            "Assets/_GamePlay_/Scenes/SampleScene.unity"
+            "Assets/_GamePlay_/Scenes/LV711.unity"
         ],
         "startupScene": 0,
         "packages": {
@@ -368,10 +368,6 @@
             },
             {
                 "name": "Bridge.GeneratorEnumerable",
-                "excluded": true
-            },
-            {
-                "name": "Bridge.GeneratorEnumerator",
                 "excluded": true
             },
             {
@@ -1579,10 +1575,6 @@
                 "excluded": true
             },
             {
-                "name": "UnityEngine.CustomYieldInstruction",
-                "excluded": true
-            },
-            {
                 "name": "UnityEngine.DefaultExecutionOrder",
                 "excluded": true
             },
@@ -2064,10 +2056,6 @@
             },
             {
                 "name": "UnityEngine.U2D.SpriteAtlas",
-                "excluded": true
-            },
-            {
-                "name": "UnityEngine.WaitForSeconds",
                 "excluded": true
             },
             {
@@ -6316,11 +6304,11 @@
             },
             {
                 "name": "UnityEngine.WaitForEndOfFrame",
-                "excluded": true
+                "excluded": false
             },
             {
                 "name": "UnityEngine.WaitForFixedUpdate",
-                "excluded": true
+                "excluded": false
             },
             {
                 "name": "Luna.Unity.DTO.UnityEngine.Assets.RenderObjects",
@@ -18182,11 +18170,11 @@
                     },
                     {
                         "name": "orthographicSize#get",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "orthographicSize#set",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "orthographic#get",
@@ -23951,6 +23939,14 @@
                     {
                         "name": "ShowHandTutorial",
                         "excluded": false
+                    },
+                    {
+                        "name": "OnItemPlaced$1",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Awake",
+                        "excluded": false
                     }
                 ]
             },
@@ -24110,10 +24106,46 @@
                     },
                     {
                         "name": "DelayUpdateUIRoutine",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "UpdateUI",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetTargetOrthographicSize",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ApplyCameraScale",
+                        "excluded": false
+                    },
+                    {
+                        "name": "CachePerspectiveCamera",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetInitialPerspectiveFocusDistance",
+                        "excluded": false
+                    },
+                    {
+                        "name": "FitPerspectiveCameraToSize",
+                        "excluded": true
+                    },
+                    {
+                        "name": "TryGetRendererBounds",
+                        "excluded": true
+                    },
+                    {
+                        "name": "EncapsulateRenderer",
+                        "excluded": true
+                    },
+                    {
+                        "name": "FitPerspectiveCameraToBounds",
+                        "excluded": true
+                    },
+                    {
+                        "name": "CacheDefaultOrthographicSize",
                         "excluded": false
                     }
                 ]
@@ -26218,11 +26250,11 @@
                 "instanceMethods": [
                     {
                         "name": "init",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "ctor",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "Cancel",
@@ -26230,7 +26262,7 @@
                     },
                     {
                         "name": "Update",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "HandleFixedUpdate",
@@ -26242,7 +26274,7 @@
                     },
                     {
                         "name": "MoveNext",
-                        "excluded": true
+                        "excluded": false
                     }
                 ]
             },
@@ -30840,7 +30872,7 @@
                     },
                     {
                         "name": "Resize",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "Resize$1",
@@ -31174,7 +31206,7 @@
                 "instanceMethods": [
                     {
                         "name": "getDefaultValue",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "ctor",
@@ -31194,7 +31226,7 @@
                     },
                     {
                         "name": "$clone",
-                        "excluded": true
+                        "excluded": false
                     }
                 ]
             },
@@ -33051,7 +33083,23 @@
                         "excluded": false
                     },
                     {
-                        "name": "SpawnNextItem",
+                        "name": "SpawnNextItemToVacatedTarget",
+                        "excluded": false
+                    },
+                    {
+                        "name": "TryPlayEndAnimation",
+                        "excluded": true
+                    },
+                    {
+                        "name": "RevealNextItem",
+                        "excluded": false
+                    },
+                    {
+                        "name": "RevealInitialItems",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ShowInitialItem",
                         "excluded": false
                     }
                 ]
@@ -33128,6 +33176,22 @@
                     },
                     {
                         "name": "SpawnVFX",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ApplyChildSortingOffset",
+                        "excluded": false
+                    },
+                    {
+                        "name": "RestoreDefaultSorting",
+                        "excluded": false
+                    },
+                    {
+                        "name": "CacheChildSortingOrders",
+                        "excluded": false
+                    },
+                    {
+                        "name": "EnsureDefaultSortingOrder",
                         "excluded": false
                     }
                 ]
@@ -37139,6 +37203,96 @@
                     {
                         "name": "Tick",
                         "excluded": false
+                    },
+                    {
+                        "name": "Tick\",this)}this.c$-=t;if(this.c$<=0){pc.Application.getApplication().events.off(\"update",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "ItemSetupTool",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "ScreenScaleStep",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "ctor",
+                        "excluded": false
+                    },
+                    {
+                        "name": "$ctor1",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "Bridge.GeneratorEnumerator",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "Current#get",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ctor",
+                        "excluded": false
+                    },
+                    {
+                        "name": "getCurrent",
+                        "excluded": false
+                    },
+                    {
+                        "name": "getCurrent$1",
+                        "excluded": true
+                    },
+                    {
+                        "name": "reset",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "UnityEngine.CustomYieldInstruction",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "Current#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "moveNext",
+                        "excluded": true
+                    },
+                    {
+                        "name": "reset",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "UnityEngine.WaitForSeconds",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "ctor",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Update",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Reset",
+                        "excluded": false
                     }
                 ]
             }
@@ -37258,6 +37412,26 @@
                         "script": "",
                         "ext": "",
                         "name": "Assets/Assets/Level 711/Level_655.psd"
+                    },
+                    {
+                        "maxWidth": 2048,
+                        "maxHeight": 2048,
+                        "format": "png32",
+                        "compression": "quantSize",
+                        "quality": 65,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/Assets/LV711/Level_655.psd"
+                    },
+                    {
+                        "maxWidth": 2048,
+                        "maxHeight": 2048,
+                        "format": "png32",
+                        "compression": "quantSize",
+                        "quality": 65,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/Assets/LV711.spriteatlasv2"
                     }
                 ]
             },
@@ -37381,6 +37555,46 @@
                         "script": "",
                         "ext": "",
                         "name": "Assets/Casual Game Sounds U6/CasualGameSounds/DM-CGS-04.wav"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:30.000",
+                        "lengthInSeconds": 30.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/Good Day - Forrest Frank (Karaoke) Original Key (mp3cut.net).mp3"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:30.000",
+                        "lengthInSeconds": 30.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/Cute Kitty Monster Voice 05.mp3"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:30.000",
+                        "lengthInSeconds": 30.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/Cute Kitty Monster Voice 04.mp3"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:30.000",
+                        "lengthInSeconds": 30.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/Audio/HuyDQCommonAudio/Sfx/drop.ogg"
                     }
                 ]
             },

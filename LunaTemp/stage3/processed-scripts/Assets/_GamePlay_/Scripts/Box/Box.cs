@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using System;
 using System.Collections.Generic;
 
 public class Box : MonoBehaviour
@@ -8,13 +9,13 @@ public class Box : MonoBehaviour
     [SerializeField] private BoxGraphicController graphicController;
 
     [Header("Item Spawning")]
-    [Tooltip("Các vật phẩm động sẽ bay ra từ hộp.")]
     public List<Item> dynamicItems;
-    [Tooltip("Các vị trí mà vật phẩm sẽ bay đến.")]
     public List<Transform> spawnTargets;
+    public int initialSpawnCount = 5;
+    public float revealDuration = 0.4f;
 
     private int currentItemIndex = 0;
-    private bool isOpened = false;
+    private bool isRevealingInitialItems = false;
 
     private void Start()
     {
@@ -32,49 +33,17 @@ public class Box : MonoBehaviour
             }
         }
 
-        graphicController.ChangeAnim("0-Drop", false, () => {
-            graphicController.ChangeAnim("1-ready-Loop", true);
-            GameManager.Ins.TriggerTutorial();
-        });
+        if (graphicController != null)
+        {
+            graphicController.ChangeAnim("3-OPEN-loop", true);
+        }
+
+        RevealInitialItems();
     }
 
     public void OnClicked()
     {
-        Debug.Log("OnClick");
-        Ply_SoundManager.Ins.PlayFx(FxType.Click);
         GameManager.Ins.ResetInactivityTimer();
-
-        if (!isOpened)
-        {
-            UIManager.Ins.ZoomInCamera();
-            isOpened = true;
-            graphicController.ChangeAnim("2-OPEN", false, () => {
-                SpawnNextItem();
-                graphicController.ChangeAnim("3-OPEN-click", false, () => {
-                    graphicController.ChangeAnim("3-OPEN-loop-break", true);
-                });
-            });
-        }
-        else
-        {
-            if (currentItemIndex < dynamicItems.Count && spawnTargets.Count > 0)
-            {
-                graphicController.ChangeAnim("3-OPEN-click", false, () => {
-                    if (currentItemIndex >= dynamicItems.Count)
-                    {
-                        Debug.Log("End");
-                        graphicController.ChangeAnim("4-End", false,() => {
-                            gameObject.SetActive(false);
-                        });
-                    }
-                    else
-                    {
-                        graphicController.ChangeAnim("3-OPEN-loop", true);
-                    }
-                });
-                SpawnNextItem();
-            }
-        }
     }
 
     public bool HasItems()
@@ -82,51 +51,144 @@ public class Box : MonoBehaviour
         return currentItemIndex < dynamicItems.Count;
     }
 
-    private void SpawnNextItem()
+    public void SpawnNextItemToVacatedTarget([Bridge.Ref] Vector3 targetPosition)
     {
-        if (currentItemIndex >= dynamicItems.Count || spawnTargets.Count == 0) return;
+        if (isRevealingInitialItems)
+        {
+            return;
+        }
+
+        if (currentItemIndex >= dynamicItems.Count)
+        {
+            TryPlayEndAnimation();
+            return;
+        }
+
+        RevealNextItem(targetPosition);
+    }
+
+    private void RevealInitialItems()
+    {
+        isRevealingInitialItems = true;
+        int revealCount = Mathf.Min(initialSpawnCount, spawnTargets.Count, dynamicItems.Count - currentItemIndex);
+
+        for (int i = 0; i < revealCount; i++)
+        {
+            if (spawnTargets[i] != null)
+            {
+                ShowInitialItem(spawnTargets[i].position);
+            }
+        }
+
+        isRevealingInitialItems = false;
+        UIManager.Ins.ZoomInCamera();
+        GameManager.Ins.TriggerTutorial();
+    }
+
+    private void ShowInitialItem([Bridge.Ref] Vector3 targetPosition)
+    {
+        if (currentItemIndex >= dynamicItems.Count)
+        {
+            return;
+        }
 
         Item itemComponent = dynamicItems[currentItemIndex];
         if (itemComponent == null)
         {
             currentItemIndex++;
+            ShowInitialItem(targetPosition);
             return;
         }
-        
-        bool isFirstItem = (currentItemIndex == 0);
 
-        int randomIndex = Random.Range(0, spawnTargets.Count);
-        Transform targetTransform = spawnTargets[randomIndex];
-        Transform itemToSpawn = itemComponent.transform;
-        itemToSpawn.position = this.transform.position; 
-        itemToSpawn.localScale = Vector3.zero; 
-        itemToSpawn.gameObject.SetActive(true);
+        Transform itemToShow = itemComponent.transform;
+        itemToShow.DOKill();
+        itemToShow.position = targetPosition;
+        itemToShow.localScale = Vector3.one;
 
-        Collider itemCollider = ComponentCache<Collider>.Get(itemToSpawn);
+        itemComponent.canShowShadowHint = currentItemIndex < initialSpawnCount;
+        itemComponent.waitingPosition = targetPosition;
+        itemComponent.SetSortingOrder(GameManager.Ins.currentLayer);
+        GameManager.Ins.AddItemToTutorial(itemComponent);
+        GameManager.Ins.currentLayer++;
 
+        itemToShow.gameObject.SetActive(true);
+        itemComponent.enabled = true;
+        itemComponent.ChangeState(ItemState.Waitting);
+
+        Collider itemCollider = ComponentCache<Collider>.Get(itemToShow);
+        if (itemCollider != null)
+        {
+            itemCollider.enabled = true;
+        }
+
+        itemToShow.DOMoveY(itemToShow.position.y + 0.3f, 1.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+        currentItemIndex++;
+    }
+
+    private void RevealNextItem([Bridge.Ref] Vector3 targetPosition, Action onComplete = null)
+    {
+        if (currentItemIndex >= dynamicItems.Count)
+        {
+            return;
+        }
+
+        Item itemComponent = dynamicItems[currentItemIndex];
+        if (itemComponent == null)
+        {
+            currentItemIndex++;
+            RevealNextItem(targetPosition, onComplete);
+            return;
+        }
+
+        Transform itemToReveal = itemComponent.transform;
+        itemToReveal.DOKill();
+        itemToReveal.position = targetPosition;
+        itemToReveal.localScale = Vector3.zero;
+
+        itemComponent.canShowShadowHint = currentItemIndex < initialSpawnCount;
+        itemComponent.waitingPosition = targetPosition;
+        itemComponent.SetSortingOrder(GameManager.Ins.currentLayer);
+        GameManager.Ins.AddItemToTutorial(itemComponent);
+        GameManager.Ins.currentLayer++;
+
+        itemToReveal.gameObject.SetActive(true);
+        itemComponent.enabled = true;
+        itemComponent.ChangeState(ItemState.Waitting);
+
+        Collider itemCollider = ComponentCache<Collider>.Get(itemToReveal);
         if (itemCollider != null)
         {
             itemCollider.enabled = false;
         }
 
-        itemComponent.canShowShadowHint = (currentItemIndex < 3);
-        itemComponent.waitingPosition = targetTransform.position;
-        itemComponent.SetSortingOrder(GameManager.Ins.currentLayer);
-        GameManager.Ins.AddItemToTutorial(itemComponent);
-        GameManager.Ins.currentLayer++;
+        currentItemIndex++;
 
-        itemToSpawn.DOJump(targetTransform.position,0.5f,1, 0.4f).SetEase(Ease.OutQuad);
-        itemToSpawn.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack).OnComplete(() => {
+        itemToReveal.DOScale(Vector3.one, revealDuration).SetEase(Ease.OutBack).OnComplete(() => {
             if (itemCollider != null)
             {
                 itemCollider.enabled = true;
             }
-            if (isFirstItem) {
-                GameManager.Ins.TriggerTutorial();
-            }
-            itemToSpawn.DOMoveY(itemToSpawn.position.y + 0.3f, 1.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
-        });
 
-        currentItemIndex++;
+            itemToReveal.DOMoveY(itemToReveal.position.y + 0.3f, 1.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+            onComplete?.Invoke();
+        });
+    }
+
+    private void TryPlayEndAnimation()
+    {
+        if (currentItemIndex < dynamicItems.Count)
+        {
+            return;
+        }
+
+        if (graphicController == null)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+        graphicController.ChangeAnim("4-End", false, () => {
+            gameObject.SetActive(false);
+        });
     }
 }

@@ -1,10 +1,11 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
 public class Item : MonoBehaviour
 {
-    public enum PlaceSoundType {Decor,Wooden,Plant,Mental,Silk,HeavyWooden,Clock,Girl,Wolf}
+    public enum PlaceSoundType {Decor,Wooden,Plant,Mental,Silk,HeavyWooden,Clock,Girl,Wolf,Char1,Char2}
     public PlaceSoundType placeSoundType;
     public int id; // Đã đổi sang int
     public ItemState currentState;
@@ -26,6 +27,10 @@ public class Item : MonoBehaviour
 
     public SpriteRenderer spriteRenderer; 
     private int defaultOrderLayer; 
+    private SpriteRenderer[] childSpriteRenderers;
+    private int[] defaultChildSortingOrders;
+    private bool hasCachedChildSortingOrders;
+    private bool hasDefaultSortingOrder;
 
     private void Start()
     {
@@ -35,6 +40,8 @@ public class Item : MonoBehaviour
         originalRotation = tf.rotation;
         currentState = ItemState.Waitting;
         itemHolderLayer = InputManager.Ins.targetLayer;
+        defaultOrderLayer = id;
+        hasDefaultSortingOrder = true;
     }
 
     public void ChangeState(ItemState newState)
@@ -44,10 +51,14 @@ public class Item : MonoBehaviour
 
     public void SetSortingOrder(int order)
     {
+        EnsureDefaultSortingOrder();
+
         if (spriteRenderer != null)
         {
             spriteRenderer.sortingOrder = order;
         }
+
+        ApplyChildSortingOffset();
     }
 
     private void Update()
@@ -66,11 +77,12 @@ public class Item : MonoBehaviour
         Ply_SoundManager.Ins.PlayFx(FxType.Pop);
         tf.DOKill();
         GameManager.Ins.ResetInactivityTimer();
+        ApplyChildSortingOffset();
         ChangeState(ItemState.OnDrag);
         tf.DOScale(originalScale * 1.2f, 0.2f).SetEase(Ease.OutBack);
         tf.DORotate(new Vector3(0, 0, 0), 0.2f); 
 
-        if (canShowShadowHint && shadowOnHolder != null)
+        if (shadowOnHolder != null)
         {
             shadowOnHolder.gameObject.SetActive(true);
         }
@@ -110,13 +122,13 @@ public class Item : MonoBehaviour
             {
                 isPlaced = true;
                 ChangeState(ItemState.MoveToCorrectPos);
-                GameManager.Ins.OnItemPlaced();
+                GameManager.Ins.OnItemPlaced(this);
                 PlaceSound(placeSoundType);
                 tf.DOMove(holder.transform.position, 0.2f)
                          .SetEase(Ease.OutCubic)
                          .OnComplete(() =>
                          {
-                             SetSortingOrder(this.id);
+                             RestoreDefaultSorting();
                             SpawnVFX();
                              if (shadowOnHolder != null)
                              {
@@ -147,6 +159,85 @@ public class Item : MonoBehaviour
             tf.DOMoveY(tf.position.y + 0.3f, 1.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
             tf.DORotateQuaternion(originalRotation, 0.3f);
         }
+    }
+
+    private void ApplyChildSortingOffset()
+    {
+        EnsureDefaultSortingOrder();
+        CacheChildSortingOrders();
+
+        if (spriteRenderer == null || childSpriteRenderers == null)
+        {
+            return;
+        }
+
+        int orderOffset = spriteRenderer.sortingOrder - defaultOrderLayer;
+        for (int i = 0; i < childSpriteRenderers.Length; i++)
+        {
+            if (childSpriteRenderers[i] != null)
+            {
+                childSpriteRenderers[i].sortingOrder = defaultChildSortingOrders[i] + orderOffset;
+            }
+        }
+    }
+
+    private void RestoreDefaultSorting()
+    {
+        EnsureDefaultSortingOrder();
+        SetSortingOrder(defaultOrderLayer);
+
+        if (!hasCachedChildSortingOrders || childSpriteRenderers == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < childSpriteRenderers.Length; i++)
+        {
+            if (childSpriteRenderers[i] != null)
+            {
+                childSpriteRenderers[i].sortingOrder = defaultChildSortingOrders[i];
+            }
+        }
+    }
+
+    private void CacheChildSortingOrders()
+    {
+        if (hasCachedChildSortingOrders)
+        {
+            return;
+        }
+
+        List<SpriteRenderer> children = new List<SpriteRenderer>();
+        SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer>(true);
+
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            if (renderers[i] != null && renderers[i] != spriteRenderer)
+            {
+                children.Add(renderers[i]);
+            }
+        }
+
+        childSpriteRenderers = children.ToArray();
+        defaultChildSortingOrders = new int[childSpriteRenderers.Length];
+
+        for (int i = 0; i < childSpriteRenderers.Length; i++)
+        {
+            defaultChildSortingOrders[i] = childSpriteRenderers[i].sortingOrder;
+        }
+
+        hasCachedChildSortingOrders = true;
+    }
+
+    private void EnsureDefaultSortingOrder()
+    {
+        if (hasDefaultSortingOrder)
+        {
+            return;
+        }
+
+        defaultOrderLayer = id;
+        hasDefaultSortingOrder = true;
     }
 
     private Vector3 GetMouseWorldPos()
@@ -197,6 +288,12 @@ public class Item : MonoBehaviour
                 break;
             case PlaceSoundType.Wolf:
             Ply_SoundManager.Ins.PlayFx(FxType.Wolf);
+                break;
+            case PlaceSoundType.Char1:
+            Ply_SoundManager.Ins.PlayFx(FxType.Char1);
+                break;
+            case PlaceSoundType.Char2:
+            Ply_SoundManager.Ins.PlayFx(FxType.Char2);
                 break;
             default:
                 break;

@@ -14,7 +14,9 @@ public enum FxType
     Clock,
     Girl,
     Wolf,
-    Pop
+    Pop,
+    Char1,
+    Char2
 }
 
 public class Ply_SoundManager : Ply_Singleton<Ply_SoundManager>

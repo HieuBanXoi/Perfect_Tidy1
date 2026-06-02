@@ -10,6 +10,8 @@ public class GameManager : Ply_Singleton<GameManager>
     public bool isTutorial = true;
     public bool isGotoStore = false;
     public int countMove = 0;
+    public int maxMove = 45;
+    public int startLayer = 2000;
     public int currentLayer; // Lớp sorting order cao nhất hiện tại
 
     [Header("Components")]
@@ -25,10 +27,15 @@ public class GameManager : Ply_Singleton<GameManager>
     private int totalDynamicItems;
     private int placedItemCount = 0;
 
+    public override void Awake()
+    {
+        base.Awake();
+        currentLayer = startLayer;
+    }
+
     private void Start()
     {
         ChangeState(new OnPlayState());
-        currentLayer = 2000; // Khởi tạo lớp sorting order ban đầu
         if (handTutorial != null)
         {
             handTutorial.SetActive(false);
@@ -108,13 +115,18 @@ public class GameManager : Ply_Singleton<GameManager>
 
     public void OnItemPlaced()
     {
+        OnItemPlaced(null);
+    }
+
+    public void OnItemPlaced(Item placedItem)
+    {
         placedItemCount++;
         if (UIManager.Ins != null)
         {
             UIManager.Ins.UpdateProgress();
         }
 
-        if (placedItemCount == 8)
+        if (placedItemCount == maxMove)
         {
             LoseGame();
             return;
@@ -123,6 +135,12 @@ public class GameManager : Ply_Singleton<GameManager>
         if (placedItemCount >= totalDynamicItems)
         {
             WinGame();
+            return;
+        }
+
+        if (placedItem != null && mainBox != null)
+        {
+            mainBox.SpawnNextItemToVacatedTarget(placedItem.waitingPosition);
         }
     }
 
