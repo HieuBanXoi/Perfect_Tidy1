@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
   m_Name: BaNgoaiSoi_Atlas
   m_EditorClassIdentifier: 
-  textureLoadingMode: 0
-  onDemandTextureLoader: {fileID: 0}
   atlasFile: {fileID: 4900000, guid: dab3cde2ffeec52448a299d8db4d896f, type: 3}
   materials:
   - {fileID: 2100000, guid: beeba139901d5134a94ed862f6b84938, type: 2}

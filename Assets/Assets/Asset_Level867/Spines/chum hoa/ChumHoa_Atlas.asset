@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
   m_Name: ChumHoa_Atlas
   m_EditorClassIdentifier: 
-  textureLoadingMode: 0
-  onDemandTextureLoader: {fileID: 0}
   atlasFile: {fileID: 4900000, guid: 24005a622794aa04e979c4702ad5bbb2, type: 3}
   materials:
   - {fileID: 2100000, guid: f841b7f03192f084880b14187f9410be, type: 2}

@@ -76,12 +76,12 @@
                 "Stubs/SupersonicWisdom/"
             ],
             "msbuildMac64": "/Library/Frameworks/Mono.framework/Versions/Current/bin/msbuild",
-            "msbuildWin64": "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/MSBuild.exe",
+            "msbuildWin64": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe",
             "externalSources": [],
             "externalJSLibraries": [],
             "scriptingDefines": [],
-            "msbuildVersion": "17.14",
-            "monoVersion": "10.0.3",
+            "msbuildVersion": "18.6",
+            "monoVersion": "10.0.8",
             "dotnetVersion": ""
         },
         "assets": {
@@ -131,9 +131,11 @@
             ]
         },
         "scenes": [
+            "Assets/_GamePlay_/Scenes/LV711.unity"
+        ],
+        "disabledScenes": [
             "Assets/_GamePlay_/Scenes/SampleScene.unity"
         ],
-        "disabledScenes": [],
         "startupScene": 0,
         "packages": {
             "default": {
@@ -8142,10 +8144,6 @@
             },
             {
                 "name": "ItemHolder",
-                "excluded": false
-            },
-            {
-                "name": "ItemSetupTool",
                 "excluded": false
             },
             {
@@ -37141,10 +37139,6 @@
                     {
                         "name": "Tick",
                         "excluded": false
-                    },
-                    {
-                        "name": "Tick\",this)}this.c$-=t;if(this.c$<=0){pc.Application.getApplication().events.off(\"update",
-                        "excluded": false
                     }
                 ]
             }
@@ -37254,6 +37248,16 @@
                         "script": "",
                         "ext": "",
                         "name": "Assets/Assets/Font/LilitaOne-Regular SDF1.asset"
+                    },
+                    {
+                        "maxWidth": 4096,
+                        "maxHeight": 4096,
+                        "format": "png32",
+                        "compression": "quantQuality",
+                        "quality": 65,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/Assets/Level 711/Level_655.psd"
                     }
                 ]
             },
