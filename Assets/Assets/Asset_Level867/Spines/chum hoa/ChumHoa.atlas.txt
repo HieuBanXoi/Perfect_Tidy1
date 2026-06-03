@@ -1,6 +1,0 @@
-ChumHoa.png
-size:1304,1304
-filter:Linear,Linear
-pma:true
-1_day leo
-bounds:2,2,1300,1298
