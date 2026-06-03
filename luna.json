@@ -2,7 +2,7 @@
     "version": "7.1.0",
     "projectId": "54ab6df5d24ca13458b7b8f24e7d8130",
     "applicationID": 27329,
-    "creativeName": "PLY_DreamyRoom_Lv491",
+    "creativeName": "PLY_DreamyRoom_Lv711_GG",
     "pgServer": "EU",
     "window": {
         "‐⁙": true
@@ -131,10 +131,10 @@
             ]
         },
         "scenes": [
-            "Assets/_GamePlay_/Scenes/SampleScene.unity"
+            "Assets/_GamePlay_/Scenes/LV491.unity"
         ],
         "disabledScenes": [
-            "Assets/_GamePlay_/Scenes/LV491.unity"
+            "Assets/_GamePlay_/Scenes/SampleScene.unity"
         ],
         "startupScene": 0,
         "packages": {
@@ -33217,6 +33217,14 @@
                     {
                         "name": "EnsureDefaultSortingOrder",
                         "excluded": false
+                    },
+                    {
+                        "name": "GetWaitingScale",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ApplySpawnScale",
+                        "excluded": false
                     }
                 ]
             },
@@ -37393,6 +37401,28 @@
                         "excluded": false
                     }
                 ]
+            },
+            {
+                "className": "PSD_Tool",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
+                        "excluded": false
+                    },
+                    {
+                        "name": "FindAllChildGameObjects",
+                        "excluded": true
+                    },
+                    {
+                        "name": "FindNameAndChangeSpriteObjectPSD",
+                        "excluded": true
+                    },
+                    {
+                        "name": "FindNameSpriteAndChangeSpriteObjectPSD",
+                        "excluded": true
+                    }
+                ]
             }
         ],
         "stubberDataList": [],
@@ -37550,6 +37580,16 @@
                         "script": "",
                         "ext": "",
                         "name": "Assets/Assets/LV491/Lv491.spriteatlasv2"
+                    },
+                    {
+                        "maxWidth": 2048,
+                        "maxHeight": 2048,
+                        "format": "png32",
+                        "compression": "quantSize",
+                        "quality": 65,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/Assets/LV711/Lv711.spriteatlasv2"
                     }
                 ]
             },

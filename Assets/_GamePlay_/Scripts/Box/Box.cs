@@ -124,7 +124,7 @@ public class Box : MonoBehaviour
         Transform itemToShow = itemComponent.transform;
         itemToShow.DOKill();
         itemToShow.position = targetPosition;
-        itemToShow.localScale = Vector3.one;
+        itemComponent.ApplySpawnScale();
 
         itemComponent.canShowShadowHint = itemIndex < initialSpawnCount;
         itemComponent.waitingPosition = targetPosition;
@@ -158,6 +158,7 @@ public class Box : MonoBehaviour
         itemToReveal.DOKill();
         itemToReveal.position = targetPosition;
         itemToReveal.localScale = Vector3.zero;
+        Vector3 targetScale = itemComponent.GetWaitingScale();
 
         itemComponent.canShowShadowHint = itemIndex < initialSpawnCount;
         itemComponent.waitingPosition = targetPosition;
@@ -175,7 +176,7 @@ public class Box : MonoBehaviour
             itemCollider.enabled = false;
         }
 
-        itemToReveal.DOScale(Vector3.one, revealDuration).SetEase(Ease.OutBack).OnComplete(() => {
+        itemToReveal.DOScale(targetScale, revealDuration).SetEase(Ease.OutBack).OnComplete(() => {
             if (itemCollider != null)
             {
                 itemCollider.enabled = true;
@@ -287,7 +288,14 @@ public class Box : MonoBehaviour
         for (int i = Mathf.Max(0, startIndex); i < clampedEndIndex; i++)
         {
             Item item = dynamicItems[i];
-            if (item != null && item.shadowOnHolder != null)
+            if (item == null)
+            {
+                continue;
+            }
+
+            item.keepShadowVisibleWhenWaiting = isVisible;
+
+            if (item.shadowOnHolder != null)
             {
                 item.shadowOnHolder.gameObject.SetActive(isVisible);
             }

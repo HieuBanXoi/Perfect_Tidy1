@@ -124,7 +124,7 @@ public class Box : MonoBehaviour
         Transform itemToShow = itemComponent.transform;
         itemToShow.DOKill();
         itemToShow.position = targetPosition;
-        itemToShow.localScale = Vector3.one;
+        itemComponent.ApplySpawnScale();
 
         itemComponent.canShowShadowHint = itemIndex < initialSpawnCount;
         itemComponent.waitingPosition = targetPosition;
@@ -158,6 +158,7 @@ public class Box : MonoBehaviour
         itemToReveal.DOKill();
         itemToReveal.position = targetPosition;
         itemToReveal.localScale = Vector3.zero;
+        Vector3 targetScale = itemComponent.GetWaitingScale();
 
         itemComponent.canShowShadowHint = itemIndex < initialSpawnCount;
         itemComponent.waitingPosition = targetPosition;
@@ -175,7 +176,7 @@ public class Box : MonoBehaviour
             itemCollider.enabled = false;
         }
 
-        itemToReveal.DOScale(Vector3.one, revealDuration).SetEase(Ease.OutBack).OnComplete(() => {
+        itemToReveal.DOScale(targetScale, revealDuration).SetEase(Ease.OutBack).OnComplete(() => {
             if (itemCollider != null)
             {
                 itemCollider.enabled = true;

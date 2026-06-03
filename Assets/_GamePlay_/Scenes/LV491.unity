@@ -1058,12 +1058,13 @@ MonoBehaviour:
   - {fileID: 7129835388225641430}
   - {fileID: 8600966603538525369}
   - {fileID: 8862995553553297216}
+  - {fileID: 5975853386945785639}
+  - {fileID: 5095416211834642942}
   - {fileID: 9146485384652947472}
   - {fileID: 7977044988336716597}
   - {fileID: 7858699959445712309}
   - {fileID: 8114238487000299891}
   - {fileID: 5310947475738889534}
-  - {fileID: 5975853386945785639}
   - {fileID: 7900823915591411769}
   - {fileID: 7135881245377702572}
   - {fileID: 9070429449081769324}
@@ -1072,15 +1073,13 @@ MonoBehaviour:
   - {fileID: 8250157321667843104}
   - {fileID: 7512090195165113861}
   - {fileID: 7986171639490933996}
-  - {fileID: 5095416211834642942}
-  - {fileID: 7767431801439755510}
   - {fileID: 7913169034763141581}
   - {fileID: 3545917568532838812}
   - {fileID: 8197402733679878290}
   - {fileID: 8422201151461311916}
   - {fileID: 4009691621341174922}
   - {fileID: 8006525448963286786}
-  - {fileID: 0}
+  - {fileID: 7767431801439755510}
   - {fileID: 7968738491095672824}
   - {fileID: 8998651054729938914}
   - {fileID: 8374242536550451137}
@@ -2309,7 +2308,7 @@ MonoBehaviour:
   minZoomRatio: 0.75
   maxZoomRatio: 1.35
   mouseWheelZoomSpeed: 0.25
-  pinchZoomSpeed: 0.01
+  pinchZoomSpeed: 0.2
   enableDrag: 1
   horizontalOnly: 1
   dragSensitivity: 1
@@ -3249,7 +3248,7 @@ Transform:
   m_GameObject: {fileID: 733608042}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9, y: -16.15, z: 0}
+  m_LocalPosition: {x: -10.5, y: -16.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6564,7 +6563,7 @@ Transform:
   m_GameObject: {fileID: 1352662062}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9, y: -16.15, z: 0}
+  m_LocalPosition: {x: 10.5, y: -16.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10057,7 +10056,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 72451e2dc04b1e142b568e7c5b1c79f1, type: 3}
   - {fileID: 8300000, guid: f5f3732893e21cb4280a3f119e2b619b, type: 3}
   - {fileID: 8300000, guid: 43262c018e3009446affb093bf268a6f, type: 3}
-  - {fileID: 8300000, guid: ed98644753c11da4592e863af0ba0030, type: 3}
+  - {fileID: 8300000, guid: 65f1b7bab8cb44a45a1cd55aa6fced00, type: 3}
   - {fileID: 8300000, guid: c5e2a73ad4706440f93bf05df0b465fe, type: 3}
   - {fileID: 8300000, guid: 2fa0841bb876c8647bc5cacecd362bb3, type: 3}
   - {fileID: 8300000, guid: 490a522f1939d094e8c5199b0d49cb36, type: 3}
@@ -12820,6 +12819,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 11975697}
   shadowOnHolder: {fileID: 3725835987639568975}
   canShowShadowHint: 1
@@ -13498,6 +13499,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 999649670}
   shadowOnHolder: {fileID: 2954577658687675689}
   canShowShadowHint: 1
@@ -14287,6 +14290,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 696462236}
   shadowOnHolder: {fileID: 1476170200}
   canShowShadowHint: 1
@@ -14650,6 +14655,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 134718738}
   shadowOnHolder: {fileID: 7645027864858578031}
   canShowShadowHint: 1
@@ -14970,6 +14977,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 930772268}
   shadowOnHolder: {fileID: 641879775}
   canShowShadowHint: 1
@@ -15118,6 +15127,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1619710780}
   shadowOnHolder: {fileID: 7227175678599052707}
   canShowShadowHint: 1
@@ -15592,6 +15603,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 331347584}
   shadowOnHolder: {fileID: 1652669785}
   canShowShadowHint: 1
@@ -16041,6 +16054,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 620423389}
   shadowOnHolder: {fileID: 393109448525369546}
   canShowShadowHint: 1
@@ -16212,6 +16227,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 1
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 954015352}
   shadowOnHolder: {fileID: 2243991234118660541}
   canShowShadowHint: 1
@@ -16362,6 +16379,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 894292775}
   shadowOnHolder: {fileID: 125272346934553401}
   canShowShadowHint: 1
@@ -16771,6 +16790,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 1
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 576640590}
   shadowOnHolder: {fileID: 3425784045500166688}
   canShowShadowHint: 1
@@ -17521,6 +17542,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 517057615}
   shadowOnHolder: {fileID: 8150304276319608205}
   canShowShadowHint: 1
@@ -17673,6 +17696,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 2100929674}
   shadowOnHolder: {fileID: 5142841644942350309}
   canShowShadowHint: 1
@@ -18026,6 +18051,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 726198835}
   shadowOnHolder: {fileID: 2624956657334140079}
   canShowShadowHint: 1
@@ -18089,6 +18116,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 2106494381}
   shadowOnHolder: {fileID: 2027546515}
   canShowShadowHint: 1
@@ -18130,6 +18159,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1344347257}
   shadowOnHolder: {fileID: 426117112}
   canShowShadowHint: 1
@@ -18386,6 +18417,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 2062901052}
   shadowOnHolder: {fileID: 1644490643279031471}
   canShowShadowHint: 1
@@ -18485,6 +18518,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 874651587}
   shadowOnHolder: {fileID: 6333246412434628797}
   canShowShadowHint: 1
@@ -18563,6 +18598,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 521459237}
   shadowOnHolder: {fileID: 370017687}
   canShowShadowHint: 1
@@ -18693,6 +18730,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1747107091}
   shadowOnHolder: {fileID: 1363076328}
   canShowShadowHint: 1
@@ -18877,6 +18916,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1250739802}
   shadowOnHolder: {fileID: 2730828222072838438}
   canShowShadowHint: 1
@@ -18987,6 +19028,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1935433404}
   shadowOnHolder: {fileID: 1498158189}
   canShowShadowHint: 1
@@ -19078,6 +19121,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1893320218}
   shadowOnHolder: {fileID: 2818422241494847758}
   canShowShadowHint: 1
@@ -19251,6 +19296,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1993812165}
   shadowOnHolder: {fileID: 4823259227210504107}
   canShowShadowHint: 1
@@ -19331,6 +19378,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 345362476}
   shadowOnHolder: {fileID: 4082064598857731934}
   canShowShadowHint: 1
@@ -19390,6 +19439,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 855789720}
   shadowOnHolder: {fileID: 6456621923224315267}
   canShowShadowHint: 1
@@ -19489,6 +19540,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 741062803}
   shadowOnHolder: {fileID: 4188069169030412472}
   canShowShadowHint: 1
@@ -19588,6 +19641,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1405097405}
   shadowOnHolder: {fileID: 445289616503699800}
   canShowShadowHint: 1
@@ -19702,6 +19757,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 2056205177}
   shadowOnHolder: {fileID: 4126866818651813787}
   canShowShadowHint: 1
@@ -19777,6 +19834,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 971079031}
   shadowOnHolder: {fileID: 6370191742868595100}
   canShowShadowHint: 1
@@ -19836,6 +19895,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1182412742}
   shadowOnHolder: {fileID: 715917883169135033}
   canShowShadowHint: 1
@@ -19899,6 +19960,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 782343865}
   shadowOnHolder: {fileID: 5923188535933347547}
   canShowShadowHint: 1
@@ -19973,6 +20036,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1848851747}
   shadowOnHolder: {fileID: 5066354264731883566}
   canShowShadowHint: 1
@@ -20267,6 +20332,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1723431133}
   shadowOnHolder: {fileID: 799399234}
   canShowShadowHint: 1
@@ -20385,6 +20452,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 728341892}
   shadowOnHolder: {fileID: 8915111536017158806}
   canShowShadowHint: 1
@@ -20508,6 +20577,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1205419486}
   shadowOnHolder: {fileID: 2474666899724766722}
   canShowShadowHint: 1
@@ -20624,6 +20695,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1280520295}
   shadowOnHolder: {fileID: 8721510277703412771}
   canShowShadowHint: 1
@@ -20715,6 +20788,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 91850125}
   shadowOnHolder: {fileID: 5624532667474928771}
   canShowShadowHint: 1
@@ -20774,6 +20849,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1961764755}
   shadowOnHolder: {fileID: 1591885759}
   canShowShadowHint: 1
@@ -20837,6 +20914,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1817896335}
   shadowOnHolder: {fileID: 1083639975}
   canShowShadowHint: 1
@@ -20936,6 +21015,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 777883205}
   shadowOnHolder: {fileID: 69941008}
   canShowShadowHint: 1
@@ -21050,6 +21131,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1435556790}
   shadowOnHolder: {fileID: 1146016430}
   canShowShadowHint: 1
@@ -21113,6 +21196,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1070869189}
   shadowOnHolder: {fileID: 8003162178511707094}
   canShowShadowHint: 1
@@ -21288,6 +21373,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1296699650}
   shadowOnHolder: {fileID: 3943219538823945872}
   canShowShadowHint: 1
@@ -21442,6 +21529,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1835848757}
   shadowOnHolder: {fileID: 1518706645}
   canShowShadowHint: 1
@@ -21611,6 +21700,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 519263042}
   shadowOnHolder: {fileID: 2371182462390224914}
   canShowShadowHint: 1
@@ -21725,6 +21816,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1756102335}
   shadowOnHolder: {fileID: 484902294531056421}
   canShowShadowHint: 1
@@ -21803,6 +21896,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 398172630}
   shadowOnHolder: {fileID: 8122947213854240052}
   canShowShadowHint: 1
@@ -21866,6 +21961,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 129350956}
   shadowOnHolder: {fileID: 4637941297785071678}
   canShowShadowHint: 1
@@ -21965,6 +22062,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1048951933}
   shadowOnHolder: {fileID: 6095816208249130640}
   canShowShadowHint: 1
@@ -22060,6 +22159,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1313643846}
   shadowOnHolder: {fileID: 3700533051597084115}
   canShowShadowHint: 1
@@ -22159,6 +22260,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 903111751}
   shadowOnHolder: {fileID: 8286037785327516482}
   canShowShadowHint: 1
@@ -22218,6 +22321,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1873620612}
   shadowOnHolder: {fileID: 6923035077681529877}
   canShowShadowHint: 1
@@ -22277,6 +22382,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 553090264}
   shadowOnHolder: {fileID: 5639611670155410528}
   canShowShadowHint: 1
@@ -22441,6 +22548,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 1
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 603437498}
   shadowOnHolder: {fileID: 4000139832361758933}
   canShowShadowHint: 1
@@ -22504,6 +22613,8 @@ MonoBehaviour:
   itemHolderLayer:
     serializedVersion: 2
     m_Bits: 0
+  scaleOnSpawn: 0
+  spawnScaleMultiplier: 1.25
   correctHolderTransform: {fileID: 1484334800}
   shadowOnHolder: {fileID: 2031920976960432846}
   canShowShadowHint: 1

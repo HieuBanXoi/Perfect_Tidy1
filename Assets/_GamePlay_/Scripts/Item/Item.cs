@@ -11,6 +11,10 @@ public class Item : MonoBehaviour
     public ItemState currentState;
     public LayerMask itemHolderLayer;
 
+    [Header("Spawn Scale")]
+    public bool scaleOnSpawn = false;
+    public float spawnScaleMultiplier = 1.25f;
+
     [NonSerialized]
     public Transform tf;
     private Camera mainCam;
@@ -20,6 +24,8 @@ public class Item : MonoBehaviour
     public Transform correctHolderTransform;
     public Transform shadowOnHolder;
     public bool canShowShadowHint = true;
+    [NonSerialized]
+    public bool keepShadowVisibleWhenWaiting = false;
     public Vector3 waitingPosition;
     private Quaternion originalRotation;
 
@@ -35,7 +41,7 @@ public class Item : MonoBehaviour
     private void Start()
     {
         mainCam = Camera.main;
-        originalScale = Vector3.one;
+        originalScale = GetWaitingScale();
         if (tf == null) tf = transform;
         originalRotation = tf.rotation;
         currentState = ItemState.Waitting;
@@ -47,6 +53,22 @@ public class Item : MonoBehaviour
     public void ChangeState(ItemState newState)
     {
         currentState = newState;
+    }
+
+    public Vector3 GetWaitingScale()
+    {
+        return scaleOnSpawn ? Vector3.one * spawnScaleMultiplier : Vector3.one;
+    }
+
+    public void ApplySpawnScale()
+    {
+        if (tf == null)
+        {
+            tf = transform;
+        }
+
+        originalScale = GetWaitingScale();
+        tf.localScale = originalScale;
     }
 
     public void SetSortingOrder(int order)
@@ -103,8 +125,6 @@ public class Item : MonoBehaviour
 
     private void ReleaseItem()
     {
-        tf.DOScale(originalScale, 0.2f).SetEase(Ease.OutBack);
-        
         if (InputManager.Ins != null) 
             InputManager.Ins.isDragging = false;
 
@@ -124,6 +144,7 @@ public class Item : MonoBehaviour
                 ChangeState(ItemState.MoveToCorrectPos);
                 GameManager.Ins.OnItemPlaced(this);
                 PlaceSound(placeSoundType);
+                tf.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack);
                 tf.DOMove(holder.transform.position, 0.2f)
                          .SetEase(Ease.OutCubic)
                          .OnComplete(() =>
@@ -150,12 +171,13 @@ public class Item : MonoBehaviour
         if (!isPlaced)
         {
 
-            if (shadowOnHolder != null)
+            if (shadowOnHolder != null && !keepShadowVisibleWhenWaiting)
             {
                 shadowOnHolder.gameObject.SetActive(false);
             }
 
             ChangeState(ItemState.Waitting);
+            tf.DOScale(originalScale, 0.2f).SetEase(Ease.OutBack);
             tf.DOMoveY(tf.position.y + 0.3f, 1.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
             tf.DORotateQuaternion(originalRotation, 0.3f);
         }
