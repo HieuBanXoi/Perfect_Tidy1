@@ -50,6 +50,8 @@ public class GameManager : Ply_Singleton<GameManager>
                 UIManager.Ins.SetupProgressBar(totalDynamicItems);
             }
         }
+
+        TriggerTutorial();
     }
     private void Update()
     {
@@ -128,6 +130,12 @@ public class GameManager : Ply_Singleton<GameManager>
 
         if (placedItemCount == maxMove)
         {
+            if (placedItem != null && mainBox != null && mainBox.HasItems())
+            {
+                mainBox.SpawnNextItemToVacatedTarget(placedItem.waitingPosition, LoseGame);
+                return;
+            }
+
             LoseGame();
             return;
         }
@@ -150,6 +158,7 @@ public class GameManager : Ply_Singleton<GameManager>
     {
         if (isTutorialActive || !isPlaying) return;
         inactivityTimer = tutorialDelay;
+        ShowHandTutorial();
     }
 
     public void AddItemToTutorial(Item item)
@@ -158,6 +167,13 @@ public class GameManager : Ply_Singleton<GameManager>
         {
             tutorialItems.Add(item);
         }
+
+        if (isTutorialActive)
+        {
+            RestartHandTutorial();
+            return;
+        }
+
         ResetInactivityTimer();
     }
 
@@ -190,6 +206,25 @@ public class GameManager : Ply_Singleton<GameManager>
             }
             currentlyGuidedItem = null; // Clear reference
         }
+    }
+
+    private void RestartHandTutorial()
+    {
+        isTutorialActive = false;
+
+        if (handTutorial != null)
+        {
+            DOTween.Kill("handTutorial");
+            handTutorial.SetActive(false);
+        }
+
+        if (currentlyGuidedItem != null && currentlyGuidedItem.shadowOnHolder != null)
+        {
+            currentlyGuidedItem.shadowOnHolder.gameObject.SetActive(false);
+        }
+
+        currentlyGuidedItem = null;
+        ShowHandTutorial();
     }
 
     private void ShowHandTutorial()

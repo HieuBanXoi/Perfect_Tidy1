@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class Item : MonoBehaviour
 {
-    public enum PlaceSoundType {Decor,Wooden,Plant,Mental,Silk,HeavyWooden,Clock,Girl,Wolf,Char1,Char2}
+    public enum PlaceSoundType {Decor,Wooden,Plant,Mental,Silk,HeavyWooden,Clock,Girl,Wolf,Char1,Char2,Star,Blanket}
     public PlaceSoundType placeSoundType;
     public int id; // Đã đổi sang int
     public ItemState currentState;
@@ -294,6 +294,12 @@ public class Item : MonoBehaviour
                 break;
             case PlaceSoundType.Char2:
             Ply_SoundManager.Ins.PlayFx(FxType.Char2);
+                break;
+            case PlaceSoundType.Star:
+            Ply_SoundManager.Ins.PlayFx(FxType.Star);
+                break;
+            case PlaceSoundType.Blanket:
+            Ply_SoundManager.Ins.PlayFx(FxType.Blanket);
                 break;
             default:
                 break;

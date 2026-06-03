@@ -2,7 +2,7 @@
     "version": "7.1.0",
     "projectId": "54ab6df5d24ca13458b7b8f24e7d8130",
     "applicationID": 27329,
-    "creativeName": "PLY_DreamyRoom_Lv711_PrideMonth",
+    "creativeName": "PLY_DreamyRoom_Lv491",
     "pgServer": "EU",
     "window": {
         "‐⁙": true
@@ -134,7 +134,7 @@
             "Assets/_GamePlay_/Scenes/SampleScene.unity"
         ],
         "disabledScenes": [
-            "Assets/_GamePlay_/Scenes/LV711.unity"
+            "Assets/_GamePlay_/Scenes/LV491.unity"
         ],
         "startupScene": 0,
         "packages": {
@@ -9193,6 +9193,10 @@
             {
                 "name": "DG.Tweening.Plugins.Core.ITPlugin$4",
                 "excluded": false
+            },
+            {
+                "name": "BoxSpawnMode",
+                "excluded": false
             }
         ],
         "unusedMethods": [
@@ -15836,7 +15840,7 @@
                     },
                     {
                         "name": "value#get",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "value#set",
@@ -23947,6 +23951,10 @@
                     {
                         "name": "Awake",
                         "excluded": false
+                    },
+                    {
+                        "name": "RestartHandTutorial",
+                        "excluded": true
                     }
                 ]
             },
@@ -24978,7 +24986,7 @@
                     },
                     {
                         "name": "Raycast",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "Raycast$1",
@@ -25166,7 +25174,7 @@
                     },
                     {
                         "name": "RaycastInternal",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "GenerateCapsule",
@@ -33101,6 +33109,22 @@
                     {
                         "name": "ShowInitialItem",
                         "excluded": false
+                    },
+                    {
+                        "name": "SpawnBatchWhenTargetsEmpty",
+                        "excluded": false
+                    },
+                    {
+                        "name": "RevealBatch",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetNextDynamicItem",
+                        "excluded": false
+                    },
+                    {
+                        "name": "SetSpawnedShadowsVisible",
+                        "excluded": false
                     }
                 ]
             },
@@ -37030,7 +37054,7 @@
                     },
                     {
                         "name": "$ctor2",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "$ctor1",
@@ -37203,10 +37227,6 @@
                     {
                         "name": "Tick",
                         "excluded": false
-                    },
-                    {
-                        "name": "Tick\",this)}this.c$-=t;if(this.c$<=0){pc.Application.getApplication().events.off(\"update",
-                        "excluded": false
                     }
                 ]
             },
@@ -37292,6 +37312,84 @@
                     },
                     {
                         "name": "Reset",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "CameraController",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Awake",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Start",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Update",
+                        "excluded": false
+                    },
+                    {
+                        "name": "HandleZoom",
+                        "excluded": false
+                    },
+                    {
+                        "name": "HandlePinchZoom",
+                        "excluded": true
+                    },
+                    {
+                        "name": "HandleDrag",
+                        "excluded": false
+                    },
+                    {
+                        "name": "HandleMouseDrag",
+                        "excluded": false
+                    },
+                    {
+                        "name": "HandleTouchDrag",
+                        "excluded": false
+                    },
+                    {
+                        "name": "StartCameraDrag",
+                        "excluded": false
+                    },
+                    {
+                        "name": "DragCamera",
+                        "excluded": false
+                    },
+                    {
+                        "name": "TryGetWorldPoint",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ClampCameraPosition",
+                        "excluded": false
+                    },
+                    {
+                        "name": "SetOrthographicSize",
+                        "excluded": true
+                    },
+                    {
+                        "name": "RefreshZoomLimits",
+                        "excluded": false
+                    },
+                    {
+                        "name": "IsItemDragging",
+                        "excluded": false
+                    },
+                    {
+                        "name": "IsPointerOverGameplayObject",
+                        "excluded": false
+                    },
+                    {
+                        "name": "SetInputEnabled",
                         "excluded": false
                     }
                 ]
@@ -37432,6 +37530,26 @@
                         "script": "",
                         "ext": "",
                         "name": "Assets/Assets/LV711.spriteatlasv2"
+                    },
+                    {
+                        "maxWidth": 512,
+                        "maxHeight": 512,
+                        "format": "png32",
+                        "compression": "none",
+                        "quality": 65,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Font/LilitaOne-Regular SDF.asset"
+                    },
+                    {
+                        "maxWidth": 2048,
+                        "maxHeight": 2048,
+                        "format": "png32",
+                        "compression": "quantSize",
+                        "quality": 65,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/Assets/LV491/Lv491.spriteatlasv2"
                     }
                 ]
             },

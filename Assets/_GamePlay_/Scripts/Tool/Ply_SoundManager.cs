@@ -16,7 +16,9 @@ public enum FxType
     Wolf,
     Pop,
     Char1,
-    Char2
+    Char2,
+    Star,
+    Blanket
 }
 
 public class Ply_SoundManager : Ply_Singleton<Ply_SoundManager>

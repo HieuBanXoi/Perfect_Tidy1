@@ -25,6 +25,7 @@ public class ItemSetupTool : MonoBehaviour
 
     [Header("Generated Shadow")]
     public Color generatedShadowColor = new Color(0f, 0f, 0f, 0.25f);
+    public Color fadedBlackShadowColor = new Color(0f, 0f, 0f, 0.18f);
     public Vector3 generatedShadowLocalOffset = Vector3.zero;
 
     [Header("Optional Layers")]
@@ -237,6 +238,36 @@ public class ItemSetupTool : MonoBehaviour
         Debug.Log($"Scaled {scaledCount} BoxCollider(s) by multiplier {colliderSizeMultiplier}.", this);
     }
 
+    [ContextMenu("Set All Shadows To Faded Black")]
+    public void SetAllShadowsToFadedBlack()
+    {
+        if (string.IsNullOrEmpty(shadowSuffix))
+        {
+            Debug.LogError("shadowSuffix cannot be empty.", this);
+            return;
+        }
+
+        HashSet<SpriteRenderer> shadowRenderers = new HashSet<SpriteRenderer>();
+        CollectShadowRenderers(spritesParent, shadowRenderers);
+        CollectShadowRenderers(holdersParent, shadowRenderers);
+
+        int updatedCount = 0;
+        foreach (SpriteRenderer shadowRenderer in shadowRenderers)
+        {
+            if (shadowRenderer == null)
+            {
+                continue;
+            }
+
+            Undo.RecordObject(shadowRenderer, "Set Shadow Color");
+            shadowRenderer.color = fadedBlackShadowColor;
+            EditorUtility.SetDirty(shadowRenderer);
+            updatedCount++;
+        }
+
+        Debug.Log($"Set {updatedCount} shadow(s) to faded black.", this);
+    }
+
     private Dictionary<string, Transform> CollectShadows(SpriteRenderer[] renderers)
     {
         Dictionary<string, Transform> shadowsByItemName = new Dictionary<string, Transform>();
@@ -260,6 +291,24 @@ public class ItemSetupTool : MonoBehaviour
         }
 
         return shadowsByItemName;
+    }
+
+    private void CollectShadowRenderers(Transform parent, HashSet<SpriteRenderer> shadowRenderers)
+    {
+        if (parent == null)
+        {
+            return;
+        }
+
+        SpriteRenderer[] renderers = parent.GetComponentsInChildren<SpriteRenderer>(true);
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            SpriteRenderer renderer = renderers[i];
+            if (renderer != null && IsShadowName(renderer.gameObject.name))
+            {
+                shadowRenderers.Add(renderer);
+            }
+        }
     }
 
     private HashSet<string> CollectValidHolderNames()

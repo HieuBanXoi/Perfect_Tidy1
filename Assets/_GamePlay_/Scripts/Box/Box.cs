@@ -5,21 +5,29 @@ using System.Collections.Generic;
 
 public class Box : MonoBehaviour
 {
+    [Header("Settings")]
+    public bool useBox = true;
+
     [Header("Components")]
     [SerializeField] private BoxGraphicController graphicController;
 
     [Header("Item Spawning")]
+    public BoxSpawnMode spawnMode = BoxSpawnMode.Continuous;
     public List<Item> dynamicItems;
     public List<Transform> spawnTargets;
     public int initialSpawnCount = 5;
     public float revealDuration = 0.4f;
+    [Tooltip("Only used by BatchWhenTargetsEmpty. Shows holder shadows for all items in the first spawned batch.")]
+    public bool showInitialBatchShadowsOnSpawn = false;
 
     private int currentItemIndex = 0;
     private bool isRevealingInitialItems = false;
+    private readonly List<Vector3> vacatedTargetPositions = new List<Vector3>();
+    private int activeSpawnTargetCount = 0;
 
     private void Start()
     {
-        if (graphicController == null)
+        if (useBox && graphicController == null)
         {
             graphicController = ComponentCache<BoxGraphicController>.Get(transform);
         }
@@ -33,7 +41,7 @@ public class Box : MonoBehaviour
             }
         }
 
-        if (graphicController != null)
+        if (useBox && graphicController != null)
         {
             graphicController.ChangeAnim("3-OPEN-loop", true);
         }
@@ -51,20 +59,32 @@ public class Box : MonoBehaviour
         return currentItemIndex < dynamicItems.Count;
     }
 
-    public void SpawnNextItemToVacatedTarget(Vector3 targetPosition)
+    public void SpawnNextItemToVacatedTarget(Vector3 targetPosition, Action onComplete = null)
     {
+        if (spawnMode == BoxSpawnMode.BatchWhenTargetsEmpty)
+        {
+            SpawnBatchWhenTargetsEmpty(targetPosition, onComplete);
+            return;
+        }
+
         if (isRevealingInitialItems)
         {
+            onComplete?.Invoke();
             return;
         }
 
         if (currentItemIndex >= dynamicItems.Count)
         {
             TryPlayEndAnimation();
+            onComplete?.Invoke();
             return;
         }
 
-        RevealNextItem(targetPosition);
+        if (!RevealNextItem(targetPosition, onComplete))
+        {
+            TryPlayEndAnimation();
+            onComplete?.Invoke();
+        }
     }
 
     private void RevealInitialItems()
@@ -76,8 +96,16 @@ public class Box : MonoBehaviour
         {
             if (spawnTargets[i] != null)
             {
-                ShowInitialItem(spawnTargets[i].position);
+                if (ShowInitialItem(spawnTargets[i].position))
+                {
+                    activeSpawnTargetCount++;
+                }
             }
+        }
+
+        if (spawnMode == BoxSpawnMode.BatchWhenTargetsEmpty && showInitialBatchShadowsOnSpawn)
+        {
+            SetSpawnedShadowsVisible(0, currentItemIndex, true);
         }
 
         isRevealingInitialItems = false;
@@ -85,19 +113,12 @@ public class Box : MonoBehaviour
         GameManager.Ins.TriggerTutorial();
     }
 
-    private void ShowInitialItem(Vector3 targetPosition)
+    private bool ShowInitialItem(Vector3 targetPosition)
     {
-        if (currentItemIndex >= dynamicItems.Count)
-        {
-            return;
-        }
-
-        Item itemComponent = dynamicItems[currentItemIndex];
+        Item itemComponent = GetNextDynamicItem(out int itemIndex);
         if (itemComponent == null)
         {
-            currentItemIndex++;
-            ShowInitialItem(targetPosition);
-            return;
+            return false;
         }
 
         Transform itemToShow = itemComponent.transform;
@@ -105,7 +126,7 @@ public class Box : MonoBehaviour
         itemToShow.position = targetPosition;
         itemToShow.localScale = Vector3.one;
 
-        itemComponent.canShowShadowHint = currentItemIndex < initialSpawnCount;
+        itemComponent.canShowShadowHint = itemIndex < initialSpawnCount;
         itemComponent.waitingPosition = targetPosition;
         itemComponent.SetSortingOrder(GameManager.Ins.currentLayer);
         GameManager.Ins.AddItemToTutorial(itemComponent);
@@ -122,22 +143,15 @@ public class Box : MonoBehaviour
         }
 
         itemToShow.DOMoveY(itemToShow.position.y + 0.3f, 1.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
-        currentItemIndex++;
+        return true;
     }
 
-    private void RevealNextItem(Vector3 targetPosition, Action onComplete = null)
+    private bool RevealNextItem(Vector3 targetPosition, Action onComplete = null)
     {
-        if (currentItemIndex >= dynamicItems.Count)
-        {
-            return;
-        }
-
-        Item itemComponent = dynamicItems[currentItemIndex];
+        Item itemComponent = GetNextDynamicItem(out int itemIndex);
         if (itemComponent == null)
         {
-            currentItemIndex++;
-            RevealNextItem(targetPosition, onComplete);
-            return;
+            return false;
         }
 
         Transform itemToReveal = itemComponent.transform;
@@ -145,7 +159,7 @@ public class Box : MonoBehaviour
         itemToReveal.position = targetPosition;
         itemToReveal.localScale = Vector3.zero;
 
-        itemComponent.canShowShadowHint = currentItemIndex < initialSpawnCount;
+        itemComponent.canShowShadowHint = itemIndex < initialSpawnCount;
         itemComponent.waitingPosition = targetPosition;
         itemComponent.SetSortingOrder(GameManager.Ins.currentLayer);
         GameManager.Ins.AddItemToTutorial(itemComponent);
@@ -161,8 +175,6 @@ public class Box : MonoBehaviour
             itemCollider.enabled = false;
         }
 
-        currentItemIndex++;
-
         itemToReveal.DOScale(Vector3.one, revealDuration).SetEase(Ease.OutBack).OnComplete(() => {
             if (itemCollider != null)
             {
@@ -172,10 +184,123 @@ public class Box : MonoBehaviour
             itemToReveal.DOMoveY(itemToReveal.position.y + 0.3f, 1.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
             onComplete?.Invoke();
         });
+
+        return true;
+    }
+
+    private void SpawnBatchWhenTargetsEmpty(Vector3 targetPosition, Action onComplete = null)
+    {
+        if (isRevealingInitialItems)
+        {
+            onComplete?.Invoke();
+            return;
+        }
+
+        vacatedTargetPositions.Add(targetPosition);
+
+        if (vacatedTargetPositions.Count < activeSpawnTargetCount)
+        {
+            onComplete?.Invoke();
+            return;
+        }
+
+        if (currentItemIndex >= dynamicItems.Count)
+        {
+            TryPlayEndAnimation();
+            onComplete?.Invoke();
+            return;
+        }
+
+        RevealBatch(onComplete);
+    }
+
+    private void RevealBatch(Action onComplete = null)
+    {
+        int targetCount = Mathf.Min(spawnTargets.Count, vacatedTargetPositions.Count);
+        if (targetCount <= 0)
+        {
+            TryPlayEndAnimation();
+            onComplete?.Invoke();
+            return;
+        }
+
+        List<Vector3> targetPositions = vacatedTargetPositions.GetRange(0, targetCount);
+        vacatedTargetPositions.RemoveRange(0, targetCount);
+
+        activeSpawnTargetCount = 0;
+        int pendingRevealCount = 0;
+
+        for (int i = 0; i < targetPositions.Count; i++)
+        {
+            if (currentItemIndex >= dynamicItems.Count)
+            {
+                break;
+            }
+
+            pendingRevealCount++;
+            bool didReveal = RevealNextItem(targetPositions[i], () => {
+                pendingRevealCount--;
+                if (pendingRevealCount == 0)
+                {
+                    onComplete?.Invoke();
+                }
+            });
+
+            if (didReveal)
+            {
+                activeSpawnTargetCount++;
+            }
+            else
+            {
+                pendingRevealCount--;
+            }
+        }
+
+        if (pendingRevealCount == 0)
+        {
+            TryPlayEndAnimation();
+            onComplete?.Invoke();
+        }
+    }
+
+    private Item GetNextDynamicItem(out int itemIndex)
+    {
+        while (currentItemIndex < dynamicItems.Count)
+        {
+            itemIndex = currentItemIndex;
+            Item item = dynamicItems[currentItemIndex];
+            currentItemIndex++;
+
+            if (item != null)
+            {
+                return item;
+            }
+        }
+
+        itemIndex = -1;
+        return null;
+    }
+
+    private void SetSpawnedShadowsVisible(int startIndex, int endIndex, bool isVisible)
+    {
+        int clampedEndIndex = Mathf.Min(endIndex, dynamicItems.Count);
+        for (int i = Mathf.Max(0, startIndex); i < clampedEndIndex; i++)
+        {
+            Item item = dynamicItems[i];
+            if (item != null && item.shadowOnHolder != null)
+            {
+                item.shadowOnHolder.gameObject.SetActive(isVisible);
+            }
+        }
     }
 
     private void TryPlayEndAnimation()
     {
+        if (!useBox)
+        {
+            return;
+        }
+
         if (currentItemIndex < dynamicItems.Count)
         {
             return;
@@ -191,4 +316,10 @@ public class Box : MonoBehaviour
             gameObject.SetActive(false);
         });
     }
+}
+
+public enum BoxSpawnMode
+{
+    Continuous,
+    BatchWhenTargetsEmpty
 }
