@@ -1,8 +1,8 @@
 {
     "version": "7.1.0",
     "projectId": "54ab6df5d24ca13458b7b8f24e7d8130",
-    "applicationID": 27329,
-    "creativeName": "PLY_DreamyRoom_Lv711_GG",
+    "applicationID": 0,
+    "creativeName": "PLY_DreamyRoom_Lv491_V2",
     "pgServer": "EU",
     "window": {
         "‐⁙": true
@@ -23955,6 +23955,10 @@
                     {
                         "name": "RestartHandTutorial",
                         "excluded": true
+                    },
+                    {
+                        "name": "HideCurrentGuidedItemShadowIfAllowed",
+                        "excluded": false
                     }
                 ]
             },
@@ -33125,6 +33129,22 @@
                     {
                         "name": "SetSpawnedShadowsVisible",
                         "excluded": false
+                    },
+                    {
+                        "name": "HandleBoxClickSpawn",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SpawnItemFromBoxClick",
+                        "excluded": true
+                    },
+                    {
+                        "name": "CacheAvailableBoxSpawnPositions",
+                        "excluded": true
+                    },
+                    {
+                        "name": "AddAvailableBoxSpawnPosition",
+                        "excluded": true
                     }
                 ]
             },
@@ -37235,6 +37255,10 @@
                     {
                         "name": "Tick",
                         "excluded": false
+                    },
+                    {
+                        "name": "Tick\",this)}this.c$-=t;if(this.c$<=0){pc.Application.getApplication().events.off(\"update",
+                        "excluded": false
                     }
                 ]
             },
@@ -37590,6 +37614,16 @@
                         "script": "",
                         "ext": "",
                         "name": "Assets/Assets/LV711/Lv711.spriteatlasv2"
+                    },
+                    {
+                        "maxWidth": 1024,
+                        "maxHeight": 1024,
+                        "format": "png32",
+                        "compression": "quantSize",
+                        "quality": 65,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/Assets/LV491/BG_lv491.jpg"
                     }
                 ]
             },

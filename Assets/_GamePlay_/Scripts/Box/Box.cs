@@ -23,7 +23,10 @@ public class Box : MonoBehaviour
     private int currentItemIndex = 0;
     private bool isRevealingInitialItems = false;
     private readonly List<Vector3> vacatedTargetPositions = new List<Vector3>();
+    private readonly List<Vector3> availableBoxSpawnPositions = new List<Vector3>();
     private int activeSpawnTargetCount = 0;
+    private bool isOpened = false;
+    private bool isPlayingBoxAnimation = false;
 
     private void Start()
     {
@@ -41,17 +44,38 @@ public class Box : MonoBehaviour
             }
         }
 
-        if (useBox && graphicController != null)
+        if (useBox)
         {
-            graphicController.ChangeAnim("3-OPEN-loop", true);
-        }
+            CacheAvailableBoxSpawnPositions();
 
-        RevealInitialItems();
+            if (graphicController != null)
+            {
+                graphicController.ChangeAnim("0-Drop", false, () => {
+                    graphicController.ChangeAnim("1-ready-Loop", true);
+                    GameManager.Ins.TriggerTutorial();
+                });
+            }
+            else
+            {
+                GameManager.Ins.TriggerTutorial();
+            }
+        }
+        else
+        {
+            RevealInitialItems();
+        }
     }
 
     public void OnClicked()
     {
+        Debug.Log("OnClick");
+        Ply_SoundManager.Ins.PlayFx(FxType.Click);
         GameManager.Ins.ResetInactivityTimer();
+
+        if (useBox)
+        {
+            HandleBoxClickSpawn();
+        }
     }
 
     public bool HasItems()
@@ -61,6 +85,13 @@ public class Box : MonoBehaviour
 
     public void SpawnNextItemToVacatedTarget(Vector3 targetPosition, Action onComplete = null)
     {
+        if (useBox)
+        {
+            AddAvailableBoxSpawnPosition(targetPosition);
+            onComplete?.Invoke();
+            return;
+        }
+
         if (spawnMode == BoxSpawnMode.BatchWhenTargetsEmpty)
         {
             SpawnBatchWhenTargetsEmpty(targetPosition, onComplete);
@@ -146,7 +177,7 @@ public class Box : MonoBehaviour
         return true;
     }
 
-    private bool RevealNextItem(Vector3 targetPosition, Action onComplete = null)
+    private bool RevealNextItem(Vector3 targetPosition, Action onComplete = null, bool moveFromBox = false)
     {
         Item itemComponent = GetNextDynamicItem(out int itemIndex);
         if (itemComponent == null)
@@ -156,7 +187,7 @@ public class Box : MonoBehaviour
 
         Transform itemToReveal = itemComponent.transform;
         itemToReveal.DOKill();
-        itemToReveal.position = targetPosition;
+        itemToReveal.position = moveFromBox ? transform.position : targetPosition;
         itemToReveal.localScale = Vector3.zero;
         Vector3 targetScale = itemComponent.GetWaitingScale();
 
@@ -176,6 +207,11 @@ public class Box : MonoBehaviour
             itemCollider.enabled = false;
         }
 
+        if (moveFromBox)
+        {
+            itemToReveal.DOJump(targetPosition, 0.5f, 1, revealDuration).SetEase(Ease.OutQuad);
+        }
+
         itemToReveal.DOScale(targetScale, revealDuration).SetEase(Ease.OutBack).OnComplete(() => {
             if (itemCollider != null)
             {
@@ -187,6 +223,124 @@ public class Box : MonoBehaviour
         });
 
         return true;
+    }
+
+    private void HandleBoxClickSpawn()
+    {
+        if (isPlayingBoxAnimation)
+        {
+            return;
+        }
+
+        if (!isOpened)
+        {
+            UIManager.Ins.ZoomInCamera();
+            isOpened = true;
+
+            if (graphicController == null)
+            {
+                SpawnItemFromBoxClick();
+                return;
+            }
+
+            isPlayingBoxAnimation = true;
+            graphicController.ChangeAnim("2-OPEN", false, () => {
+                SpawnItemFromBoxClick();
+                graphicController.ChangeAnim("3-OPEN-click", false, () => {
+                    graphicController.ChangeAnim("3-OPEN-loop-break", true);
+                    isPlayingBoxAnimation = false;
+                });
+            });
+            return;
+        }
+
+        if (currentItemIndex >= dynamicItems.Count)
+        {
+            TryPlayEndAnimation();
+            return;
+        }
+
+        if (availableBoxSpawnPositions.Count <= 0)
+        {
+            return;
+        }
+
+        if (graphicController == null)
+        {
+            SpawnItemFromBoxClick();
+            return;
+        }
+
+        isPlayingBoxAnimation = true;
+        graphicController.ChangeAnim("3-OPEN-click", false, () => {
+            if (currentItemIndex >= dynamicItems.Count)
+            {
+                Debug.Log("End");
+                TryPlayEndAnimation();
+            }
+            else
+            {
+                graphicController.ChangeAnim("3-OPEN-loop", true);
+                isPlayingBoxAnimation = false;
+            }
+        });
+
+        SpawnItemFromBoxClick();
+    }
+
+    private void SpawnItemFromBoxClick()
+    {
+        if (isRevealingInitialItems)
+        {
+            return;
+        }
+
+        if (currentItemIndex >= dynamicItems.Count)
+        {
+            TryPlayEndAnimation();
+            return;
+        }
+
+        if (availableBoxSpawnPositions.Count <= 0)
+        {
+            return;
+        }
+
+        int randomIndex = UnityEngine.Random.Range(0, availableBoxSpawnPositions.Count);
+        Vector3 targetPosition = availableBoxSpawnPositions[randomIndex];
+        availableBoxSpawnPositions.RemoveAt(randomIndex);
+
+        if (!RevealNextItem(targetPosition, null, true))
+        {
+            AddAvailableBoxSpawnPosition(targetPosition);
+            TryPlayEndAnimation();
+        }
+    }
+
+    private void CacheAvailableBoxSpawnPositions()
+    {
+        availableBoxSpawnPositions.Clear();
+
+        for (int i = 0; i < spawnTargets.Count; i++)
+        {
+            if (spawnTargets[i] != null)
+            {
+                AddAvailableBoxSpawnPosition(spawnTargets[i].position);
+            }
+        }
+    }
+
+    private void AddAvailableBoxSpawnPosition(Vector3 targetPosition)
+    {
+        for (int i = 0; i < availableBoxSpawnPositions.Count; i++)
+        {
+            if (Vector3.SqrMagnitude(availableBoxSpawnPositions[i] - targetPosition) < 0.0001f)
+            {
+                return;
+            }
+        }
+
+        availableBoxSpawnPositions.Add(targetPosition);
     }
 
     private void SpawnBatchWhenTargetsEmpty(Vector3 targetPosition, Action onComplete = null)
@@ -316,11 +470,13 @@ public class Box : MonoBehaviour
 
         if (graphicController == null)
         {
+            isPlayingBoxAnimation = false;
             gameObject.SetActive(false);
             return;
         }
 
         graphicController.ChangeAnim("4-End", false, () => {
+            isPlayingBoxAnimation = false;
             gameObject.SetActive(false);
         });
     }

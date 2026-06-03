@@ -24,6 +24,8 @@ public class Item : MonoBehaviour
     public Transform correctHolderTransform;
     public Transform shadowOnHolder;
     public bool canShowShadowHint = true;
+    [NonSerialized]
+    public bool keepShadowVisibleWhenWaiting = false;
     public Vector3 waitingPosition;
     private Quaternion originalRotation;
 
@@ -169,7 +171,7 @@ public class Item : MonoBehaviour
         if (!isPlaced)
         {
 
-            if (shadowOnHolder != null)
+            if (shadowOnHolder != null && !keepShadowVisibleWhenWaiting)
             {
                 shadowOnHolder.gameObject.SetActive(false);
             }
