@@ -5,11 +5,12 @@ using DG.Tweening;
 
 public class Item : MonoBehaviour
 {
-    public enum PlaceSoundType {Decor,Wooden,Plant,Mental,Silk,HeavyWooden,Clock,Girl,Wolf,Char1,Char2,Star,Blanket}
-    public PlaceSoundType placeSoundType;
+    public FxType fxType;
+    public FxType fxTypeOnPlace;
     public int id; // Đã đổi sang int
     public ItemState currentState;
     public LayerMask itemHolderLayer;
+    public GameObject auraEffect;
 
     [Header("Spawn Scale")]
     public bool scaleOnSpawn = false;
@@ -28,6 +29,8 @@ public class Item : MonoBehaviour
     public bool keepShadowVisibleWhenWaiting = false;
     public Vector3 waitingPosition;
     private Quaternion originalRotation;
+    private Animator itemAnimator;
+    private bool hasCachedAnimator;
 
     [Header("Sorting Layer Settings")]
 
@@ -69,6 +72,26 @@ public class Item : MonoBehaviour
 
         originalScale = GetWaitingScale();
         tf.localScale = originalScale;
+    }
+
+    public void DisableAnimatorOnSpawn()
+    {
+        EnsureAnimator();
+
+        if (itemAnimator != null)
+        {
+            itemAnimator.enabled = false;
+        }
+    }
+
+    private void EnableAnimatorWhenPlaced()
+    {
+        EnsureAnimator();
+
+        if (itemAnimator != null)
+        {
+            itemAnimator.enabled = true;
+        }
     }
 
     public void SetSortingOrder(int order)
@@ -143,14 +166,15 @@ public class Item : MonoBehaviour
                 isPlaced = true;
                 ChangeState(ItemState.MoveToCorrectPos);
                 GameManager.Ins.OnItemPlaced(this);
-                PlaceSound(placeSoundType);
+                Ply_SoundManager.Ins.PlayFx(fxType);
                 tf.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack);
                 tf.DOMove(holder.transform.position, 0.2f)
                          .SetEase(Ease.OutCubic)
                          .OnComplete(() =>
                          {
                              RestoreDefaultSorting();
-                            SpawnVFX();
+                             SpawnVFX();
+                             EnableAnimatorWhenPlaced();
                              if (shadowOnHolder != null)
                              {
                                  shadowOnHolder.gameObject.SetActive(true);
@@ -158,8 +182,10 @@ public class Item : MonoBehaviour
 
                              GameManager.Ins.RemoveItemFromTutorial(this);
 
-                             
-
+                            if(auraEffect != null)
+                             {
+                                 auraEffect.SetActive(true);
+                             }
                              ChangeState(ItemState.OnGoal);
                          });
 
@@ -262,6 +288,17 @@ public class Item : MonoBehaviour
         hasDefaultSortingOrder = true;
     }
 
+    private void EnsureAnimator()
+    {
+        if (hasCachedAnimator)
+        {
+            return;
+        }
+
+        itemAnimator = GetComponentInChildren<Animator>(true);
+        hasCachedAnimator = true;
+    }
+
     private Vector3 GetMouseWorldPos()
     {
         Vector3 mousePoint = Input.mousePosition;
@@ -279,59 +316,15 @@ public class Item : MonoBehaviour
 
     private void MoveToCorrectPos() { }
     private void Waitting() { }
-
-    public void PlaceSound(PlaceSoundType type)
-    {
-        switch (type)
-        {
-            case PlaceSoundType.Decor:
-            Ply_SoundManager.Ins.PlayFx(FxType.Decor);
-                break;
-            case PlaceSoundType.Wooden:
-            Ply_SoundManager.Ins.PlayFx(FxType.Wooden);
-                break;
-            case PlaceSoundType.Plant:
-            Ply_SoundManager.Ins.PlayFx(FxType.Plant);
-                break;
-            case PlaceSoundType.Mental:
-            Ply_SoundManager.Ins.PlayFx(FxType.Mental);
-                break;
-            case PlaceSoundType.Silk:
-            Ply_SoundManager.Ins.PlayFx(FxType.Silk);
-                break;
-            case PlaceSoundType.HeavyWooden:
-            Ply_SoundManager.Ins.PlayFx(FxType.HeavyWooden);
-                break;
-            case PlaceSoundType.Clock:
-            Ply_SoundManager.Ins.PlayFx(FxType.Clock);
-                break;
-            case PlaceSoundType.Girl:
-            Ply_SoundManager.Ins.PlayFx(FxType.Girl);
-                break;
-            case PlaceSoundType.Wolf:
-            Ply_SoundManager.Ins.PlayFx(FxType.Wolf);
-                break;
-            case PlaceSoundType.Char1:
-            Ply_SoundManager.Ins.PlayFx(FxType.Char1);
-                break;
-            case PlaceSoundType.Char2:
-            Ply_SoundManager.Ins.PlayFx(FxType.Char2);
-                break;
-            case PlaceSoundType.Star:
-            Ply_SoundManager.Ins.PlayFx(FxType.Star);
-                break;
-            case PlaceSoundType.Blanket:
-            Ply_SoundManager.Ins.PlayFx(FxType.Blanket);
-                break;
-            default:
-                break;
-        }
-    }
     
     public void SpawnVFX()
     {
         MergeEffect mergeEffect = Ply_Pool.Ins.Spawn<MergeEffect>(PoolType.MergeVFX,tf.position,tf.rotation);
         mergeEffect.DeSpawnByTime();
+    }
+    public void PlaySoundOnPlace()
+    {
+        Ply_SoundManager.Ins.PlayFx(fxTypeOnPlace);
     }
 }
 

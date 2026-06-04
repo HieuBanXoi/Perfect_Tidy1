@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float minZoomRatio = 0.75f;
     [SerializeField] private float maxZoomRatio = 1.35f;
     [SerializeField] private float mouseWheelZoomSpeed = 0.25f;
-    [SerializeField] private float pinchZoomSpeed = 0.01f;
+    [SerializeField] private float pinchZoomSpeed = 0.2f;
 
     [Header("Drag")]
     [SerializeField] private bool enableDrag = true;

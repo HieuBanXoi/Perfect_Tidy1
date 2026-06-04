@@ -8,17 +8,16 @@ public enum FxType
     Decor = 1,
     Wooden = 2,
     Plant = 3,
-    Mental = 4,
-    Silk = 5,
-    HeavyWooden,
-    Clock,
-    Girl,
-    Wolf,
     Pop,
-    Char1,
-    Char2,
-    Star,
-    Blanket
+    Silk,
+    Cat1,
+    Cat2,
+    Cleaning,
+    Knock,
+    Cat3,
+    Cat4,
+    Cat5,
+    PhatTo
 }
 
 public class Ply_SoundManager : Ply_Singleton<Ply_SoundManager>

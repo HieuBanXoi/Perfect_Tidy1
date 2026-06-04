@@ -150,13 +150,28 @@
       "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/ItemHolder.cs"
     ],
     [
+      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/DelayStartAnim.cs"
+    ],
+    [
       "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/ItemSetupTool.cs"
+    ],
+    [
+      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/ItemWithAura.cs"
     ],
     [
       "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/PSD_Tool.cs"
     ],
     [
       "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Yielders.cs"
+    ],
+    [
+      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Epic Toon FX/Scripts/ETFXLightFade.cs"
+    ],
+    [
+      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Epic Toon FX/Scripts/ETFXPitchRandomizer.cs"
+    ],
+    [
+      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Epic Toon FX/Scripts/ETFXRotation.cs"
     ],
     [
       "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs"

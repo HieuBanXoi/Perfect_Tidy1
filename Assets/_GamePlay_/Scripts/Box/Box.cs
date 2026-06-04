@@ -156,6 +156,7 @@ public class Box : MonoBehaviour
         itemToShow.DOKill();
         itemToShow.position = targetPosition;
         itemComponent.ApplySpawnScale();
+        itemComponent.DisableAnimatorOnSpawn();
 
         itemComponent.canShowShadowHint = itemIndex < initialSpawnCount;
         itemComponent.waitingPosition = targetPosition;
@@ -189,6 +190,7 @@ public class Box : MonoBehaviour
         itemToReveal.DOKill();
         itemToReveal.position = moveFromBox ? transform.position : targetPosition;
         itemToReveal.localScale = Vector3.zero;
+        itemComponent.DisableAnimatorOnSpawn();
         Vector3 targetScale = itemComponent.GetWaitingScale();
 
         itemComponent.canShowShadowHint = itemIndex < initialSpawnCount;
@@ -227,10 +229,10 @@ public class Box : MonoBehaviour
 
     private void HandleBoxClickSpawn()
     {
-        if (isPlayingBoxAnimation)
-        {
-            return;
-        }
+        // if (isPlayingBoxAnimation)
+        // {
+        //     return;
+        // }
 
         if (!isOpened)
         {

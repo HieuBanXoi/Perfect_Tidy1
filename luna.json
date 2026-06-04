@@ -1,8 +1,8 @@
 {
     "version": "7.1.0",
     "projectId": "54ab6df5d24ca13458b7b8f24e7d8130",
-    "applicationID": 0,
-    "creativeName": "PLY_DreamyRoom_Lv491_V2",
+    "applicationID": 27329,
+    "creativeName": "PLY_DreamyRoom_Lv689_GG",
     "pgServer": "EU",
     "window": {
         "‐⁙": true
@@ -123,7 +123,8 @@
                 "Stubs/IronSource",
                 "Stubs/Vungle",
                 "Stubs/MoreMountains.NiceVibrations",
-                "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset"
+                "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset",
+                "Assets/Assets/LV689/Level_650.psd"
             ],
             "includes": [
                 "Assets/Resources/DOTweenSettings.asset",
@@ -131,11 +132,9 @@
             ]
         },
         "scenes": [
-            "Assets/_GamePlay_/Scenes/LV491.unity"
+            "Assets/_GamePlay_/Scenes/LV689.unity"
         ],
-        "disabledScenes": [
-            "Assets/_GamePlay_/Scenes/SampleScene.unity"
-        ],
+        "disabledScenes": [],
         "startupScene": 0,
         "packages": {
             "default": {
@@ -2275,10 +2274,6 @@
                 "excluded": true
             },
             {
-                "name": "UnityEngine.ParticleSystem",
-                "excluded": true
-            },
-            {
                 "name": "UnityEngine.ReflectionProbe",
                 "excluded": true
             },
@@ -3576,7 +3571,7 @@
             },
             {
                 "name": "UnityEngine.AnimationEvent",
-                "excluded": true
+                "excluded": false
             },
             {
                 "name": "UnityEngine.AnimationEventSource",
@@ -8124,10 +8119,6 @@
             },
             {
                 "name": "IGameState",
-                "excluded": false
-            },
-            {
-                "name": "Item.PlaceSoundType",
                 "excluded": false
             },
             {
@@ -15022,7 +15013,7 @@
                     },
                     {
                         "name": "NextDouble",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "NextBytes",
@@ -33100,7 +33091,7 @@
                     },
                     {
                         "name": "TryPlayEndAnimation",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "RevealNextItem",
@@ -33132,19 +33123,19 @@
                     },
                     {
                         "name": "HandleBoxClickSpawn",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "SpawnItemFromBoxClick",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "CacheAvailableBoxSpawnPositions",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "AddAvailableBoxSpawnPosition",
-                        "excluded": true
+                        "excluded": false
                     }
                 ]
             },
@@ -33215,10 +33206,6 @@
                         "excluded": false
                     },
                     {
-                        "name": "PlaceSound",
-                        "excluded": false
-                    },
-                    {
                         "name": "SpawnVFX",
                         "excluded": false
                     },
@@ -33244,6 +33231,22 @@
                     },
                     {
                         "name": "ApplySpawnScale",
+                        "excluded": false
+                    },
+                    {
+                        "name": "DisableAnimatorOnSpawn",
+                        "excluded": false
+                    },
+                    {
+                        "name": "EnableAnimatorWhenPlaced",
+                        "excluded": false
+                    },
+                    {
+                        "name": "EnsureAnimator",
+                        "excluded": false
+                    },
+                    {
+                        "name": "PlaySoundOnPlace",
                         "excluded": false
                     }
                 ]
@@ -33768,7 +33771,7 @@
                     },
                     {
                         "name": "OnDisable",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "OnDestroy",
@@ -34980,7 +34983,7 @@
                     },
                     {
                         "name": "Range$1",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "Range",
@@ -37427,7 +37430,7 @@
                 ]
             },
             {
-                "className": "PSD_Tool",
+                "className": "DelayStartAnim",
                 "staticMethods": [],
                 "instanceMethods": [
                     {
@@ -37435,15 +37438,289 @@
                         "excluded": false
                     },
                     {
-                        "name": "FindAllChildGameObjects",
+                        "name": "Awake",
+                        "excluded": false
+                    },
+                    {
+                        "name": "OnEnable",
+                        "excluded": false
+                    },
+                    {
+                        "name": "OnDisable",
                         "excluded": true
                     },
                     {
-                        "name": "FindNameAndChangeSpriteObjectPSD",
+                        "name": "EnableAnim",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Reset",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "UnityEngine.ParticleSystem",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "main#get",
                         "excluded": true
                     },
                     {
-                        "name": "FindNameSpriteAndChangeSpriteObjectPSD",
+                        "name": "emission#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "colorBySpeed#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "colorOverLifetime#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "rotationBySpeed#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "rotationOverLifetime#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "shape#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "sizeBySpeed#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "sizeOverLifetime#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "textureSheetAnimation#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "velocityOverLifetime#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "noise#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "inheritVelocity#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "forceOverLifetime#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "limitVelocityOverLifetime#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "enableEmission#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "enableEmission#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "maxParticles#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "maxParticles#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "isPlaying#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "isPaused#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "isStopped#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "time#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "isEmitting#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "particleCount#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "duration#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "duration#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "loop#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "loop#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "startDelay#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "startDelay#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "prewarm#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "prewarm#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "simulationSpace#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "simulationSpace#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "simulationSpeed#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "simulationSpeed#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "useRigidbodyForVelocity#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "useRigidbodyForVelocity#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "useUnscaledTime#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "useUnscaledTime#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "scalingMode#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "scalingMode#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "moveWithCustomTransform#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "moveWithCustomTransform#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "startSize3D#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "startSize3D#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "playOnAwake#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "playOnAwake#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "init",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ctor",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetParticles",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SetParticles",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SetCustomParticleData",
+                        "excluded": true
+                    },
+                    {
+                        "name": "IsAlive",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Play",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Play$1",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Pause",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Pause$1",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Stop",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Stop$1",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Stop$2",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Emit",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Clear",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Simulate",
                         "excluded": true
                     }
                 ]
@@ -37624,6 +37901,26 @@
                         "script": "",
                         "ext": "",
                         "name": "Assets/Assets/LV491/BG_lv491.jpg"
+                    },
+                    {
+                        "maxWidth": 2048,
+                        "maxHeight": 2048,
+                        "format": "png32",
+                        "compression": "quantSize",
+                        "quality": 65,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/Assets/LV689/Lv689.spriteatlasv2"
+                    },
+                    {
+                        "maxWidth": 2048,
+                        "maxHeight": 2048,
+                        "format": "png32",
+                        "compression": "quantSize",
+                        "quality": 65,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/Assets/LV689/New Sprite Atlas.spriteatlasv2"
                     }
                 ]
             },
