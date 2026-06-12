@@ -199,11 +199,7 @@ public class GameManager : Ply_Singleton<GameManager>
             }
 
             // Tắt shadow hint của item vừa được hướng dẫn
-            if (currentlyGuidedItem != null && currentlyGuidedItem.shadowOnHolder != null)
-            {
-                // Tắt shadow hint của item vừa được hướng dẫn
-                currentlyGuidedItem.shadowOnHolder.gameObject.SetActive(false);
-            }
+            HideCurrentGuidedItemShadowIfAllowed();
             currentlyGuidedItem = null; // Clear reference
         }
     }
@@ -218,13 +214,25 @@ public class GameManager : Ply_Singleton<GameManager>
             handTutorial.SetActive(false);
         }
 
-        if (currentlyGuidedItem != null && currentlyGuidedItem.shadowOnHolder != null)
-        {
-            currentlyGuidedItem.shadowOnHolder.gameObject.SetActive(false);
-        }
+        HideCurrentGuidedItemShadowIfAllowed();
 
         currentlyGuidedItem = null;
         ShowHandTutorial();
+    }
+
+    private void HideCurrentGuidedItemShadowIfAllowed()
+    {
+        if (currentlyGuidedItem == null || currentlyGuidedItem.shadowOnHolder == null)
+        {
+            return;
+        }
+
+        if (currentlyGuidedItem.keepShadowVisibleWhenWaiting)
+        {
+            return;
+        }
+
+        currentlyGuidedItem.shadowOnHolder.gameObject.SetActive(false);
     }
 
     private void ShowHandTutorial()

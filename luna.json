@@ -131,10 +131,10 @@
             ]
         },
         "scenes": [
-            "Assets/_GamePlay_/Scenes/LV491.unity"
+            "Assets/_GamePlay_/Scenes/SampleScene.unity"
         ],
         "disabledScenes": [
-            "Assets/_GamePlay_/Scenes/SampleScene.unity"
+            "Assets/_GamePlay_/Scenes/LV491.unity"
         ],
         "startupScene": 0,
         "packages": {
@@ -23955,6 +23955,10 @@
                     {
                         "name": "RestartHandTutorial",
                         "excluded": true
+                    },
+                    {
+                        "name": "HideCurrentGuidedItemShadowIfAllowed",
+                        "excluded": false
                     }
                 ]
             },
@@ -37235,6 +37239,10 @@
                     {
                         "name": "Tick",
                         "excluded": false
+                    },
+                    {
+                        "name": "Tick\",this)}this.c$-=t;if(this.c$<=0){pc.Application.getApplication().events.off(\"update",
+                        "excluded": false
                     }
                 ]
             },
@@ -37399,28 +37407,6 @@
                     {
                         "name": "SetInputEnabled",
                         "excluded": false
-                    }
-                ]
-            },
-            {
-                "className": "PSD_Tool",
-                "staticMethods": [],
-                "instanceMethods": [
-                    {
-                        "name": "init",
-                        "excluded": false
-                    },
-                    {
-                        "name": "FindAllChildGameObjects",
-                        "excluded": true
-                    },
-                    {
-                        "name": "FindNameAndChangeSpriteObjectPSD",
-                        "excluded": true
-                    },
-                    {
-                        "name": "FindNameSpriteAndChangeSpriteObjectPSD",
-                        "excluded": true
                     }
                 ]
             }

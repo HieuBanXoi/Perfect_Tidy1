@@ -288,7 +288,14 @@ public class Box : MonoBehaviour
         for (int i = Mathf.Max(0, startIndex); i < clampedEndIndex; i++)
         {
             Item item = dynamicItems[i];
-            if (item != null && item.shadowOnHolder != null)
+            if (item == null)
+            {
+                continue;
+            }
+
+            item.keepShadowVisibleWhenWaiting = isVisible;
+
+            if (item.shadowOnHolder != null)
             {
                 item.shadowOnHolder.gameObject.SetActive(isVisible);
             }
