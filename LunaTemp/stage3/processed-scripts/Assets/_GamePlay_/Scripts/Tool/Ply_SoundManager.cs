@@ -13,7 +13,14 @@ public enum FxType
     Silk,
     Drop,
     Girl,
-    Pop
+    Pop,
+    Paper,
+    Cat,
+    WoodenHeavy,
+    WoodenSmall,
+    Bao,
+    TrongHoa
+    
 }
 
 public class Ply_SoundManager : Ply_Singleton<Ply_SoundManager>

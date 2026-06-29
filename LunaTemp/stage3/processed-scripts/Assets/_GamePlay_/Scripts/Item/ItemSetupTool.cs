@@ -174,27 +174,27 @@ public class ItemSetupTool : MonoBehaviour
             return;
         }
 
-        List<SpriteRenderer> itemRenderers = new List<SpriteRenderer>();
-        SpriteRenderer[] renderers = spritesParent.GetComponentsInChildren<SpriteRenderer>(true);
+        List<Item> itemRenderers = new List<Item>();
+        Item[] items = spritesParent.GetComponentsInChildren<Item>(true);
 
-        for (int i = 0; i < renderers.Length; i++)
+        for (int i = 0; i < items.Length; i++)
         {
-            SpriteRenderer renderer = renderers[i];
-            if (renderer.transform.parent != spritesParent)
+            Item item = items[i];
+            if (item.transform.parent != spritesParent)
             {
                 continue;
             }
 
-            if (IsShadowName(renderer.gameObject.name))
+            if (IsShadowName(item.gameObject.name))
             {
                 continue;
             }
 
-            itemRenderers.Add(renderer);
+            itemRenderers.Add(item);
         }
 
         itemRenderers.Sort((left, right) => {
-            int orderCompare = left.sortingOrder.CompareTo(right.sortingOrder);
+            int orderCompare = left.id.CompareTo(right.id);
             if (orderCompare != 0)
             {
                 return orderCompare;

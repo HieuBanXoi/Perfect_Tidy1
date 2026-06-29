@@ -19,6 +19,7 @@ public class Box : Ply_Singleton<Box>
     public float revealDuration = 0.4f;
     [Tooltip("Only used by BatchWhenTargetsEmpty. Shows holder shadows for all items in the first spawned batch.")]
     public bool showInitialBatchShadowsOnSpawn = false;
+    public ItemConveyor mainConveyor;
 
     private int currentItemIndex = 0;
     private bool isRevealingInitialItems = false;
@@ -482,9 +483,65 @@ public class Box : Ply_Singleton<Box>
             }
         }
     }
+    private void CompactItemsToLeft()
+    {
+        // 1. Tìm tất cả các Item hiện đang nằm trên các spawnTargets và đang ở trạng thái chờ
+        List<Item> activeItems = new List<Item>();
+        for (int i = 0; i < spawnTargets.Count; i++)
+        {
+            Transform target = spawnTargets[i];
+            if (target != null && target.childCount > 0)
+            {
+                Item item = target.GetComponentInChildren<Item>();
+                if (item != null && item.currentState == ItemState.Waitting)
+                {
+                    activeItems.Add(item);
+                }
+            }
+        }
 
+        if (activeItems.Count == 0) return;
+
+        // 2. Sắp xếp các Item này theo vị trí trục X từ trái sang phải để giữ nguyên thứ tự của chúng
+        activeItems.Sort((a, b) => a.transform.position.x.CompareTo(b.transform.position.x));
+
+        // 3. Sắp xếp lại danh sách các slot (spawnTargets) từ trái sang phải theo tọa độ thế giới
+        List<Transform> sortedTargets = new List<Transform>(spawnTargets);
+        sortedTargets.Sort((a, b) => a.position.x.CompareTo(b.position.x));
+
+        // 4. Dồn các Item về các slot bên trái tương ứng
+        for (int i = 0; i < activeItems.Count; i++)
+        {
+            Item item = activeItems[i];
+            Transform newTarget = sortedTargets[i];
+
+            // Nếu item đã ở đúng slot này rồi thì bỏ qua để tránh chạy lại Tween không cần thiết
+            if (item.homeSlot == newTarget)
+            {
+                continue;
+            }
+
+            // Cập nhật dữ liệu slot mới cho Item để khi người chơi kéo/thả trượt nó sẽ bay về đúng chỗ mới
+            item.transform.SetParent(newTarget, true);
+            item.homeSlot = newTarget;
+            item.waitingPosition = newTarget.position;
+
+            // Chạy hiệu ứng mượt mà dồn item về slot mới bằng DOTween
+            Transform itemTf = item.transform;
+            itemTf.DOKill(); // Xóa các Tween nhấp nhô (Yoyo) cũ đang chạy
+
+            itemTf.DOLocalMove(Vector3.zero, 0.4f).SetEase(Ease.OutCubic).OnComplete(() => {
+                // Sau khi dồn xong, kích hoạt lại hiệu ứng nhấp nhô Yoyo tại vị trí mới giống như ban đầu
+                itemTf.DOMoveY(newTarget.position.y + 0.3f, 1.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+            });
+        }
+    }
     private void TryPlayEndAnimation()
     {
+        if (currentItemIndex >= dynamicItems.Count)
+        {
+            CompactItemsToLeft();
+        }
         if (!useBox)
         {
             return;
