@@ -331,7 +331,7 @@ public class Item : MonoBehaviour
     private void EnsureAnimator()
     {
         if (hasCachedAnimator) return;
-        itemAnimator = ComponentCache<Animator>.Get(tf);
+        itemAnimator = GetComponent<Animator>();
         hasCachedAnimator = true;
     }
 

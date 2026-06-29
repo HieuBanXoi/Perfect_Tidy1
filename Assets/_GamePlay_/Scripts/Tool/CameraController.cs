@@ -11,6 +11,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float maxZoomRatio = 1.35f;
     [SerializeField] private float mouseWheelZoomSpeed = 0.25f;
     [SerializeField] private float pinchZoomSpeed = 0.2f;
+    [SerializeField] private ItemConveyor conveyor;
+
 
     [Header("Drag")]
     [SerializeField] private bool enableDrag = true;
@@ -68,7 +70,7 @@ public class CameraController : MonoBehaviour
 
     private void HandleZoom()
     {
-        if (!enableZoom || !targetCamera.orthographic)
+        if (!enableZoom || !targetCamera.orthographic )
         {
             return;
         }
@@ -103,7 +105,7 @@ public class CameraController : MonoBehaviour
 
     private void HandleDrag()
     {
-        if (!enableDrag || Input.touchCount >= 2 || IsItemDragging())
+        if (!enableDrag || Input.touchCount >= 2 || IsItemDragging() || conveyor.isDraggingConveyor)
         {
             isDraggingCamera = false;
             return;
