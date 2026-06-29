@@ -17,9 +17,10 @@
   "groups": [
     [
       "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Box/Box.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/GameManager.cs",
       "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/Item.cs",
+      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/GameManager.cs",
       "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/InputManager.cs",
+      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Spine/ItemConveyor.cs",
       "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/CameraController.cs",
       "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/StateMachine/LoseState.cs",
       "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/StateMachine/IGameState.cs",
@@ -157,6 +158,9 @@
     ],
     [
       "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/ItemWithAura.cs"
+    ],
+    [
+      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Spine/ScreenHeightPositionAnchor.cs"
     ],
     [
       "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/PSD_Tool.cs"

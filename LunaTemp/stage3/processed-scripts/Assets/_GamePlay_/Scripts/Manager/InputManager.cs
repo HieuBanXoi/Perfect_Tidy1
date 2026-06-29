@@ -11,6 +11,7 @@ public class InputManager : Ply_Singleton<InputManager>
     public LayerMask targetLayer;
     public LayerMask defaultLayer;
     public LayerMask boxLayer;
+    public LayerMask conveyorLayer;
     
     public bool isDragging = false;
 

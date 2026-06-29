@@ -646,5 +646,87 @@ public class ItemSetupTool : MonoBehaviour
         target.layer = layer;
         EditorUtility.SetDirty(target);
     }
+    [ContextMenu("Extract Sprite To Model")]
+    public void ExtractSpriteToModel()
+    {
+        if (spritesParent == null)
+        {
+            Debug.LogError("spritesParent chưa được gán.", this);
+            return;
+        }
+
+        // Lấy tất cả các component Item nằm trong spritesParent
+        Item[] items = spritesParent.GetComponentsInChildren<Item>(true);
+        int processedCount = 0;
+
+        for (int i = 0; i < items.Length; i++)
+        {
+            Item item = items[i];
+            GameObject itemObj = item.gameObject;
+            SpriteRenderer originalRenderer = itemObj.GetComponent<SpriteRenderer>();
+
+            // Bỏ qua nếu GameObject không có SpriteRenderer
+            if (originalRenderer == null)
+            {
+                continue;
+            }
+
+            // 1. Tạo GameObject con tên là "Model"
+            GameObject modelObj = new GameObject("Model");
+            Undo.RegisterCreatedObjectUndo(modelObj, "Create Model GameObject");
+            
+            Transform modelTransform = modelObj.transform;
+            Undo.SetTransformParent(modelTransform, itemObj.transform, "Parent Model");
+            
+            // Reset Transform của Model về mặc định
+            Undo.RecordObject(modelTransform, "Reset Model Transform");
+            modelTransform.localPosition = Vector3.zero;
+            modelTransform.localRotation = Quaternion.identity;
+            modelTransform.localScale = Vector3.one;
+
+            // 2. Chuyển các object con hiện tại sang làm con của Model
+            // Dùng List để lưu trữ tạm các child, tránh lỗi do thay đổi hierarchy khi đang lặp
+            List<Transform> childrenToMove = new List<Transform>();
+            for (int j = 0; j < itemObj.transform.childCount; j++)
+            {
+                Transform child = itemObj.transform.GetChild(j);
+                if (child != modelTransform) // Bỏ qua chính object Model vừa tạo
+                {
+                    childrenToMove.Add(child);
+                }
+            }
+
+            foreach (Transform child in childrenToMove)
+            {
+                Undo.SetTransformParent(child, modelTransform, "Move Child To Model");
+            }
+
+            // 3. Thêm SpriteRenderer vào Model và copy các thuộc tính từ originalRenderer
+            SpriteRenderer modelRenderer = Undo.AddComponent<SpriteRenderer>(modelObj);
+            Undo.RecordObject(modelRenderer, "Copy SpriteRenderer Properties");
+            modelRenderer.sprite = originalRenderer.sprite;
+            modelRenderer.color = originalRenderer.color;
+            modelRenderer.flipX = originalRenderer.flipX;
+            modelRenderer.flipY = originalRenderer.flipY;
+            modelRenderer.drawMode = originalRenderer.drawMode;
+            modelRenderer.size = originalRenderer.size;
+            modelRenderer.sortingLayerID = originalRenderer.sortingLayerID;
+            modelRenderer.sortingOrder = originalRenderer.sortingOrder;
+            modelRenderer.sharedMaterial = originalRenderer.sharedMaterial;
+            EditorUtility.SetDirty(modelRenderer);
+
+            // 4. Cập nhật lại reference spriteRenderer trong script Item để không bị null
+            Undo.RecordObject(item, "Update Item SpriteRenderer Reference");
+            item.spriteRenderer = modelRenderer;
+            EditorUtility.SetDirty(item);
+
+            // 5. Xóa SpriteRenderer ở object cha (chứa Item)
+            Undo.DestroyObjectImmediate(originalRenderer);
+            
+            processedCount++;
+        }
+
+        Debug.Log($"Extract Sprite To Model hoàn tất. Đã xử lý {processedCount} object.", this);
+    }
 #endif
 }

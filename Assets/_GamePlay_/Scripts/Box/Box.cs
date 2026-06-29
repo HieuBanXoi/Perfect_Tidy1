@@ -3,7 +3,7 @@ using DG.Tweening;
 using System;
 using System.Collections.Generic;
 
-public class Box : MonoBehaviour
+public class Box : Ply_Singleton<Box>
 {
     [Header("Settings")]
     public bool useBox = true;
@@ -22,8 +22,8 @@ public class Box : MonoBehaviour
 
     private int currentItemIndex = 0;
     private bool isRevealingInitialItems = false;
-    private readonly List<Vector3> vacatedTargetPositions = new List<Vector3>();
-    private readonly List<Vector3> availableBoxSpawnPositions = new List<Vector3>();
+    private readonly List<Transform> vacatedTargets = new List<Transform>();
+    private readonly List<Transform> availableBoxTargets = new List<Transform>();
     private int activeSpawnTargetCount = 0;
     private bool isOpened = false;
     private bool isPlayingBoxAnimation = false;
@@ -46,7 +46,7 @@ public class Box : MonoBehaviour
 
         if (useBox)
         {
-            CacheAvailableBoxSpawnPositions();
+            CacheAvailableBoxTargets();
 
             if (graphicController != null)
             {
@@ -85,16 +85,23 @@ public class Box : MonoBehaviour
 
     public void SpawnNextItemToVacatedTarget(Vector3 targetPosition, Action onComplete = null)
     {
+        Transform target = GetSpawnTargetByPosition(targetPosition);
+        if (target == null)
+        {
+            onComplete?.Invoke();
+            return;
+        }
+
         if (useBox)
         {
-            AddAvailableBoxSpawnPosition(targetPosition);
+            AddAvailableBoxTarget(target);
             onComplete?.Invoke();
             return;
         }
 
         if (spawnMode == BoxSpawnMode.BatchWhenTargetsEmpty)
         {
-            SpawnBatchWhenTargetsEmpty(targetPosition, onComplete);
+            SpawnBatchWhenTargetsEmpty(target, onComplete);
             return;
         }
 
@@ -111,7 +118,8 @@ public class Box : MonoBehaviour
             return;
         }
 
-        if (!RevealNextItem(targetPosition, onComplete))
+        // Chế độ Continuous khi không dùng Box sẽ spawn ngay lập tức tại đây
+        if (!RevealNextItem(target, onComplete))
         {
             TryPlayEndAnimation();
             onComplete?.Invoke();
@@ -127,7 +135,7 @@ public class Box : MonoBehaviour
         {
             if (spawnTargets[i] != null)
             {
-                if (ShowInitialItem(spawnTargets[i].position))
+                if (ShowInitialItem(spawnTargets[i]))
                 {
                     activeSpawnTargetCount++;
                 }
@@ -144,8 +152,10 @@ public class Box : MonoBehaviour
         GameManager.Ins.TriggerTutorial();
     }
 
-    private bool ShowInitialItem(Vector3 targetPosition)
+    private bool ShowInitialItem(Transform target)
     {
+        if (target == null) return false;
+
         Item itemComponent = GetNextDynamicItem(out int itemIndex);
         if (itemComponent == null)
         {
@@ -153,13 +163,18 @@ public class Box : MonoBehaviour
         }
 
         Transform itemToShow = itemComponent.transform;
+        
+        // Đặt Spawn Target làm cha của Item và lưu lại homeSlot
+        itemToShow.SetParent(target, true);
+        itemComponent.homeSlot = target;
+
         itemToShow.DOKill();
-        itemToShow.position = targetPosition;
+        itemToShow.position = target.position;
         itemComponent.ApplySpawnScale();
         itemComponent.DisableAnimatorOnSpawn();
 
         itemComponent.canShowShadowHint = itemIndex < initialSpawnCount;
-        itemComponent.waitingPosition = targetPosition;
+        itemComponent.waitingPosition = target.position;
         itemComponent.SetSortingOrder(GameManager.Ins.currentLayer);
         GameManager.Ins.AddItemToTutorial(itemComponent);
         GameManager.Ins.currentLayer++;
@@ -178,8 +193,10 @@ public class Box : MonoBehaviour
         return true;
     }
 
-    private bool RevealNextItem(Vector3 targetPosition, Action onComplete = null, bool moveFromBox = false)
+    private bool RevealNextItem(Transform target, Action onComplete = null, bool moveFromBox = false)
     {
+        if (target == null) return false;
+
         Item itemComponent = GetNextDynamicItem(out int itemIndex);
         if (itemComponent == null)
         {
@@ -187,14 +204,19 @@ public class Box : MonoBehaviour
         }
 
         Transform itemToReveal = itemComponent.transform;
+        
+        // Đặt Spawn Target làm cha của Item và lưu lại homeSlot
+        itemToReveal.SetParent(target, true);
+        itemComponent.homeSlot = target;
+
         itemToReveal.DOKill();
-        itemToReveal.position = moveFromBox ? transform.position : targetPosition;
+        itemToReveal.position = moveFromBox ? transform.position : target.position;
         itemToReveal.localScale = Vector3.zero;
         itemComponent.DisableAnimatorOnSpawn();
         Vector3 targetScale = itemComponent.GetWaitingScale();
 
         itemComponent.canShowShadowHint = itemIndex < initialSpawnCount;
-        itemComponent.waitingPosition = targetPosition;
+        itemComponent.waitingPosition = target.position;
         itemComponent.SetSortingOrder(GameManager.Ins.currentLayer);
         GameManager.Ins.AddItemToTutorial(itemComponent);
         GameManager.Ins.currentLayer++;
@@ -211,7 +233,7 @@ public class Box : MonoBehaviour
 
         if (moveFromBox)
         {
-            itemToReveal.DOJump(targetPosition, 0.5f, 1, revealDuration).SetEase(Ease.OutQuad);
+            itemToReveal.DOJump(target.position, 0.5f, 1, revealDuration).SetEase(Ease.OutQuad);
         }
 
         itemToReveal.DOScale(targetScale, revealDuration).SetEase(Ease.OutBack).OnComplete(() => {
@@ -229,11 +251,6 @@ public class Box : MonoBehaviour
 
     private void HandleBoxClickSpawn()
     {
-        // if (isPlayingBoxAnimation)
-        // {
-        //     return;
-        // }
-
         if (!isOpened)
         {
             UIManager.Ins.ZoomInCamera();
@@ -262,7 +279,7 @@ public class Box : MonoBehaviour
             return;
         }
 
-        if (availableBoxSpawnPositions.Count <= 0)
+        if (availableBoxTargets.Count <= 0)
         {
             return;
         }
@@ -303,49 +320,45 @@ public class Box : MonoBehaviour
             return;
         }
 
-        if (availableBoxSpawnPositions.Count <= 0)
+        if (availableBoxTargets.Count <= 0)
         {
             return;
         }
 
-        int randomIndex = UnityEngine.Random.Range(0, availableBoxSpawnPositions.Count);
-        Vector3 targetPosition = availableBoxSpawnPositions[randomIndex];
-        availableBoxSpawnPositions.RemoveAt(randomIndex);
+        int randomIndex = UnityEngine.Random.Range(0, availableBoxTargets.Count);
+        Transform target = availableBoxTargets[randomIndex];
+        availableBoxTargets.RemoveAt(randomIndex);
 
-        if (!RevealNextItem(targetPosition, null, true))
+        if (!RevealNextItem(target, null, true))
         {
-            AddAvailableBoxSpawnPosition(targetPosition);
+            AddAvailableBoxTarget(target);
             TryPlayEndAnimation();
         }
     }
 
-    private void CacheAvailableBoxSpawnPositions()
+    private void CacheAvailableBoxTargets()
     {
-        availableBoxSpawnPositions.Clear();
+        availableBoxTargets.Clear();
 
         for (int i = 0; i < spawnTargets.Count; i++)
         {
             if (spawnTargets[i] != null)
             {
-                AddAvailableBoxSpawnPosition(spawnTargets[i].position);
+                AddAvailableBoxTarget(spawnTargets[i]);
             }
         }
     }
 
-    private void AddAvailableBoxSpawnPosition(Vector3 targetPosition)
+    private void AddAvailableBoxTarget(Transform target)
     {
-        for (int i = 0; i < availableBoxSpawnPositions.Count; i++)
+        if (target == null) return;
+        if (!availableBoxTargets.Contains(target))
         {
-            if (Vector3.SqrMagnitude(availableBoxSpawnPositions[i] - targetPosition) < 0.0001f)
-            {
-                return;
-            }
+            availableBoxTargets.Add(target);
         }
-
-        availableBoxSpawnPositions.Add(targetPosition);
     }
 
-    private void SpawnBatchWhenTargetsEmpty(Vector3 targetPosition, Action onComplete = null)
+    private void SpawnBatchWhenTargetsEmpty(Transform target, Action onComplete = null)
     {
         if (isRevealingInitialItems)
         {
@@ -353,9 +366,9 @@ public class Box : MonoBehaviour
             return;
         }
 
-        vacatedTargetPositions.Add(targetPosition);
+        vacatedTargets.Add(target);
 
-        if (vacatedTargetPositions.Count < activeSpawnTargetCount)
+        if (vacatedTargets.Count < activeSpawnTargetCount)
         {
             onComplete?.Invoke();
             return;
@@ -373,7 +386,7 @@ public class Box : MonoBehaviour
 
     private void RevealBatch(Action onComplete = null)
     {
-        int targetCount = Mathf.Min(spawnTargets.Count, vacatedTargetPositions.Count);
+        int targetCount = Mathf.Min(spawnTargets.Count, vacatedTargets.Count);
         if (targetCount <= 0)
         {
             TryPlayEndAnimation();
@@ -381,13 +394,13 @@ public class Box : MonoBehaviour
             return;
         }
 
-        List<Vector3> targetPositions = vacatedTargetPositions.GetRange(0, targetCount);
-        vacatedTargetPositions.RemoveRange(0, targetCount);
+        List<Transform> targetsToProcess = vacatedTargets.GetRange(0, targetCount);
+        vacatedTargets.RemoveRange(0, targetCount);
 
         activeSpawnTargetCount = 0;
         int pendingRevealCount = 0;
 
-        for (int i = 0; i < targetPositions.Count; i++)
+        for (int i = 0; i < targetsToProcess.Count; i++)
         {
             if (currentItemIndex >= dynamicItems.Count)
             {
@@ -395,7 +408,7 @@ public class Box : MonoBehaviour
             }
 
             pendingRevealCount++;
-            bool didReveal = RevealNextItem(targetPositions[i], () => {
+            bool didReveal = RevealNextItem(targetsToProcess[i], () => {
                 pendingRevealCount--;
                 if (pendingRevealCount == 0)
                 {
@@ -435,6 +448,18 @@ public class Box : MonoBehaviour
         }
 
         itemIndex = -1;
+        return null;
+    }
+
+    private Transform GetSpawnTargetByPosition(Vector3 position)
+    {
+        for (int i = 0; i < spawnTargets.Count; i++)
+        {
+            if (spawnTargets[i] != null && Vector3.SqrMagnitude(spawnTargets[i].position - position) < 0.0001f)
+            {
+                return spawnTargets[i];
+            }
+        }
         return null;
     }
 

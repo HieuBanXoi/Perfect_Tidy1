@@ -9,6 +9,7 @@ public class GameManager : Ply_Singleton<GameManager>
     public bool isPlaying = false;
     public bool isTutorial = true;
     public bool isGotoStore = false;
+    public bool isDraggingConveyor = false;
     public int countMove = 0;
     public int maxMove = 45;
     public int startLayer = 2000;
@@ -16,6 +17,7 @@ public class GameManager : Ply_Singleton<GameManager>
 
     [Header("Components")]
     public Box mainBox;
+    public ItemConveyor itemConveyor;
 
     [Header("Tutorial")]
     public GameObject handTutorial;
@@ -51,7 +53,7 @@ public class GameManager : Ply_Singleton<GameManager>
             }
         }
 
-        TriggerTutorial();
+        
     }
     private void Update()
     {
@@ -65,11 +67,24 @@ public class GameManager : Ply_Singleton<GameManager>
         }
 
         // Xử lý logic tutorial
-        if (!isTutorialActive && isPlaying && !InputManager.Ins.isDragging)
+        if (!isTutorialActive && !itemConveyor.isDraggingConveyor && isPlaying && !InputManager.Ins.isDragging)
+    {
+        // Nếu người chơi chưa ghép đúng item nào (vừa vào game), 
+        // bỏ qua timer và ép gọi tay hướng dẫn liên tục cho đến khi hiện thành công.
+        if (placedItemCount == 0)
         {
-            inactivityTimer += Time.deltaTime;
-            if (inactivityTimer >= tutorialDelay) ShowHandTutorial();
+            ShowHandTutorial();
         }
+        else
+        {
+            // Các bước chơi sau sẽ dùng lại timer (tutorialDelay) bình thường
+            inactivityTimer += Time.deltaTime;
+            if (inactivityTimer >= tutorialDelay) 
+            {
+                ShowHandTutorial();
+            }
+        }
+    }
     }
     public void ChangeState(IGameState newState)
     {
@@ -146,10 +161,10 @@ public class GameManager : Ply_Singleton<GameManager>
             return;
         }
 
-        if (placedItem != null && mainBox != null)
-        {
-            mainBox.SpawnNextItemToVacatedTarget(placedItem.waitingPosition);
-        }
+        // if (placedItem != null && mainBox != null)
+        // {
+        //     mainBox.SpawnNextItemToVacatedTarget(placedItem.waitingPosition);
+        // }
     }
 
     #region Tutorial Methods
@@ -240,22 +255,47 @@ public class GameManager : Ply_Singleton<GameManager>
         if (isTutorialActive) return;
 
         // Ưu tiên hướng dẫn cho item nếu có
-        if (tutorialItems.Count > 0)
+        // Get the main camera. If not available, we can't check viewport visibility.
+        Camera mainCamera = Camera.main;
+        if (mainCamera == null)
+        {
+            Debug.LogWarning("GameManager: Main Camera not found. Cannot determine item visibility for tutorial.");
+            return;
+        }
+
+        // Filter visible items from the tutorialItems list
+        List<Item> visibleTutorialItems = new List<Item>();
+        foreach (var item in tutorialItems)
+        {
+            if (item != null)
+            {
+                Vector3 viewportPoint = mainCamera.WorldToViewportPoint(item.transform.position);
+                // Check if the item is within the viewport (0 to 1 for x and y) and in front of the camera (z > 0)
+                if (viewportPoint.x >= 0 && viewportPoint.x <= 1 &&
+                    viewportPoint.y >= 0 && viewportPoint.y <= 1 &&
+                    viewportPoint.z > 0)
+                {
+                    visibleTutorialItems.Add(item);
+                }
+            }
+        }
+
+        if (visibleTutorialItems.Count > 0)
         {
             isTutorialActive = true;
 
             Item itemToGuide = null;
             int maxOrder = -1;
-            for (int i = 0; i < tutorialItems.Count; i++)
-            {
-                var item = tutorialItems[i];
-                // Ưu tiên item có sortingOrder cao nhất
-                if (item.spriteRenderer != null && item.spriteRenderer.sortingOrder > maxOrder)
-                {
-                    maxOrder = item.spriteRenderer.sortingOrder;
-                    itemToGuide = item;
-                }
-            }
+            // Find the visible item with the highest sorting order
+            foreach (var item in visibleTutorialItems)
+{
+    // Ưu tiên item có sortingOrder cao nhất
+    if (item.spriteRenderer != null && item.spriteRenderer.sortingOrder > maxOrder)
+    {
+        maxOrder = item.spriteRenderer.sortingOrder;
+        itemToGuide = item;
+    }
+}
 
             if (itemToGuide != null && itemToGuide.correctHolderTransform != null && handTutorial != null)
             {
@@ -275,7 +315,7 @@ public class GameManager : Ply_Singleton<GameManager>
                 sequence.AppendInterval(0.5f);
                 sequence.SetLoops(-1, LoopType.Restart).SetId("handTutorial");
             }
-            else
+            else // No item to guide, or missing correctHolderTransform/handTutorial
             {
                 isTutorialActive = false; // Không có gì để hướng dẫn, reset lại
             }
@@ -291,6 +331,12 @@ public class GameManager : Ply_Singleton<GameManager>
             sequence.Append(handTutorial.transform.DOScale(0.8f, 0.3f).SetEase(Ease.InOutSine));
             sequence.Append(handTutorial.transform.DOScale(1f, 0.3f).SetEase(Ease.InOutSine));
             sequence.SetLoops(-1, LoopType.Yoyo).SetId("handTutorial");
+        }
+        else
+        {
+            // No visible items and no items in the box, so no tutorial to show.
+            isTutorialActive = false;
+            handTutorial.SetActive(false);
         }
     }
 

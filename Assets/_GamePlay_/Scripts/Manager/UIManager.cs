@@ -28,8 +28,13 @@ public class UIManager : Ply_Singleton<UIManager>
     public GameObject tutorial;
     public GameObject verticalUI;
     public GameObject horizontalUI;
-    public Button downloadBtnVertical;
-    public Button dowloadBtnHorizontal;
+    public GameObject downloadBtnVertical;
+    public GameObject dowloadBtnHorizontal;
+    public Animator textAnim;
+
+    [LunaPlaygroundField("Google Build", 0, "Build Settings")]
+    public bool isGoogleBuild = false;
+
     public Slider progressSlider;
     public TextMeshProUGUI progressText;
     public int maxProgressItems = 100;
@@ -40,8 +45,17 @@ public class UIManager : Ply_Singleton<UIManager>
     private int totalItems;
     private int placedItems;
     private Color originalTextColor;
+    
     public bool isVertical;
+    public bool isScreenVertical;
     public Camera cam;
+
+    [Header("--- UI ORIENTATION SETTINGS ---")]
+    [Tooltip("Neu ty le Chieu cao / Chieu rong >= muc nay thi dung verticalUI, nguoc lai dung horizontalUI. Mac dinh 1 = cao hon rong.")]
+    public float verticalUIHeightOnWidthRatio = 0.6f;
+
+    [Tooltip("Neu ty le Chieu cao / Chieu rong >= muc nay thi tinh la man doc khi scale camera, nguoc lai tinh la man ngang.")]
+    public float screenVerticalHeightOnWidthRatio = 1f;
 
     [Header("--- CAMERA INTRO ZOOM ---")]
     public float introZoomOutMultiplier = 1.1f;
@@ -95,7 +109,11 @@ public class UIManager : Ply_Singleton<UIManager>
         winUI.SetActive(false);
         loseUI.SetActive(false);
         tutorial.SetActive(false);
+        
+        ActiveDownloadButtons(!isGoogleBuild);
+        
         UpdateUI();
+        
         if (cam != null)
         {
             CachePerspectiveCamera();
@@ -139,10 +157,12 @@ public class UIManager : Ply_Singleton<UIManager>
         screenHeight = Screen.height;
         screenWidth = Screen.width;
     }
+    
     private void GetSreenType()
     {
-        isVertical = screenHeight > screenWidth;
-        scaleHeightOnWidth = screenHeight / screenWidth;
+        scaleHeightOnWidth = screenWidth > 0f ? screenHeight / screenWidth : 1f;
+        isVertical = scaleHeightOnWidth >= verticalUIHeightOnWidthRatio;
+        isScreenVertical = scaleHeightOnWidth >= screenVerticalHeightOnWidthRatio;
     }
 
 
@@ -176,7 +196,7 @@ public class UIManager : Ply_Singleton<UIManager>
     {
         if (useContinuousScaling)
         {
-            if (!isVertical)
+            if (!isScreenVertical)
             {
                 return landscapeSize;
             }
@@ -184,7 +204,7 @@ public class UIManager : Ply_Singleton<UIManager>
             return baseOrthographicSize * (scaleHeightOnWidth / baseAspect);
         }
 
-        if (!isVertical)
+        if (!isScreenVertical)
         {
             return landscapeSize;
         }
@@ -385,6 +405,25 @@ public class UIManager : Ply_Singleton<UIManager>
     public void ActiveTutorialUI(bool isActive)
     {
         tutorial.SetActive(isActive);
+    }
+    
+    public void ActiveDownloadButtons(bool isActive)
+    {
+        if (isGoogleBuild)
+        {
+            isActive = false;
+        }
+
+        if (downloadBtnVertical != null)
+        {
+            downloadBtnVertical.gameObject.SetActive(isActive);
+        }
+
+        if (dowloadBtnHorizontal != null)
+        {
+            dowloadBtnHorizontal.gameObject.SetActive(isActive);
+        }
+        textAnim.enabled = isActive;
     }
 
     public void ZoomInCamera()

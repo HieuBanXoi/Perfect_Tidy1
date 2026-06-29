@@ -5,12 +5,16 @@ using DG.Tweening;
 
 public class Item : MonoBehaviour
 {
-    public FxType fxType;
     public FxType fxTypeOnPlace;
-    public int id; // Đã đổi sang int
+    public int id;
     public ItemState currentState;
     public LayerMask itemHolderLayer;
     public GameObject auraEffect;
+
+    [Header("Drop Settings")]
+    [Tooltip("Bật để vật phẩm bay về slot/vị trí cũ khi thả trượt. Tắt để rớt tại chỗ.")]
+    public bool returnToSlotOnMiss = false;
+    public bool hideShadowOnDrop = false;
 
     [Header("Spawn Scale")]
     public bool scaleOnSpawn = false;
@@ -22,18 +26,21 @@ public class Item : MonoBehaviour
     private float zCoord;
     private Vector3 offset;
     private Vector3 originalScale;
+    
     public Transform correctHolderTransform;
     public Transform shadowOnHolder;
     public bool canShowShadowHint = true;
+    
     [NonSerialized]
     public bool keepShadowVisibleWhenWaiting = false;
+    
+    public Transform homeSlot; // Ghi nhớ vị trí gốc (trên Box hoặc Conveyor)
     public Vector3 waitingPosition;
     private Quaternion originalRotation;
     private Animator itemAnimator;
     private bool hasCachedAnimator;
 
     [Header("Sorting Layer Settings")]
-
     public SpriteRenderer spriteRenderer; 
     private int defaultOrderLayer; 
     private SpriteRenderer[] childSpriteRenderers;
@@ -77,7 +84,6 @@ public class Item : MonoBehaviour
     public void DisableAnimatorOnSpawn()
     {
         EnsureAnimator();
-
         if (itemAnimator != null)
         {
             itemAnimator.enabled = false;
@@ -87,7 +93,6 @@ public class Item : MonoBehaviour
     private void EnableAnimatorWhenPlaced()
     {
         EnsureAnimator();
-
         if (itemAnimator != null)
         {
             itemAnimator.enabled = true;
@@ -97,12 +102,10 @@ public class Item : MonoBehaviour
     public void SetSortingOrder(int order)
     {
         EnsureDefaultSortingOrder();
-
         if (spriteRenderer != null)
         {
             spriteRenderer.sortingOrder = order;
         }
-
         ApplyChildSortingOffset();
     }
 
@@ -119,7 +122,9 @@ public class Item : MonoBehaviour
 
     public void StartDrag()
     {
-        Ply_SoundManager.Ins.PlayFx(FxType.Pop);
+        Ply_SoundManager.Ins.PlayFx(FxType.Click);
+
+        transform.SetParent(null); // Gỡ khỏi cha (conveyor/box) để kéo mượt trên màn hình
         tf.DOKill();
         GameManager.Ins.ResetInactivityTimer();
         ApplyChildSortingOffset();
@@ -166,7 +171,20 @@ public class Item : MonoBehaviour
                 isPlaced = true;
                 ChangeState(ItemState.MoveToCorrectPos);
                 GameManager.Ins.OnItemPlaced(this);
-                Ply_SoundManager.Ins.PlayFx(fxType);
+                PlaySoundOnPlace();
+
+                // --- GỌI BOX SPAWN ITEM MỚI VÀO SLOT TRỐNG ---
+                if (homeSlot != null)
+                {
+                    Box box = Box.Ins;
+                    if (box != null)
+                    {
+                        box.SpawnNextItemToVacatedTarget(homeSlot.position);
+                    }
+                    homeSlot = null; // Huỷ liên kết để tránh gọi trùng lặp
+                }
+                // ----------------------------------------------
+
                 tf.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack);
                 tf.DOMove(holder.transform.position, 0.2f)
                          .SetEase(Ease.OutCubic)
@@ -175,9 +193,14 @@ public class Item : MonoBehaviour
                              RestoreDefaultSorting();
                              SpawnVFX();
                              EnableAnimatorWhenPlaced();
-                             if (shadowOnHolder != null)
+                             if (shadowOnHolder != null && !hideShadowOnDrop)
                              {
                                  shadowOnHolder.gameObject.SetActive(true);
+                             }
+                             else
+                             {
+                                 shadowOnHolder.gameObject.SetActive(false);
+                                 
                              }
 
                              GameManager.Ins.RemoveItemFromTutorial(this);
@@ -196,7 +219,6 @@ public class Item : MonoBehaviour
 
         if (!isPlaced)
         {
-
             if (shadowOnHolder != null && !keepShadowVisibleWhenWaiting)
             {
                 shadowOnHolder.gameObject.SetActive(false);
@@ -204,8 +226,39 @@ public class Item : MonoBehaviour
 
             ChangeState(ItemState.Waitting);
             tf.DOScale(originalScale, 0.2f).SetEase(Ease.OutBack);
-            tf.DOMoveY(tf.position.y + 0.3f, 1.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
             tf.DORotateQuaternion(originalRotation, 0.3f);
+
+            // Bắn tia kiểm tra xem vị trí thả chuột có nằm trên Conveyor không
+            bool isOverConveyor = false;
+            
+                isOverConveyor = Physics.Raycast(ray, 100f, InputManager.Ins.conveyorLayer);
+            
+
+            // ĐIỀU KIỆN MỚI: Chỉ return khi returnToSlotOnMiss là TRUE VÀ thả trúng vùng Conveyor
+            if (returnToSlotOnMiss && isOverConveyor)
+            {
+                // Quay về đúng slot và bám theo di chuyển (đặt target là cha)
+                if (homeSlot != null)
+                {
+                    tf.SetParent(homeSlot, true); // Đặt lại cha để bám theo
+                    tf.DOLocalMove(Vector3.zero, 0.2f).SetEase(Ease.OutCubic).OnComplete(() => {
+                        tf.DOMoveY(homeSlot.position.y + 0.3f, 1.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+                    });
+                }
+                else
+                {
+                    tf.DOMove(waitingPosition, 0.2f).SetEase(Ease.OutCubic).OnComplete(() => {
+                        tf.DOMoveY(waitingPosition.y + 0.3f, 1.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+                    });
+                }
+            }
+            else
+            {
+                // KHÔNG RETURN: Rớt tại chỗ thả
+                // Kích hoạt khi thả ngoài Conveyor HOẶC returnToSlotOnMiss = false
+                tf.SetParent(null); // Gỡ khỏi cha cũ để nằm độc lập ngoài không gian
+                tf.DOMoveY(tf.position.y + 0.3f, 1.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+            }
         }
     }
 
@@ -214,10 +267,7 @@ public class Item : MonoBehaviour
         EnsureDefaultSortingOrder();
         CacheChildSortingOrders();
 
-        if (spriteRenderer == null || childSpriteRenderers == null)
-        {
-            return;
-        }
+        if (spriteRenderer == null || childSpriteRenderers == null) return;
 
         int orderOffset = spriteRenderer.sortingOrder - defaultOrderLayer;
         for (int i = 0; i < childSpriteRenderers.Length; i++)
@@ -234,10 +284,7 @@ public class Item : MonoBehaviour
         EnsureDefaultSortingOrder();
         SetSortingOrder(defaultOrderLayer);
 
-        if (!hasCachedChildSortingOrders || childSpriteRenderers == null)
-        {
-            return;
-        }
+        if (!hasCachedChildSortingOrders || childSpriteRenderers == null) return;
 
         for (int i = 0; i < childSpriteRenderers.Length; i++)
         {
@@ -250,10 +297,7 @@ public class Item : MonoBehaviour
 
     private void CacheChildSortingOrders()
     {
-        if (hasCachedChildSortingOrders)
-        {
-            return;
-        }
+        if (hasCachedChildSortingOrders) return;
 
         List<SpriteRenderer> children = new List<SpriteRenderer>();
         SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer>(true);
@@ -279,23 +323,15 @@ public class Item : MonoBehaviour
 
     private void EnsureDefaultSortingOrder()
     {
-        if (hasDefaultSortingOrder)
-        {
-            return;
-        }
-
+        if (hasDefaultSortingOrder) return;
         defaultOrderLayer = id;
         hasDefaultSortingOrder = true;
     }
 
     private void EnsureAnimator()
     {
-        if (hasCachedAnimator)
-        {
-            return;
-        }
-
-        itemAnimator = GetComponentInChildren<Animator>(true);
+        if (hasCachedAnimator) return;
+        itemAnimator = ComponentCache<Animator>.Get(tf);
         hasCachedAnimator = true;
     }
 
@@ -319,9 +355,10 @@ public class Item : MonoBehaviour
     
     public void SpawnVFX()
     {
-        MergeEffect mergeEffect = Ply_Pool.Ins.Spawn<MergeEffect>(PoolType.MergeVFX,tf.position,tf.rotation);
+        MergeEffect mergeEffect = Ply_Pool.Ins.Spawn<MergeEffect>(PoolType.MergeVFX, tf.position, tf.rotation);
         mergeEffect.DeSpawnByTime();
     }
+    
     public void PlaySoundOnPlace()
     {
         Ply_SoundManager.Ins.PlayFx(fxTypeOnPlace);
