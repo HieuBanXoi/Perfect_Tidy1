@@ -18,8 +18,10 @@ public enum FxType
     Cat,
     WoodenHeavy,
     WoodenSmall,
-    Bao,
-    TrongHoa
+    Magic,
+    TrongHoa,
+    Lengkeng,
+    ChuongGio
     
 }
 

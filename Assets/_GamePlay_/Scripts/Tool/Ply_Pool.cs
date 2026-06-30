@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PoolType { Piece, GroundPiece, PieceHolder, MergeVFX }
+public enum PoolType { Piece, GroundPiece, PieceHolder, MergeVFX,BlinkFX }
 
 public class Ply_Pool : Ply_Singleton<Ply_Pool>
 {

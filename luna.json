@@ -33302,6 +33302,10 @@
                     {
                         "name": "PlaySoundOnPlace",
                         "excluded": false
+                    },
+                    {
+                        "name": "CanPlaced",
+                        "excluded": false
                     }
                 ]
             },
@@ -38638,6 +38642,20 @@
                     {
                         "name": "ThrowNotSupportedExceptionIfNonNumericType",
                         "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "BlinkEffect",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "DeSpawnByTime",
+                        "excluded": false
+                    },
+                    {
+                        "name": "DeSpawn",
+                        "excluded": false
                     }
                 ]
             }

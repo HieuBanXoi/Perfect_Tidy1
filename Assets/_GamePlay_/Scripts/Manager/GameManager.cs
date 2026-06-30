@@ -11,7 +11,8 @@ public class GameManager : Ply_Singleton<GameManager>
     public bool isGotoStore = false;
     public bool isDraggingConveyor = false;
     public int countMove = 0;
-    public int maxMove = 45;
+    [LunaPlaygroundField("MaxMove", 1, "Build Settings")]
+    public int maxMove = 200;
     public int startLayer = 2000;
     public int currentLayer; // Lớp sorting order cao nhất hiện tại
 
@@ -53,7 +54,7 @@ public class GameManager : Ply_Singleton<GameManager>
             }
         }
 
-        
+
     }
     private void Update()
     {
@@ -68,23 +69,23 @@ public class GameManager : Ply_Singleton<GameManager>
 
         // Xử lý logic tutorial
         if (!isTutorialActive && !itemConveyor.isDraggingConveyor && isPlaying && !InputManager.Ins.isDragging)
-    {
-        // Nếu người chơi chưa ghép đúng item nào (vừa vào game), 
-        // bỏ qua timer và ép gọi tay hướng dẫn liên tục cho đến khi hiện thành công.
-        if (placedItemCount == 0)
         {
-            ShowHandTutorial();
-        }
-        else
-        {
-            // Các bước chơi sau sẽ dùng lại timer (tutorialDelay) bình thường
-            inactivityTimer += Time.deltaTime;
-            if (inactivityTimer >= tutorialDelay) 
+            // Nếu người chơi chưa ghép đúng item nào (vừa vào game), 
+            // bỏ qua timer và ép gọi tay hướng dẫn liên tục cho đến khi hiện thành công.
+            if (placedItemCount == 0)
             {
                 ShowHandTutorial();
             }
+            else
+            {
+                // Các bước chơi sau sẽ dùng lại timer (tutorialDelay) bình thường
+                inactivityTimer += Time.deltaTime;
+                if (inactivityTimer >= tutorialDelay)
+                {
+                    ShowHandTutorial();
+                }
+            }
         }
-    }
     }
     public void ChangeState(IGameState newState)
     {
@@ -93,7 +94,7 @@ public class GameManager : Ply_Singleton<GameManager>
         currentState = newState;
 
         currentState?.OnEnter(this);
-        Debug.Log("ChangeState: "+ currentState.ToString());
+        Debug.Log("ChangeState: " + currentState.ToString());
     }
     public bool IsPlaying()
     {
@@ -107,7 +108,7 @@ public class GameManager : Ply_Singleton<GameManager>
     public void MoveOne()
     {
         countMove++;
-        if(countMove == 100)
+        if (countMove == 100)
         {
             isPlaying = false;
             isGotoStore = true;
@@ -118,7 +119,7 @@ public class GameManager : Ply_Singleton<GameManager>
         if (isTutorial)
         {
             UIManager.Ins.ActiveTutorialUI(false);
-            isTutorial= false;
+            isTutorial = false;
         }
     }
     public void WinGame()
@@ -288,14 +289,14 @@ public class GameManager : Ply_Singleton<GameManager>
             int maxOrder = -1;
             // Find the visible item with the highest sorting order
             foreach (var item in visibleTutorialItems)
-{
-    // Ưu tiên item có sortingOrder cao nhất
-    if (item.spriteRenderer != null && item.spriteRenderer.sortingOrder > maxOrder)
-    {
-        maxOrder = item.spriteRenderer.sortingOrder;
-        itemToGuide = item;
-    }
-}
+            {
+                // Ưu tiên item có sortingOrder cao nhất
+                if (item.spriteRenderer != null && item.spriteRenderer.sortingOrder > maxOrder && item.CanPlaced())
+                {
+                    maxOrder = item.spriteRenderer.sortingOrder;
+                    itemToGuide = item;
+                }
+            }
 
             if (itemToGuide != null && itemToGuide.correctHolderTransform != null && handTutorial != null)
             {

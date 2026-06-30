@@ -19,6 +19,9 @@ public class Item : MonoBehaviour
     [Header("Spawn Scale")]
     public bool scaleOnSpawn = false;
     public float spawnScaleMultiplier = 1.25f;
+    [Header("RequiredItems")]
+    public List<Item> requiredItems;
+
 
     [NonSerialized]
     public Transform tf;
@@ -134,7 +137,10 @@ public class Item : MonoBehaviour
 
         if (shadowOnHolder != null)
         {
-            shadowOnHolder.gameObject.SetActive(true);
+            if (CanPlaced())
+            {
+                shadowOnHolder.gameObject.SetActive(true);
+            }
         }
         
         zCoord = mainCam.WorldToScreenPoint(tf.position).z;
@@ -166,7 +172,7 @@ public class Item : MonoBehaviour
             RaycastHit hit = hits[i];
             ItemHolder holder = hit.collider.GetComponent<ItemHolder>();
 
-            if (holder != null && holder.id == this.id)
+            if (holder != null && CanPlaced() && holder.id == this.id )
             {
                 isPlaced = true;
                 ChangeState(ItemState.MoveToCorrectPos);
@@ -261,7 +267,18 @@ public class Item : MonoBehaviour
             }
         }
     }
-
+    public bool CanPlaced()
+    {
+        for(int i = 0; i < requiredItems.Count; i++)
+        {
+            if(requiredItems[i].currentState != ItemState.OnGoal)
+            {
+                return false;
+            }
+        }
+            
+        return true;
+    }
     private void ApplyChildSortingOffset()
     {
         EnsureDefaultSortingOrder();
@@ -353,10 +370,15 @@ public class Item : MonoBehaviour
     private void MoveToCorrectPos() { }
     private void Waitting() { }
     
+    // public void SpawnVFX()
+    // {
+    //     MergeEffect mergeEffect = Ply_Pool.Ins.Spawn<MergeEffect>(PoolType.MergeVFX, tf.position, tf.rotation);
+    //     mergeEffect.DeSpawnByTime();
+    // }
     public void SpawnVFX()
     {
-        MergeEffect mergeEffect = Ply_Pool.Ins.Spawn<MergeEffect>(PoolType.MergeVFX, tf.position, tf.rotation);
-        mergeEffect.DeSpawnByTime();
+        BlinkEffect blinkEffect = Ply_Pool.Ins.Spawn<BlinkEffect>(PoolType.BlinkFX, tf.position, tf.rotation);
+        blinkEffect.DeSpawnByTime();
     }
     
     public void PlaySoundOnPlace()
