@@ -9,7 +9,7 @@ public class Item : MonoBehaviour
     public int id;
     public ItemState currentState;
     public LayerMask itemHolderLayer;
-    public GameObject auraEffect;
+    public GameObject defaultShadow;
 
     [Header("Drop Settings")]
     [Tooltip("Bật để vật phẩm bay về slot/vị trí cũ khi thả trượt. Tắt để rớt tại chỗ.")]
@@ -211,9 +211,9 @@ public class Item : MonoBehaviour
 
                              GameManager.Ins.RemoveItemFromTutorial(this);
 
-                            if(auraEffect != null)
+                            if(defaultShadow != null)
                              {
-                                 auraEffect.SetActive(true);
+                                 defaultShadow.SetActive(true);
                              }
                              ChangeState(ItemState.OnGoal);
                          });

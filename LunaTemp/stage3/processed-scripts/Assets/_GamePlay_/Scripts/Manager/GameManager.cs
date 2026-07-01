@@ -122,10 +122,12 @@ public class GameManager : Ply_Singleton<GameManager>
             isTutorial = false;
         }
     }
+    [ContextMenu("Win Game")]
     public void WinGame()
     {
         ChangeState(new WinState());
     }
+    [ContextMenu("Lose Game")]
     public void LoseGame()
     {
         ChangeState(new LoseState());

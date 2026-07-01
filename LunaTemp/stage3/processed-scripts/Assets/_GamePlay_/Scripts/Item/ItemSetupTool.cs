@@ -22,6 +22,7 @@ public class ItemSetupTool : MonoBehaviour
     [Header("Collider")]
     public float colliderDepth = 0.2f;
     public float colliderSizeMultiplier = 1.2f;
+    public Vector2 minColliderSize = new Vector2(0.1f, 0.1f);
 
     [Header("Generated Shadow")]
     public Color generatedShadowColor = new Color(0f, 0f, 0f, 0.25f);
@@ -30,10 +31,10 @@ public class ItemSetupTool : MonoBehaviour
 
     [Header("Optional Layers")]
     [Tooltip("Leave empty to keep the item's current layer.")]
-    public string itemLayerName = "";
+    public LayerMask itemLayer;
 
     [Tooltip("Leave empty to keep the holder's current layer.")]
-    public string holderLayerName = "";
+    public LayerMask holderLayer;
 
 #if UNITY_EDITOR
     [ContextMenu("Bake Item Data")]
@@ -54,19 +55,26 @@ public class ItemSetupTool : MonoBehaviour
         Undo.RecordObject(this, "Bake Item Data");
         EnsureHoldersParent();
 
-        SpriteRenderer[] renderers = spritesParent.GetComponentsInChildren<SpriteRenderer>(true);
-        Dictionary<string, Transform> shadowsByItemName = CollectShadows(renderers);
+        // Collect all shadows first, as they might be children of items or directly under spritesParent
+        Dictionary<string, Transform> shadowsByItemName = CollectShadows(spritesParent.GetComponentsInChildren<SpriteRenderer>(true));
 
         int itemCount = 0;
-        for (int i = 0; i < renderers.Length; i++)
+        // Iterate only through direct children of spritesParent
+        for (int i = 0; i < spritesParent.childCount; i++)
         {
-            SpriteRenderer spriteRenderer = renderers[i];
-            Transform itemTransform = spriteRenderer.transform;
+            Transform itemTransform = spritesParent.GetChild(i);
+            SpriteRenderer spriteRenderer = itemTransform.GetComponent<SpriteRenderer>();
 
-            if (IsShadowName(itemTransform.name))
+            // Skip if it's a shadow itself or doesn't have a SpriteRenderer
+            if (spriteRenderer == null || IsShadowName(itemTransform.name))
             {
+                // If it's an item that has already been processed by ExtractSpriteToModel,
+                // its SpriteRenderer will be on a child "Model" GameObject.
+                // We should skip this parent GameObject as it's not the primary sprite.
+                // The BakeItem method expects the SpriteRenderer to be on the itemTransform itself
+                // for initial processing.
                 continue;
-            }
+        }
 
             BakeItem(itemTransform, spriteRenderer, shadowsByItemName);
             itemCount++;
@@ -114,7 +122,7 @@ public class ItemSetupTool : MonoBehaviour
             return;
         }
 
-        Dictionary<string, SpriteRenderer> itemsByName = CollectItemRenderersByName();
+        Dictionary<string, Item> itemsByName = CollectItemRenderersByName();
         int createdCount = 0;
 
         for (int i = 0; i < holdersParent.childCount; i++)
@@ -126,17 +134,16 @@ public class ItemSetupTool : MonoBehaviour
             }
 
             string itemName = holder.name.Substring(holderPrefix.Length);
-            if (!itemsByName.TryGetValue(itemName, out SpriteRenderer itemRenderer))
+            if (!itemsByName.TryGetValue(itemName, out Item item))
             {
                 Debug.LogWarning($"Cannot create shadow for '{holder.name}' because item '{itemName}' was not found in spritesParent.", holder);
                 continue;
             }
 
-            Item item = GetOrAddComponent<Item>(itemRenderer.gameObject);
             Undo.RecordObject(item, "Configure Item Shadow Reference");
-            item.tf = itemRenderer.transform;
-            item.spriteRenderer = itemRenderer;
-            item.id = itemRenderer.sortingOrder;
+            item.tf = item.transform; // Ensure tf is set
+            // item.spriteRenderer should already be set by ExtractSpriteToModel
+            item.id = item.spriteRenderer.sortingOrder;
             item.correctHolderTransform = holder;
             item.enabled = true;
             EditorUtility.SetDirty(item);
@@ -154,7 +161,7 @@ public class ItemSetupTool : MonoBehaviour
                 continue;
             }
 
-            Transform createdShadow = CreateShadowFromItem(holder, itemName, itemRenderer);
+            Transform createdShadow = CreateShadowFromItem(holder, itemName, item.spriteRenderer);
             Undo.RecordObject(item, "Assign Generated Shadow");
             item.shadowOnHolder = createdShadow;
             EditorUtility.SetDirty(item);
@@ -310,16 +317,21 @@ public class ItemSetupTool : MonoBehaviour
             }
         }
     }
-
     private HashSet<string> CollectValidHolderNames()
     {
         HashSet<string> validHolderNames = new HashSet<string>();
-        SpriteRenderer[] renderers = spritesParent.GetComponentsInChildren<SpriteRenderer>(true);
+        Item[] items = spritesParent.GetComponentsInChildren<Item>(true);
 
-        for (int i = 0; i < renderers.Length; i++)
+        for (int i = 0; i < items.Length; i++)
         {
-            string itemName = renderers[i].gameObject.name;
-            if (IsShadowName(itemName))
+            Item item = items[i];
+            if (item.transform.parent != spritesParent) // Only consider top-level items
+            {
+                continue;
+            }
+
+            string itemName = item.gameObject.name;
+            if (IsShadowName(itemName)) // Skip if it's a shadow itself
             {
                 continue;
             }
@@ -330,27 +342,32 @@ public class ItemSetupTool : MonoBehaviour
         return validHolderNames;
     }
 
-    private Dictionary<string, SpriteRenderer> CollectItemRenderersByName()
+    private Dictionary<string, Item> CollectItemRenderersByName()
     {
-        Dictionary<string, SpriteRenderer> itemsByName = new Dictionary<string, SpriteRenderer>();
-        SpriteRenderer[] renderers = spritesParent.GetComponentsInChildren<SpriteRenderer>(true);
+        Dictionary<string, Item> itemsByName = new Dictionary<string, Item>();
+        Item[] items = spritesParent.GetComponentsInChildren<Item>(true);
 
-        for (int i = 0; i < renderers.Length; i++)
+        for (int i = 0; i < items.Length; i++)
         {
-            SpriteRenderer renderer = renderers[i];
-            string itemName = renderer.gameObject.name;
-            if (IsShadowName(itemName))
+            Item item = items[i];
+            if (item.transform.parent != spritesParent) // Only consider top-level items
+            {
+                continue;
+            }
+
+            string itemName = item.gameObject.name;
+            if (IsShadowName(itemName)) // Skip if it's a shadow itself
             {
                 continue;
             }
 
             if (itemsByName.ContainsKey(itemName))
             {
-                Debug.LogWarning($"Duplicate item name '{itemName}' in spritesParent. Keeping the first one.", renderer);
+                Debug.LogWarning($"Duplicate item name '{itemName}' in spritesParent. Keeping the first one.", item);
                 continue;
             }
 
-            itemsByName.Add(itemName, renderer);
+            itemsByName.Add(itemName, item);
         }
 
         return itemsByName;
@@ -373,7 +390,6 @@ public class ItemSetupTool : MonoBehaviour
 
         Undo.RecordObject(item, "Configure Item");
         item.tf = itemTransform;
-        item.spriteRenderer = spriteRenderer;
         item.id = id;
         item.correctHolderTransform = holderTransform;
         item.currentState = ItemState.Waitting;
@@ -386,8 +402,8 @@ public class ItemSetupTool : MonoBehaviour
 
         CopyCollider(itemCollider, holderCollider);
 
-        SetLayerIfConfigured(itemTransform.gameObject, itemLayerName);
-        SetLayerIfConfigured(holderTransform.gameObject, holderLayerName);
+        SetLayerIfConfigured(itemTransform.gameObject, itemLayer);
+        SetLayerIfConfigured(holderTransform.gameObject, holderLayer);
 
         if (shadowsByItemName.TryGetValue(itemTransform.name, out Transform shadow))
         {
@@ -467,6 +483,12 @@ public class ItemSetupTool : MonoBehaviour
             collider.center = Vector3.zero;
             collider.size = new Vector3(rendererBounds.size.x, rendererBounds.size.y, colliderDepth);
         }
+
+        // Enforce min size
+        Vector3 size = collider.size;
+        size.x = Mathf.Max(size.x, minColliderSize.x);
+        size.y = Mathf.Max(size.y, minColliderSize.y);
+        collider.size = size;
 
         collider.isTrigger = isTrigger;
         collider.enabled = true;
@@ -628,24 +650,37 @@ public class ItemSetupTool : MonoBehaviour
         return shadowName.Substring(0, shadowName.Length - shadowSuffix.Length);
     }
 
-    private void SetLayerIfConfigured(GameObject target, string layerName)
+    private void SetLayerIfConfigured(GameObject target, LayerMask layerMask)
     {
-        if (string.IsNullOrWhiteSpace(layerName))
+        // If the LayerMask is set to "Nothing" (value -1), skip.
+        // This is the equivalent of leaving the string empty in the old system.
+        if (layerMask.value == -1)
         {
             return;
         }
 
-        int layer = LayerMask.NameToLayer(layerName);
-        if (layer < 0)
+        int layerIndex = -1;
+        // Find the first layer index that is set in the LayerMask.
+        // This assumes the user intends to select a single layer for GameObject.layer.
+        for (int i = 0; i < 32; i++)
         {
-            Debug.LogWarning($"Layer '{layerName}' does not exist. Skipping layer assignment.", target);
-            return;
+            if (((1 << i) & layerMask.value) != 0)
+            {
+                layerIndex = i;
+                break;
+            }
         }
 
-        Undo.RecordObject(target, "Set Layer");
-        target.layer = layer;
-        EditorUtility.SetDirty(target);
-    }
+        // If a valid layer index was found (or if layerMask.value is 0, which implies "Default" layer 0)
+        if (layerIndex != -1 || layerMask.value == 0)
+        {
+            // If layerMask.value is 0, layerIndex will still be -1, so we explicitly set to 0 (Default).
+            int finalLayer = (layerIndex != -1) ? layerIndex : 0;
+            Undo.RecordObject(target, "Set Layer");
+            target.layer = finalLayer;
+            EditorUtility.SetDirty(target);
+        }
+    }    
     [ContextMenu("Extract Sprite To Model")]
     public void ExtractSpriteToModel()
     {
@@ -727,6 +762,118 @@ public class ItemSetupTool : MonoBehaviour
         }
 
         Debug.Log($"Extract Sprite To Model hoàn tất. Đã xử lý {processedCount} object.", this);
+    }
+
+    [ContextMenu("Reorder Sprite Layers")]
+    public void ReOrderLayer()
+    {
+        if (spritesParent == null)
+        {
+            Debug.LogError("spritesParent chưa được gán.", this);
+            return;
+        }
+
+        // Lấy tất cả SpriteRenderer trong spritesParent, bao gồm cả các con của con
+        SpriteRenderer[] allRenderers = spritesParent.GetComponentsInChildren<SpriteRenderer>(true);
+
+        // Lọc ra các SpriteRenderer không phải là shadow và không phải là con của một Item khác
+        List<SpriteRenderer> renderersToReorder = new List<SpriteRenderer>();
+        foreach (SpriteRenderer renderer in allRenderers)
+        {
+            // Bỏ qua nếu là shadow hoặc là SpriteRenderer của một "Model" con
+            if (IsShadowName(renderer.gameObject.name) || (renderer.transform.parent != null && renderer.transform.parent.name == "Model"))
+            {
+                continue;
+            }
+            renderersToReorder.Add(renderer);
+        }
+
+        // Sắp xếp các SpriteRenderer theo sortingOrder hiện tại của chúng
+        renderersToReorder.Sort((a, b) => a.sortingOrder.CompareTo(b.sortingOrder));
+
+        for (int i = 0; i < renderersToReorder.Count; i++)
+        {
+            Undo.RecordObject(renderersToReorder[i], "Reorder Sprite Layer");
+            renderersToReorder[i].sortingOrder = i; // Gán lại sortingOrder liên tiếp
+            EditorUtility.SetDirty(renderersToReorder[i]);
+        }
+        Debug.Log($"Reordered {renderersToReorder.Count} sprite layers in spritesParent.", this);
+    }
+
+    [ContextMenu("Remove Missing Scripts")]
+    public void RemoveMissingScripts()
+    {
+        int removedCount = 0;
+        // Duyệt qua chính GameObject chứa ItemSetupTool
+        removedCount += GameObjectUtility.RemoveMonoBehavioursWithMissingScript(gameObject);
+
+        // Duyệt qua tất cả các GameObject con
+        Transform[] allChildren = GetComponentsInChildren<Transform>(true);
+        foreach (Transform child in allChildren)
+        {
+            // Bỏ qua chính GameObject chứa ItemSetupTool vì đã xử lý ở trên
+            if (child.gameObject == gameObject)
+            {
+                continue;
+            }
+            removedCount += GameObjectUtility.RemoveMonoBehavioursWithMissingScript(child.gameObject);
+        }
+
+        if (removedCount > 0)
+        {
+            Debug.Log($"Đã xóa {removedCount} script bị thiếu từ GameObject này và các con của nó.", this);
+        }
+        else
+        {
+            Debug.Log("Không tìm thấy script bị thiếu nào trên GameObject này và các con của nó.", this);
+        }
+    }
+
+    [ContextMenu("Refresh Collider Sizes")]
+    public void RefreshColliderSizes()
+    {
+        if (minColliderSize.x <= 0 || minColliderSize.y <= 0)
+        {
+            Debug.LogWarning("minColliderSize components must be positive.", this);
+            return;
+        }
+
+        int refreshedCount = 0;
+        if (spritesParent != null)
+        {
+            refreshedCount += EnforceMinColliderSizeInChildren(spritesParent);
+        }
+        if (holdersParent != null)
+        {
+            refreshedCount += EnforceMinColliderSizeInChildren(holdersParent);
+        }
+
+        Debug.Log($"Refreshed {refreshedCount} colliders to meet min size ({minColliderSize.x}, {minColliderSize.y}).", this);
+    }
+
+    private int EnforceMinColliderSizeInChildren(Transform parent)
+    {
+        if (parent == null) return 0;
+
+        int count = 0;
+        BoxCollider[] colliders = parent.GetComponentsInChildren<BoxCollider>(true);
+        foreach (BoxCollider boxCollider in colliders)
+        {
+            Vector3 currentSize = boxCollider.size;
+            Vector3 newSize = currentSize;
+
+            newSize.x = Mathf.Max(currentSize.x, minColliderSize.x);
+            newSize.y = Mathf.Max(currentSize.y, minColliderSize.y);
+
+            if (newSize != currentSize)
+            {
+                Undo.RecordObject(boxCollider, "Enforce Min Collider Size");
+                boxCollider.size = newSize;
+                EditorUtility.SetDirty(boxCollider);
+                count++;
+            }
+        }
+        return count;
     }
 #endif
 }
