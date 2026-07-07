@@ -15,6 +15,6 @@ public class OnPlayState : IGameState
     public void OnExit(GameManager gameManager)
     {
         gameManager.isPlaying = false;
-        UIManager.Ins.ActiveDownloadButtons(false);
+        // UIManager.Ins.ActiveDownloadButtons(false);
     }
 }

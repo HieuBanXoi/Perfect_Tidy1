@@ -2,7 +2,7 @@
     "version": "7.1.0",
     "projectId": "54ab6df5d24ca13458b7b8f24e7d8130",
     "applicationID": 27329,
-    "creativeName": "PLY_DreamyRoom_Lv693",
+    "creativeName": "PLY_DreamyRoom_Lv26",
     "pgServer": "EU",
     "window": {
         "‐⁙": true
@@ -132,10 +132,10 @@
             ]
         },
         "scenes": [
-            "Assets/_GamePlay_/Scenes/NoBox.unity"
+            "Assets/_GamePlay_/Scenes/Main.unity"
         ],
         "disabledScenes": [
-            "Assets/_GamePlay_/Scenes/Main.unity"
+            "Assets/_GamePlay_/Scenes/NoBox.unity"
         ],
         "startupScene": 0,
         "packages": {
@@ -2945,7 +2945,7 @@
             },
             {
                 "name": "LunaUnity.Objects.Registry.ItemNotFoundException",
-                "excluded": true
+                "excluded": false
             },
             {
                 "name": "LunaUnity.Utils.Timer",
@@ -17689,7 +17689,7 @@
                     },
                     {
                         "name": "childCount#get",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "name#get",
@@ -23935,10 +23935,22 @@
                     },
                     {
                         "name": "RestartHandTutorial",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "HideCurrentGuidedItemShadowIfAllowed",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ResetInactivityTimer$1",
+                        "excluded": false
+                    },
+                    {
+                        "name": "StopHandTutorial",
+                        "excluded": false
+                    },
+                    {
+                        "name": "StartGameTimer",
                         "excluded": false
                     }
                 ]
@@ -33189,7 +33201,15 @@
                     },
                     {
                         "name": "CompactItemsToLeft",
+                        "excluded": false
+                    },
+                    {
+                        "name": "OnDrawGizmosSelected",
                         "excluded": true
+                    },
+                    {
+                        "name": "RevealNextItemAtPosition",
+                        "excluded": false
                     }
                 ]
             },
@@ -37316,10 +37336,6 @@
                     {
                         "name": "Tick",
                         "excluded": false
-                    },
-                    {
-                        "name": "Tick\",this)}this.c$-=t;if(this.c$<=0){pc.Application.getApplication().events.off(\"update",
-                        "excluded": false
                     }
                 ]
             },
@@ -38324,56 +38340,6 @@
                 ]
             },
             {
-                "className": "ScreenHeightPositionAnchor",
-                "staticMethods": [],
-                "instanceMethods": [
-                    {
-                        "name": "init",
-                        "excluded": false
-                    },
-                    {
-                        "name": "Awake",
-                        "excluded": false
-                    },
-                    {
-                        "name": "OnEnable",
-                        "excluded": true
-                    },
-                    {
-                        "name": "Start",
-                        "excluded": true
-                    },
-                    {
-                        "name": "LateUpdate",
-                        "excluded": true
-                    },
-                    {
-                        "name": "AlignToScreenHeightRatio",
-                        "excluded": true
-                    },
-                    {
-                        "name": "GetTargetCamera",
-                        "excluded": true
-                    },
-                    {
-                        "name": "GetAnchor",
-                        "excluded": true
-                    },
-                    {
-                        "name": "CacheScreenState",
-                        "excluded": true
-                    },
-                    {
-                        "name": "HasCameraChanged",
-                        "excluded": true
-                    },
-                    {
-                        "name": "OnDrawGizmos",
-                        "excluded": true
-                    }
-                ]
-            },
-            {
                 "className": "System.ArgumentNullException",
                 "staticMethods": [],
                 "instanceMethods": [
@@ -38658,6 +38624,16 @@
                         "excluded": false
                     }
                 ]
+            },
+            {
+                "className": "PSD_Tool",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
+                        "excluded": false
+                    }
+                ]
             }
         ],
         "stubberDataList": [],
@@ -38885,6 +38861,26 @@
                         "script": "",
                         "ext": "",
                         "name": "Assets/Assets/AssetLevel/BaseTextures/base.psd"
+                    },
+                    {
+                        "maxWidth": 2048,
+                        "maxHeight": 2048,
+                        "format": "png32",
+                        "compression": "quantSize",
+                        "quality": 65,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/Assets/AssetLevel/Main.spriteatlasv2"
+                    },
+                    {
+                        "maxWidth": 555,
+                        "maxHeight": 1200,
+                        "format": "png32",
+                        "compression": "quantSize",
+                        "quality": 65,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/Assets/UI/bg.jpg"
                     }
                 ]
             },
@@ -39048,6 +39044,46 @@
                         "script": "",
                         "ext": "",
                         "name": "Assets/_GamePlay_/Sound/Audio/HuyDQCommonAudio/Sfx/drop.ogg"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:00.000",
+                        "lengthInSeconds": 0.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/Sound Effect/Dreamy room/WATRFoun_Water Fountain Outdoor Small_PE112631.wav"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:30.000",
+                        "lengthInSeconds": 30.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/Lv689/Tibetan Healing Music Remove Negative Energy & Cleanse The Aura #singingbowl #shorts #fyp (mp3cut.net).mp3"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:30.000",
+                        "lengthInSeconds": 30.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/cat&suop (mp3cut.net).mp3"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:30.000",
+                        "lengthInSeconds": 30.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/Sound Effect/─Éß╗ô vß║¡t/WindChime (mp3cut.net).mp3"
                     }
                 ]
             },

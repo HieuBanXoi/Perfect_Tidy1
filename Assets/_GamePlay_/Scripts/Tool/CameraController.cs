@@ -105,7 +105,8 @@ public class CameraController : MonoBehaviour
 
     private void HandleDrag()
     {
-        if (!enableDrag || Input.touchCount >= 2 || IsItemDragging() || conveyor.isDraggingConveyor)
+        bool isConveyorDragging = conveyor != null && conveyor.isDraggingConveyor;
+        if (!enableDrag || Input.touchCount >= 2 || IsItemDragging() || isConveyorDragging)
         {
             isDraggingCamera = false;
             return;

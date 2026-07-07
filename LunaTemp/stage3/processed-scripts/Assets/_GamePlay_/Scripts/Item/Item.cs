@@ -135,14 +135,6 @@ public class Item : MonoBehaviour
         tf.DOScale(originalScale * 1.2f, 0.2f).SetEase(Ease.OutBack);
         tf.DORotate(new Vector3(0, 0, 0), 0.2f); 
 
-        if (shadowOnHolder != null)
-        {
-            if (CanPlaced())
-            {
-                shadowOnHolder.gameObject.SetActive(true);
-            }
-        }
-        
         zCoord = mainCam.WorldToScreenPoint(tf.position).z;
         offset = tf.position - GetMouseWorldPos();
     }
@@ -370,16 +362,16 @@ public class Item : MonoBehaviour
     private void MoveToCorrectPos() { }
     private void Waitting() { }
     
-    // public void SpawnVFX()
-    // {
-    //     MergeEffect mergeEffect = Ply_Pool.Ins.Spawn<MergeEffect>(PoolType.MergeVFX, tf.position, tf.rotation);
-    //     mergeEffect.DeSpawnByTime();
-    // }
     public void SpawnVFX()
     {
-        BlinkEffect blinkEffect = Ply_Pool.Ins.Spawn<BlinkEffect>(PoolType.BlinkFX, tf.position, tf.rotation);
-        blinkEffect.DeSpawnByTime();
+        MergeEffect mergeEffect = Ply_Pool.Ins.Spawn<MergeEffect>(PoolType.MergeVFX, tf.position, tf.rotation);
+        mergeEffect.DeSpawnByTime();
     }
+    // public void SpawnVFX()
+    // {
+    //     BlinkEffect blinkEffect = Ply_Pool.Ins.Spawn<BlinkEffect>(PoolType.BlinkFX, tf.position, tf.rotation);
+    //     blinkEffect.DeSpawnByTime();
+    // }
     
     public void PlaySoundOnPlace()
     {

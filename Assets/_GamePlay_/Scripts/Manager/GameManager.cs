@@ -20,9 +20,22 @@ public class GameManager : Ply_Singleton<GameManager>
     public Box mainBox;
     public ItemConveyor itemConveyor;
 
+    [Header("Game Timer")]
+    [Tooltip("Bật để sử dụng đồng hồ đếm ngược.")]
+    [LunaPlaygroundField("UseTimer", 2, "Build Settings")]
+
+    public bool useTimer = false;
+    [Tooltip("Tổng thời gian chơi (giây).")]
+    [LunaPlaygroundField("Time", 3, "Build Settings")]
+    public float gameDuration = 45f;
+    private float currentTime;
+    private bool isTimerRunning = false;
+
     [Header("Tutorial")]
     public GameObject handTutorial;
     public float tutorialDelay = 5f;
+    [Tooltip("Hướng dẫn sẽ dừng sau khi người chơi đặt đúng số lượng item này. 0 = không giới hạn.")]
+    public int maxTutorialPlacements = 0;
     private List<Item> tutorialItems = new List<Item>();
     private float inactivityTimer;
     private Item currentlyGuidedItem = null;
@@ -54,6 +67,12 @@ public class GameManager : Ply_Singleton<GameManager>
             }
         }
 
+        if (useTimer)
+        {
+            currentTime = gameDuration;
+            isTimerRunning = false; // Timer starts on first box click
+        }
+
 
     }
     private void Update()
@@ -67,8 +86,31 @@ public class GameManager : Ply_Singleton<GameManager>
             currentState.OnExecute(this);
         }
 
+        if (useTimer && isTimerRunning && isPlaying)
+        {
+            currentTime -= Time.deltaTime;
+
+            if (currentTime <= 0f)
+            {
+                currentTime = 0f;
+                isTimerRunning = false;
+                LoseGame();
+            }
+        }
+
+        // Check if tutorial should be permanently disabled
+        if (maxTutorialPlacements > 0 && placedItemCount >= maxTutorialPlacements)
+        {
+            if (isTutorialActive)
+            {
+                StopHandTutorial();
+            }
+            return; // Skip all further tutorial logic
+        }
+
         // Xử lý logic tutorial
-        if (!isTutorialActive && !itemConveyor.isDraggingConveyor && isPlaying && !InputManager.Ins.isDragging)
+        bool isConveyorDragging = itemConveyor != null && itemConveyor.isDraggingConveyor;
+        if (!isTutorialActive && !isConveyorDragging && isPlaying && !InputManager.Ins.isDragging)
         {
             // Nếu người chơi chưa ghép đúng item nào (vừa vào game), 
             // bỏ qua timer và ép gọi tay hướng dẫn liên tục cho đến khi hiện thành công.
@@ -130,6 +172,12 @@ public class GameManager : Ply_Singleton<GameManager>
     [ContextMenu("Lose Game")]
     public void LoseGame()
     {
+        if (!isPlaying) return;
+
+        if (isTimerRunning)
+        {
+            isTimerRunning = false;
+        }
         ChangeState(new LoseState());
     }
 
@@ -170,6 +218,18 @@ public class GameManager : Ply_Singleton<GameManager>
         // }
     }
 
+    public void StartGameTimer()
+    {
+
+        // Chỉ bắt đầu timer nếu được bật và chưa chạy
+        if (useTimer && !isTimerRunning && isPlaying)
+        {
+            Debug.Log("Start Game Timer");
+            currentTime = gameDuration;
+            isTimerRunning = true;
+        }
+    }
+
     #region Tutorial Methods
 
     public void TriggerTutorial()
@@ -206,35 +266,51 @@ public class GameManager : Ply_Singleton<GameManager>
 
     public void ResetInactivityTimer()
     {
+        ResetInactivityTimer(null);
+    }
+
+    public void ResetInactivityTimer(Item clickedItem)
+    {
         inactivityTimer = 0f;
         if (isTutorialActive)
         {
-            isTutorialActive = false;
-            if (handTutorial != null)
+            // If the player clicked the item that was being guided,
+            // we only stop the hand animation but keep the shadow hint visible for the drag.
+            if (currentlyGuidedItem != null && currentlyGuidedItem == clickedItem)
             {
-                DOTween.Kill("handTutorial");
-                handTutorial.SetActive(false);
+                isTutorialActive = false;
+                if (handTutorial != null)
+                {
+                    DOTween.Kill("handTutorial");
+                    handTutorial.SetActive(false);
+                }
             }
-
-            // Tắt shadow hint của item vừa được hướng dẫn
-            HideCurrentGuidedItemShadowIfAllowed();
-            currentlyGuidedItem = null; // Clear reference
+            else
+            {
+                // If the player clicked something else (another item, the box, or empty space),
+                // then fully stop the tutorial, including hiding the old shadow hint.
+                StopHandTutorial();
+            }
         }
     }
 
-    private void RestartHandTutorial()
+    private void StopHandTutorial()
     {
         isTutorialActive = false;
-
         if (handTutorial != null)
         {
             DOTween.Kill("handTutorial");
             handTutorial.SetActive(false);
         }
 
+        // Tắt shadow hint của item vừa được hướng dẫn
         HideCurrentGuidedItemShadowIfAllowed();
+        currentlyGuidedItem = null; // Clear reference
+    }
 
-        currentlyGuidedItem = null;
+    private void RestartHandTutorial()
+    {
+        StopHandTutorial();
         ShowHandTutorial();
     }
 

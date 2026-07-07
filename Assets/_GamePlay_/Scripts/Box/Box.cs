@@ -19,6 +19,14 @@ public class Box : Ply_Singleton<Box>
     public float revealDuration = 0.4f;
     [Tooltip("Only used by BatchWhenTargetsEmpty. Shows holder shadows for all items in the first spawned batch.")]
     public bool showInitialBatchShadowsOnSpawn = false;
+
+    [Header("Random Spawning (useBox = true)")]
+    [Tooltip("The size of the random spawn area.")]
+    public Vector2 spawnAreaSize = new Vector2(5, 2);
+    [Tooltip("The offset of the spawn area from the box's position.")]
+    public Vector3 spawnAreaOffset = Vector3.zero;
+    [Tooltip("A parent transform for items spawned randomly from the box. If null, they will be parented to the box itself.")]
+    public Transform randomSpawnParent;
     public ItemConveyor mainConveyor;
 
     private int currentItemIndex = 0;
@@ -28,6 +36,17 @@ public class Box : Ply_Singleton<Box>
     private int activeSpawnTargetCount = 0;
     private bool isOpened = false;
     private bool isPlayingBoxAnimation = false;
+
+    private void OnDrawGizmosSelected()
+    {
+        if (useBox)
+        {
+            Gizmos.color = Color.yellow;
+            Vector3 center = transform.position + spawnAreaOffset;
+            Vector3 size = new Vector3(spawnAreaSize.x, spawnAreaSize.y, 0.1f);
+            Gizmos.DrawWireCube(center, size);
+        }
+    }
 
     private void Start()
     {
@@ -47,8 +66,6 @@ public class Box : Ply_Singleton<Box>
 
         if (useBox)
         {
-            CacheAvailableBoxTargets();
-
             if (graphicController != null)
             {
                 graphicController.ChangeAnim("0-Drop", false, () => {
@@ -71,7 +88,7 @@ public class Box : Ply_Singleton<Box>
     {
         Debug.Log("OnClick");
         Ply_SoundManager.Ins.PlayFx(FxType.Click);
-        GameManager.Ins.ResetInactivityTimer();
+        GameManager.Ins.ResetInactivityTimer(null);
 
         if (useBox)
         {
@@ -86,20 +103,19 @@ public class Box : Ply_Singleton<Box>
 
     public void SpawnNextItemToVacatedTarget(Vector3 targetPosition, Action onComplete = null)
     {
+        if (useBox)
+        {
+            // When using the box, spawning is random and not tied to vacated targets.
+            onComplete?.Invoke();
+            return;
+        }
+
         Transform target = GetSpawnTargetByPosition(targetPosition);
         if (target == null)
         {
             onComplete?.Invoke();
             return;
         }
-
-        if (useBox)
-        {
-            AddAvailableBoxTarget(target);
-            onComplete?.Invoke();
-            return;
-        }
-
         if (spawnMode == BoxSpawnMode.BatchWhenTargetsEmpty)
         {
             SpawnBatchWhenTargetsEmpty(target, onComplete);
@@ -250,10 +266,70 @@ public class Box : Ply_Singleton<Box>
         return true;
     }
 
+    private bool RevealNextItemAtPosition(Vector3 position, Action onComplete = null, bool moveFromBox = false)
+    {
+        Item itemComponent = GetNextDynamicItem(out int itemIndex);
+        if (itemComponent == null)
+        {
+            return false;
+        }
+
+        Transform itemToReveal = itemComponent.transform;
+
+        // // Set parent to the designated random spawn parent, or the box itself
+        // Transform parentForRandomSpawn = randomSpawnParent != null ? randomSpawnParent : transform;
+        // itemToReveal.SetParent(parentForRandomSpawn, true);
+
+        // homeSlot is not applicable for random spawning in an area.
+        // The item will return to its waitingPosition if drag is cancelled.
+        itemComponent.homeSlot = null;
+
+        itemToReveal.DOKill();
+        itemToReveal.position = moveFromBox ? transform.position : position;
+        itemToReveal.localScale = Vector3.zero;
+        itemComponent.DisableAnimatorOnSpawn();
+        Vector3 targetScale = itemComponent.GetWaitingScale();
+
+        itemComponent.canShowShadowHint = false; // Shadows on holders are not relevant here.
+        itemComponent.waitingPosition = position;
+        itemComponent.SetSortingOrder(GameManager.Ins.currentLayer);
+        GameManager.Ins.currentLayer++;
+
+        itemToReveal.gameObject.SetActive(true);
+        itemComponent.enabled = true;
+        itemComponent.ChangeState(ItemState.Waitting);
+
+        Collider itemCollider = ComponentCache<Collider>.Get(itemToReveal);
+        if (itemCollider != null)
+        {
+            itemCollider.enabled = false;
+        }
+
+        if (moveFromBox)
+        {
+            itemToReveal.DOJump(position, 0.5f, 1, revealDuration).SetEase(Ease.OutQuad);
+        }
+
+        itemToReveal.DOScale(targetScale, revealDuration).SetEase(Ease.OutBack).OnComplete(() =>
+        {
+            if (itemCollider != null)
+            {
+                itemCollider.enabled = true;
+            }
+
+            itemToReveal.DOMoveY(itemToReveal.position.y + 0.3f, 1.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+            GameManager.Ins.AddItemToTutorial(itemComponent);
+            onComplete?.Invoke();
+        });
+
+        return true;
+    }
+
     private void HandleBoxClickSpawn()
     {
         if (!isOpened)
         {
+            GameManager.Ins.StartGameTimer();
             UIManager.Ins.ZoomInCamera();
             isOpened = true;
 
@@ -277,11 +353,6 @@ public class Box : Ply_Singleton<Box>
         if (currentItemIndex >= dynamicItems.Count)
         {
             TryPlayEndAnimation();
-            return;
-        }
-
-        if (availableBoxTargets.Count <= 0)
-        {
             return;
         }
 
@@ -321,18 +392,15 @@ public class Box : Ply_Singleton<Box>
             return;
         }
 
-        if (availableBoxTargets.Count <= 0)
-        {
-            return;
-        }
+        // Calculate random position within the spawn area
+        Vector3 center = transform.position + spawnAreaOffset;
+        float randomX = UnityEngine.Random.Range(center.x - spawnAreaSize.x / 2, center.x + spawnAreaSize.x / 2);
+        float randomY = UnityEngine.Random.Range(center.y - spawnAreaSize.y / 2, center.y + spawnAreaSize.y / 2);
+        Vector3 spawnPosition = new Vector3(randomX, randomY, center.z);
 
-        int randomIndex = UnityEngine.Random.Range(0, availableBoxTargets.Count);
-        Transform target = availableBoxTargets[randomIndex];
-        availableBoxTargets.RemoveAt(randomIndex);
-
-        if (!RevealNextItem(target, null, true))
+        // Reveal item at the random position
+        if (!RevealNextItemAtPosition(spawnPosition, null, true))
         {
-            AddAvailableBoxTarget(target);
             TryPlayEndAnimation();
         }
     }

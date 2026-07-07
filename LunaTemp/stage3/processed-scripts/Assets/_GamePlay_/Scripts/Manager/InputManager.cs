@@ -41,8 +41,6 @@ public class InputManager : Ply_Singleton<InputManager>
     {
         if (mainCamera == null) return;
 
-        GameManager.Ins.ResetInactivityTimer();
-
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
@@ -62,7 +60,6 @@ public class InputManager : Ply_Singleton<InputManager>
         
         if (hits.Length > 0)
         {
-            
             Item topItem = null;
             int highestSortingOrder = int.MinValue;
 
@@ -88,6 +85,7 @@ public class InputManager : Ply_Singleton<InputManager>
             // Thực hiện kéo thả với Item trên cùng đã tìm được
             if (topItem != null)
             {
+                GameManager.Ins.ResetInactivityTimer(topItem);
                 // Đưa orderLayer của item lên mức currentLayer hiện tại
                 topItem.SetSortingOrder(GameManager.Ins.currentLayer);
                 
@@ -96,7 +94,11 @@ public class InputManager : Ply_Singleton<InputManager>
 
                 topItem.StartDrag();
                 isDragging = true;
+                return;
             }
         }
+
+        // Nếu không click trúng item hoặc box, coi như click vào nền
+        GameManager.Ins.ResetInactivityTimer(null);
     }
 }
