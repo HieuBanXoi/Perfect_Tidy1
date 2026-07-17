@@ -36,6 +36,8 @@ public class Item : MonoBehaviour
     
     [NonSerialized]
     public bool keepShadowVisibleWhenWaiting = false;
+    [NonSerialized]
+    public int dynamicItemIndex = -1;
     
     public Transform homeSlot; // Ghi nhớ vị trí gốc (trên Box hoặc Conveyor)
     public Vector3 waitingPosition;
@@ -130,6 +132,31 @@ public class Item : MonoBehaviour
         transform.SetParent(null); // Gỡ khỏi cha (conveyor/box) để kéo mượt trên màn hình
         tf.DOKill();
         GameManager.Ins.ResetInactivityTimer();
+
+        // --- LOGIC MỚI: HIỆN SHADOW KHI KÉO ---
+        if (ItemSpawnManager.Ins != null)
+        {
+            int limit = ItemSpawnManager.Ins.showShadowOnDragCount;
+            bool canShowShadow = false;
+
+            // -1 nghĩa là hiện cho tất cả.
+            // Các giá trị > 0 sẽ chỉ hiện cho N item đầu tiên.
+            if (limit < 0) 
+            {
+                canShowShadow = true;
+            }
+            else if (limit > 0 && dynamicItemIndex >= 0 && dynamicItemIndex < limit)
+            {
+                canShowShadow = true;
+            }
+
+            if (canShowShadow && shadowOnHolder != null)
+            {
+                shadowOnHolder.gameObject.SetActive(true);
+            }
+        }
+        // -----------------------------------------
+
         ApplyChildSortingOffset();
         ChangeState(ItemState.OnDrag);
         tf.DOScale(originalScale * 1.2f, 0.2f).SetEase(Ease.OutBack);
@@ -174,7 +201,7 @@ public class Item : MonoBehaviour
                 // --- GỌI BOX SPAWN ITEM MỚI VÀO SLOT TRỐNG ---
                 if (homeSlot != null)
                 {
-                    Box box = Box.Ins;
+                    ItemSpawnManager box = ItemSpawnManager.Ins;
                     if (box != null)
                     {
                         box.SpawnNextItemToVacatedTarget(homeSlot.position);
@@ -208,6 +235,9 @@ public class Item : MonoBehaviour
                                  defaultShadow.SetActive(true);
                              }
                              ChangeState(ItemState.OnGoal);
+
+                             // Hiệu ứng nảy nhẹ khi đặt thành công
+                             tf.DOPunchScale(new Vector3(0.1f, -0.1f, 0.2f), 0.3f, 10, 1);
                          });
 
                 tf.DORotate(holder.transform.rotation.eulerAngles, 0.5f);

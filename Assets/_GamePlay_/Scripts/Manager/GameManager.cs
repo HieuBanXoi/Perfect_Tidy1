@@ -17,7 +17,7 @@ public class GameManager : Ply_Singleton<GameManager>
     public int currentLayer; // Lớp sorting order cao nhất hiện tại
 
     [Header("Components")]
-    public Box mainBox;
+    public ItemSpawnManager mainBox;
     public ItemConveyor itemConveyor;
 
     [Header("Game Timer")]

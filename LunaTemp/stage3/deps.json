@@ -1,260 +1,258 @@
 {
   "ignores": [
-    "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs",
-    "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics.cs",
-    "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics2D.cs",
-    "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleSprite.cs",
-    "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUI.cs",
-    "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUnityVersion.cs",
-    "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/Legacy/SpriteAttacher.cs",
-    "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/ISkeletonAnimation.cs",
-    "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/AtlasUtilities.cs",
-    "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/AttachmentCloneExtensions.cs",
-    "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/AttachmentRegionExtensions.cs",
-    "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/SkeletonExtensions.cs",
-    "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/TimelineExtensions.cs"
+    "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs",
+    "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics.cs",
+    "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics2D.cs",
+    "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleSprite.cs",
+    "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUI.cs",
+    "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUnityVersion.cs",
+    "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/Legacy/SpriteAttacher.cs",
+    "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/ISkeletonAnimation.cs",
+    "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/AtlasUtilities.cs",
+    "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/AttachmentCloneExtensions.cs",
+    "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/AttachmentRegionExtensions.cs",
+    "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/SkeletonExtensions.cs",
+    "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/TimelineExtensions.cs"
   ],
   "groups": [
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Box/Box.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/Item.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/GameManager.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/InputManager.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Spine/ItemConveyor.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/CameraController.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/StateMachine/LoseState.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/StateMachine/IGameState.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/StateMachine/OnPlayState.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/StateMachine/WaitingState.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/UIManager.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/StateMachine/WinState.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_Singleton.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_Pool.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/BlinkEffect.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_GameUnit.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/MergeEffect.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_SoundManager.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/CacheComponent.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Box/BoxGraphicController.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonAnimation.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Other Examples/Animation Tester/SpineAnimationTesterTool.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/ISkeletonAnimation.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Goblins.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mix and Match Character Customize/EquipSystemExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mix and Match Character Customize/EquipAssetExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mix and Match Character Customize/EquipButtonExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/SkeletonDataAsset.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/MaterialReplacementExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/AtlasAssetBase.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mix and Match Character Customize/EquipsVisualsComponentExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/SpineAttributes.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/FootSoldierExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonRenderer.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/RenderTextureFadeoutExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonRenderTexture/SkeletonRenderTextureFadeout.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonRenderTexture/SkeletonRenderTexture.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/Ghost/SkeletonGhost.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/Ghost/SkeletonGhostRenderer.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/Legacy/AtlasRegionAttacher.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/SpineAtlasAsset.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/RuntimeLoadFromExportsExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/Legacy/SpriteAttacher.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonGraphic.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/MixAndMatchGraphic.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/AtlasUtilities.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mix and Match Character Customize/MixAndMatchSkinsExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mix and Match Character Customize/MixAndMatchSkinsButtonExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/MixAndMatch.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/Following/BoundingBoxFollower.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonUtility/SkeletonUtility.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonUtility Modules/SkeletonRagdoll.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonUtility Modules/SkeletonRagdoll2D.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/RaggedySpineboy.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonUtility/SkeletonUtilityBone.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonUtility Modules/SkeletonUtilityGroundConstraint.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonUtility/SkeletonUtilityConstraint.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonUtility Modules/SkeletonUtilityEyeConstraint.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonUtility Modules/SkeletonUtilityKinematicShadow.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/Following/BoundingBoxFollowerGraphic.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/AttachmentRegionExtensions.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/OutlineSkeletonGraphic.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonGraphicMirror.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonGraphicPlayAnimationAtEvent.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpawnSkeletonGraphicExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpineboyPoleGraphic.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/AnimationReferenceAsset.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/AttackSpineboy.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpineGauge.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/Raptor.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/SpineBlinkPlayer.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/SpineboyBeginnerView.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/SpineboyBeginnerModel.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/SpineboyBeginnerInput.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/EventDataReferenceAsset.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/TransitionDictionaryExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mecanim as Logic/SkeletonAnimationHandleExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/BasicPlatformerController.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/HeroEffectsHandlerExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mecanim as Logic/DummyMecanimControllerExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mecanim as Logic/MecanimToAnimationHandleExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpineboyFreeze.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpineboyPole.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonRenderSeparator/SkeletonRenderSeparator.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonRenderSeparator/SkeletonPartsRenderer.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Mesh Generation/MeshGenerator.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/Sample VertexEffects/JitterEffectExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/Sample VertexEffects/TwoByTwoTransformEffectExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonAnimationMulti/SkeletonAnimationMulti.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Mesh Generation/SkeletonRendererInstruction.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Mesh Generation/MeshRendererBuffers.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Mesh Generation/DoubleBuffered.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Mesh Generation/SpineMesh.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/SkeletonExtensions.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/YieldInstructions/WaitForSpineAnimationComplete.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/YieldInstructions/WaitForSpineAnimation.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/YieldInstructions/WaitForSpineAnimationEnd.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/Following/BoneFollowerGraphic.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/Following/BoneFollower.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonRendererCustomMaterials/SkeletonGraphicCustomMaterials.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonUtility/ActivateBasedOnFlipDirection.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/Internal/SkeletonSubmeshGraphic.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/BlendModeMaterials.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/RenderExistingMesh.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/Following/PointFollower.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonMecanim.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/RootMotion/SkeletonMecanimRootMotion.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/RootMotion/SkeletonRootMotionBase.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/RootMotionDeltaCompensation.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/RootMotion/SkeletonRootMotion.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/TimelineExtensions.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonRendererCustomMaterials/SkeletonRendererCustomMaterials.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/SpineBeginnerTwo.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/SpineboyTargetController.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/HandleEventWithAudioExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/BoneLocalOverride.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/CombinedSkin.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonColorInitialize.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SlotTintBlackFollower.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SpineEventUnityHandler.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpawnFromSkeletonDataExample.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpineboyBodyTilt.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpineboyFootplanter.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpineboyFacialExpression.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/SpineSpriteAtlasAsset.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/SkeletonDataCompatibility.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/SkeletonDataModifierAsset.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/MecanimAnimationMatchModifier/AnimationMatchModifierAsset.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/SkeletonDataModifierAssets/BlendModeMaterials/BlendModeMaterialsAsset.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/RegionlessAttachmentLoader.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonAnimationFixedTimestep.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Spineboy.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/YieldInstructions/WaitForSpineEvent.cs",
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/ItemHolder.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Box/ItemSpawnManager.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/Item.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/GameManager.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/InputManager.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Spine/ItemConveyor.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/CameraController.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/StateMachine/LoseState.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/StateMachine/IGameState.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/StateMachine/OnPlayState.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/StateMachine/WaitingState.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/UIManager.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/StateMachine/WinState.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_Singleton.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_Pool.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/BlinkEffect.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_GameUnit.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/MergeEffect.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_SoundManager.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/CacheComponent.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/ItemHolder.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/DelayStartAnim.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/DelayStartAnim.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/ItemSetupTool.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/ItemSetupTool.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/ItemSetupToolEditor.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/ItemSetupToolEditor.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Spine/ScreenHeightPositionAnchor.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Spine/ScreenHeightPositionAnchor.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/PSD_Tool.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/PSD_Tool.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/PSD_ToolEditor.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Yielders.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Yielders.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Epic Toon FX/Scripts/ETFXLightFade.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Epic Toon FX/Scripts/ETFXLightFade.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Epic Toon FX/Scripts/ETFXPitchRandomizer.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Epic Toon FX/Scripts/ETFXPitchRandomizer.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Epic Toon FX/Scripts/ETFXRotation.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Epic Toon FX/Scripts/ETFXRotation.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleEPOOutline.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleEPOOutline.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics2D.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics2D.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleSprite.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleSprite.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUI.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUI.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUIToolkit.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUIToolkit.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUnityVersion.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUnityVersion.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUtils.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUtils.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Other Examples/Animation Tester/SpineAnimationTesterTool.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/ISkeletonAnimation.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Goblins.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonAnimation.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/AttackSpineboy.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpineGauge.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonRenderer.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/FootSoldierExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/SpineAttributes.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/SpineBeginnerTwo.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/SpineboyTargetController.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/HandleEventWithAudioExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mix and Match Character Customize/EquipsVisualsComponentExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mix and Match Character Customize/EquipSystemExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mix and Match Character Customize/EquipAssetExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mix and Match Character Customize/EquipButtonExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/SkeletonDataAsset.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/MaterialReplacementExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/AtlasAssetBase.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mix and Match Character Customize/MixAndMatchSkinsExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mix and Match Character Customize/MixAndMatchSkinsButtonExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/AtlasUtilities.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/MixAndMatch.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/Following/BoundingBoxFollower.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonUtility/SkeletonUtility.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonUtility Modules/SkeletonRagdoll.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonUtility Modules/SkeletonRagdoll2D.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/RaggedySpineboy.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonUtility/SkeletonUtilityBone.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonUtility Modules/SkeletonUtilityGroundConstraint.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonUtility/SkeletonUtilityConstraint.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonUtility Modules/SkeletonUtilityEyeConstraint.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonUtility Modules/SkeletonUtilityKinematicShadow.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/Following/BoundingBoxFollowerGraphic.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonGraphic.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/MixAndMatchGraphic.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/Legacy/SpriteAttacher.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Mesh Generation/MeshGenerator.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/Sample VertexEffects/JitterEffectExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/Sample VertexEffects/TwoByTwoTransformEffectExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonAnimationMulti/SkeletonAnimationMulti.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonRenderSeparator/SkeletonPartsRenderer.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonRenderSeparator/SkeletonRenderSeparator.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpineboyPole.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/AnimationReferenceAsset.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/Raptor.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/SpineBlinkPlayer.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/SpineboyBeginnerView.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/SpineboyBeginnerModel.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/SpineboyBeginnerInput.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/EventDataReferenceAsset.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/TransitionDictionaryExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mecanim as Logic/SkeletonAnimationHandleExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/BasicPlatformerController.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/HeroEffectsHandlerExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mecanim as Logic/DummyMecanimControllerExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Mecanim as Logic/MecanimToAnimationHandleExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpineboyFreeze.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpineboyPoleGraphic.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/YieldInstructions/WaitForSpineAnimationComplete.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/YieldInstructions/WaitForSpineAnimation.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/YieldInstructions/WaitForSpineAnimationEnd.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Mesh Generation/SkeletonRendererInstruction.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Mesh Generation/MeshRendererBuffers.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Mesh Generation/DoubleBuffered.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Mesh Generation/SpineMesh.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/SkeletonExtensions.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/OutlineSkeletonGraphic.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonGraphicMirror.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonGraphicPlayAnimationAtEvent.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpawnSkeletonGraphicExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/Following/BoneFollowerGraphic.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/Following/BoneFollower.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonRendererCustomMaterials/SkeletonGraphicCustomMaterials.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonUtility/ActivateBasedOnFlipDirection.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/Internal/SkeletonSubmeshGraphic.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/BlendModeMaterials.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/AttachmentRegionExtensions.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/SpineAtlasAsset.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/RuntimeLoadFromExportsExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/Legacy/AtlasRegionAttacher.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/SpineSpriteAtlasAsset.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpawnFromSkeletonDataExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonMecanim.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/RootMotion/SkeletonMecanimRootMotion.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/RootMotion/SkeletonRootMotionBase.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/RootMotionDeltaCompensation.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/RootMotion/SkeletonRootMotion.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/TimelineExtensions.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/SkeletonDataCompatibility.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/SkeletonDataModifierAsset.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/MecanimAnimationMatchModifier/AnimationMatchModifierAsset.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/SkeletonDataModifierAssets/BlendModeMaterials/BlendModeMaterialsAsset.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Asset Types/RegionlessAttachmentLoader.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/BoneLocalOverride.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/CombinedSkin.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonColorInitialize.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SlotTintBlackFollower.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SpineEventUnityHandler.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpineboyBodyTilt.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpineboyFootplanter.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/SpineboyFacialExpression.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/Following/PointFollower.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonRendererCustomMaterials/SkeletonRendererCustomMaterials.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/RenderTextureFadeoutExample.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonRenderTexture/SkeletonRenderTextureFadeout.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonRenderTexture/SkeletonRenderTexture.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/Ghost/SkeletonGhost.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/Ghost/SkeletonGhostRenderer.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/RenderExistingMesh.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SkeletonAnimationFixedTimestep.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Spineboy.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/YieldInstructions/WaitForSpineEvent.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/DraggableTransform.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/DraggableTransform.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/ConstrainedCamera.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Getting Started Scripts/ConstrainedCamera.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/HurtFlashEffect.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/HurtFlashEffect.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/MaterialPropertyBlockExample.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/MaterialPropertyBlockExample.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/ReloadSceneOnKeyDown.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/ReloadSceneOnKeyDown.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Rotator.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Rotator.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SetRigidbodySolverIterations.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine Examples/Scripts/Sample Components/SetRigidbodySolverIterations.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonUtility/FollowLocationRigidbody.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonUtility/FollowLocationRigidbody.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonUtility/FollowLocationRigidbody2D.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonUtility/FollowLocationRigidbody2D.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonUtility/FollowSkeletonUtilityRootRotation.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Components/SkeletonUtility/FollowSkeletonUtilityRootRotation.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Modules/TK2D/SpriteCollectionAttachmentLoader.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Modules/TK2D/SpriteCollectionAttachmentLoader.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/AttachmentCloneExtensions.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/AttachmentCloneExtensions.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/BuildUtilities.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/BuildUtilities.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/MaterialChecks.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/MaterialChecks.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/SettingsTriState.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/SettingsTriState.cs"
     ],
     [
-      "D:/Project/DreamyRoom/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/YieldInstructions/WaitForSpineTrackEntryEnd.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/Spine/Runtime/spine-unity/Utility/YieldInstructions/WaitForSpineTrackEntryEnd.cs"
     ],
     [
       "D:/LunaVersion/7.1.0/pipeline/templates/LunaCompiler/Scripts/Properties/AssemblyInfo.cs"

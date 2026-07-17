@@ -42,18 +42,6 @@ public class InputManager : Ply_Singleton<InputManager>
         if (mainCamera == null) return;
 
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        // Ưu tiên click vào Box trước
-        if (Physics.Raycast(ray, out hit, 100f, boxLayer))
-        {
-            Box clickedBox = ComponentCache<Box>.Get(hit.collider);
-            if (clickedBox != null)
-            {
-                clickedBox.OnClicked();
-                return; // Đã click vào box, không xử lý thêm
-            }
-        }
 
         // Dùng RaycastAll để quét tất cả các item bị click trúng
         RaycastHit[] hits = Physics.RaycastAll(ray, 100f, itemLayer);

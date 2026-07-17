@@ -1,8 +1,8 @@
 {
     "version": "7.1.0",
     "projectId": "54ab6df5d24ca13458b7b8f24e7d8130",
-    "applicationID": 27329,
-    "creativeName": "PLY_DreamyRoom_Lv26",
+    "applicationID": 26861,
+    "creativeName": "PLY_PerfectTidy_V132",
     "pgServer": "EU",
     "window": {
         "‐⁙": true
@@ -1557,10 +1557,6 @@
             },
             {
                 "name": "UnityEngine.ContactPoint2D",
-                "excluded": true
-            },
-            {
-                "name": "UnityEngine.ContextMenu",
                 "excluded": true
             },
             {
@@ -7188,10 +7184,6 @@
                 "excluded": true
             },
             {
-                "name": "DG.Tweening.Core.Extensions",
-                "excluded": true
-            },
-            {
                 "name": "DG.Tweening.DOCurve.CubicBezier",
                 "excluded": true
             },
@@ -7201,10 +7193,6 @@
             },
             {
                 "name": "DG.Tweening.Plugins.Core.PathCore.ControlPoint",
-                "excluded": true
-            },
-            {
-                "name": "DG.Tweening.Plugins.Core.SpecialPluginsUtils",
                 "excluded": true
             },
             {
@@ -7261,10 +7249,6 @@
             },
             {
                 "name": "DG.Tweening.Plugins.Vector2Plugin",
-                "excluded": true
-            },
-            {
-                "name": "DG.Tweening.Plugins.Vector3ArrayPlugin",
                 "excluded": true
             },
             {
@@ -9172,11 +9156,11 @@
                 "excluded": false
             },
             {
-                "name": "BoxSpawnMode",
+                "name": "Ply_SoundManager.FxAudio",
                 "excluded": false
             },
             {
-                "name": "Ply_SoundManager.FxAudio",
+                "name": "ItemSpawnMode",
                 "excluded": false
             }
         ],
@@ -22805,15 +22789,15 @@
                 "instanceMethods": [
                     {
                         "name": "getDefaultValue",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "ctor",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "Reset",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "getHashCode",
@@ -22825,7 +22809,7 @@
                     },
                     {
                         "name": "$clone",
-                        "excluded": true
+                        "excluded": false
                     }
                 ]
             },
@@ -22923,7 +22907,7 @@
                     },
                     {
                         "name": "DOStartupSpecials",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "DOStartupDurationBased",
@@ -32059,7 +32043,7 @@
                     },
                     {
                         "name": "Punch",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "Shake",
@@ -32075,7 +32059,7 @@
                     },
                     {
                         "name": "ToArray",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "Sequence",
@@ -33116,114 +33100,6 @@
                     {
                         "name": "toString",
                         "excluded": true
-                    }
-                ]
-            },
-            {
-                "className": "Box",
-                "staticMethods": [],
-                "instanceMethods": [
-                    {
-                        "name": "init",
-                        "excluded": false
-                    },
-                    {
-                        "name": "Start",
-                        "excluded": false
-                    },
-                    {
-                        "name": "OnClicked",
-                        "excluded": false
-                    },
-                    {
-                        "name": "HasItems",
-                        "excluded": false
-                    },
-                    {
-                        "name": "SpawnNextItemToVacatedTarget",
-                        "excluded": false
-                    },
-                    {
-                        "name": "TryPlayEndAnimation",
-                        "excluded": false
-                    },
-                    {
-                        "name": "RevealNextItem",
-                        "excluded": false
-                    },
-                    {
-                        "name": "RevealInitialItems",
-                        "excluded": false
-                    },
-                    {
-                        "name": "ShowInitialItem",
-                        "excluded": false
-                    },
-                    {
-                        "name": "SpawnBatchWhenTargetsEmpty",
-                        "excluded": false
-                    },
-                    {
-                        "name": "RevealBatch",
-                        "excluded": false
-                    },
-                    {
-                        "name": "GetNextDynamicItem",
-                        "excluded": false
-                    },
-                    {
-                        "name": "SetSpawnedShadowsVisible",
-                        "excluded": false
-                    },
-                    {
-                        "name": "HandleBoxClickSpawn",
-                        "excluded": false
-                    },
-                    {
-                        "name": "SpawnItemFromBoxClick",
-                        "excluded": false
-                    },
-                    {
-                        "name": "inherits",
-                        "excluded": false
-                    },
-                    {
-                        "name": "CacheAvailableBoxTargets",
-                        "excluded": true
-                    },
-                    {
-                        "name": "AddAvailableBoxTarget",
-                        "excluded": true
-                    },
-                    {
-                        "name": "GetSpawnTargetByPosition",
-                        "excluded": false
-                    },
-                    {
-                        "name": "CompactItemsToLeft",
-                        "excluded": false
-                    },
-                    {
-                        "name": "OnDrawGizmosSelected",
-                        "excluded": true
-                    },
-                    {
-                        "name": "RevealNextItemAtPosition",
-                        "excluded": false
-                    }
-                ]
-            },
-            {
-                "className": "BoxGraphicController",
-                "staticMethods": [],
-                "instanceMethods": [
-                    {
-                        "name": "Awake",
-                        "excluded": false
-                    },
-                    {
-                        "name": "ChangeAnim",
-                        "excluded": false
                     }
                 ]
             },
@@ -35775,7 +35651,7 @@
                     },
                     {
                         "name": "DOPunchScale",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "DOPunchRotation",
@@ -37336,6 +37212,10 @@
                     {
                         "name": "Tick",
                         "excluded": false
+                    },
+                    {
+                        "name": "Tick\",this)}this.c$-=t;if(this.c$<=0){pc.Application.getApplication().events.off(\"update",
+                        "excluded": false
                     }
                 ]
             },
@@ -38632,6 +38512,192 @@
                     {
                         "name": "init",
                         "excluded": false
+                    },
+                    {
+                        "name": "FindAllChildGameObjects",
+                        "excluded": true
+                    },
+                    {
+                        "name": "FindNameAndChangeSpriteObjectPSD",
+                        "excluded": true
+                    },
+                    {
+                        "name": "FindNameSpriteAndChangeSpriteObjectPSD",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "ItemSpawnManager",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "inherits",
+                        "excluded": false
+                    },
+                    {
+                        "name": "init",
+                        "excluded": false
+                    },
+                    {
+                        "name": "OnDrawGizmosSelected",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Start",
+                        "excluded": false
+                    },
+                    {
+                        "name": "HasItems",
+                        "excluded": false
+                    },
+                    {
+                        "name": "SpawnNextItemToVacatedTarget",
+                        "excluded": true
+                    },
+                    {
+                        "name": "RevealInitialItems",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ShowInitialItem",
+                        "excluded": true
+                    },
+                    {
+                        "name": "RevealNextItem",
+                        "excluded": true
+                    },
+                    {
+                        "name": "RevealNextItemAtPosition",
+                        "excluded": false
+                    },
+                    {
+                        "name": "SpawnRandomItem",
+                        "excluded": false
+                    },
+                    {
+                        "name": "SpawnBatchWhenTargetsEmpty",
+                        "excluded": true
+                    },
+                    {
+                        "name": "RevealBatch",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetNextDynamicItem",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetSpawnTargetByPosition",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SetSpawnedShadowsVisible",
+                        "excluded": true
+                    },
+                    {
+                        "name": "CompactItemsToLeft",
+                        "excluded": true
+                    },
+                    {
+                        "name": "TryPlayEndAnimation",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "UnityEngine.ContextMenu",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "ctor",
+                        "excluded": false
+                    },
+                    {
+                        "name": "$ctor1",
+                        "excluded": false
+                    },
+                    {
+                        "name": "$ctor2",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "DG.Tweening.Core.Extensions",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "SetSpecialStartupMode",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Blendable",
+                        "excluded": true
+                    },
+                    {
+                        "name": "NoFrom",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "DG.Tweening.Plugins.Core.SpecialPluginsUtils",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "SetLookAt",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SetPunch",
+                        "excluded": false
+                    },
+                    {
+                        "name": "SetShake",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SetCameraShakePosition",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "DG.Tweening.Plugins.Vector3ArrayPlugin",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "Reset",
+                        "excluded": false
+                    },
+                    {
+                        "name": "SetFrom$1",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SetFrom",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ConvertToStartValue",
+                        "excluded": false
+                    },
+                    {
+                        "name": "SetRelativeEndValue",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SetChangeValue",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetSpeedBasedDuration",
+                        "excluded": true
+                    },
+                    {
+                        "name": "EvaluateAndApply",
+                        "excluded": false
                     }
                 ]
             }
@@ -38881,6 +38947,16 @@
                         "script": "",
                         "ext": "",
                         "name": "Assets/Assets/UI/bg.jpg"
+                    },
+                    {
+                        "maxWidth": 2048,
+                        "maxHeight": 2048,
+                        "format": "png32",
+                        "compression": "quantSize",
+                        "quality": 65,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/Assets/132/Main.spriteatlasv2"
                     }
                 ]
             },
