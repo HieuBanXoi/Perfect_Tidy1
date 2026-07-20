@@ -5,6 +5,7 @@ public class WinState : IGameState
     public void OnEnter(GameManager gameManager)
     {
         UIManager.Ins.ActiveGameWinUI(true);
+        UIManager.Ins.ActiveDownloadButtons(false);
         gameManager.isGotoStore = true;
     }
 

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class ScreenScaleStep
 {
-    [Tooltip("If Height / Width is greater than this ratio, use this orthographic size.")]
+    [Tooltip("Neu ty le Chieu cao / Chieu rong lon hon muc nay")]
     public float heightOnWidthRatio;
     public float orthographicSize;
 
@@ -28,24 +28,15 @@ public class UIManager : Ply_Singleton<UIManager>
     public GameObject tutorial;
     public GameObject verticalUI;
     public GameObject horizontalUI;
-    public GameObject downloadBtnVertical;
-    public GameObject dowloadBtnHorizontal;
+    public Transform downloadBtn;
+    public Transform horizontalDownloadBtn;
     public Animator textAnim;
-
     [LunaPlaygroundField("Google Build", 0, "Build Settings")]
     public bool isGoogleBuild = false;
 
-    public Slider progressSlider;
-    public TextMeshProUGUI progressText;
-    public int maxProgressItems = 100;
-    public int startProgressItems = 0;
     public float screenWidth;
     public float screenHeight;
     public float scaleHeightOnWidth;
-    private int totalItems;
-    private int placedItems;
-    private Color originalTextColor;
-    
     public bool isVertical;
     public bool isScreenVertical;
     public Camera cam;
@@ -54,46 +45,47 @@ public class UIManager : Ply_Singleton<UIManager>
     [Tooltip("Neu ty le Chieu cao / Chieu rong >= muc nay thi dung verticalUI, nguoc lai dung horizontalUI. Mac dinh 1 = cao hon rong.")]
     public float verticalUIHeightOnWidthRatio = 0.6f;
 
+    [Header("--- SCREEN SCALE SETTINGS ---")]
+    [Tooltip("Bat de tu can lai camera khi thay doi thong so trong Inspector.")]
+    public bool scaleCameraOnValidate = false;
+
     [Tooltip("Neu ty le Chieu cao / Chieu rong >= muc nay thi tinh la man doc khi scale camera, nguoc lai tinh la man ngang.")]
     public float screenVerticalHeightOnWidthRatio = 1f;
 
-    [Header("--- CAMERA INTRO ZOOM ---")]
-    public float introZoomOutMultiplier = 1.1f;
-    public float cameraZoomDuration = 1f;
-    private float defaultOrthographicSize;
-    private bool hasDefaultOrthographicSize;
-    private bool isIntroZoomedOut = true;
-
-    [Header("--- SCREEN SCALE SETTINGS ---")]
-    [Tooltip("Enable continuous camera size scaling by screen ratio. Disable to use discrete steps below.")]
+    [Tooltip("Bat de camera tang size lien tuc theo ty le man hinh. Tat de dung cac moc discrete ben duoi.")]
     public bool useContinuousScaling = false;
 
     [Header("- Continuous Scaling -")]
-    public float baseOrthographicSize = 1.65f;
-    [Tooltip("Base Height / Width ratio. 16:9 portrait is about 1.777.")]
+    [Tooltip("Orthographic size co ban, thuong dung cho man 16:9 doc.")]
+    public float baseOrthographicSize = 6f;
+    [Tooltip("Ty le Chieu cao / Chieu rong co ban. VD: 16:9 = 1.777")]
     public float baseAspect = 1.777f;
 
     [Header("- Discrete Scaling -")]
-    public float landscapeSize = 1.65f;
-    public float defaultPortraitSize = 1.65f;
+    [Tooltip("Ti le nhan voi baseOrthographicSize khi man hinh ngang.")]
+    public float landscapeSizeRatio = 1f;
+    [Tooltip("Ti le nhan voi baseOrthographicSize khi man hinh doc mac dinh.")]
+    public float defaultPortraitSizeRatio = 1f;
+    [Tooltip("Danh sach cac moc size theo ty le man hinh.")]
     public List<ScreenScaleStep> discreteScaleSteps = new List<ScreenScaleStep>
     {
-        new ScreenScaleStep(1.9f, 1.8f),
-        new ScreenScaleStep(2.0f, 1.9f),
-        new ScreenScaleStep(2.1f, 2.0f),
-        new ScreenScaleStep(2.3f, 2.3f)
+        new ScreenScaleStep(1.4f, 6f),
+        new ScreenScaleStep(1.9f, 6f),
+        new ScreenScaleStep(2.0f, 6f),
+        new ScreenScaleStep(2.1f, 6f),
+        new ScreenScaleStep(2.3f, 6.75f)
     };
 
     [Header("--- PERSPECTIVE FIT SETTINGS ---")]
-    [Tooltip("Enable if this camera is perspective and should be fitted by distance instead of orthographicSize.")]
-    public bool usePerspectiveCamera = false;
-    [Tooltip("Optional point to keep centered while fitting a perspective camera.")]
+    [Tooltip("Bat de camera chay Perspective va fit bang khoang cach thay vi orthographicSize.")]
+    public bool usePerspectiveCamera = true;
+    [Tooltip("Tam man hinh can giu co dinh. Neu bo trong, he thong lay mot diem phia truoc camera luc Start.")]
     public Transform perspectiveFocus;
-    [Tooltip("Distance to focus when perspectiveFocus is empty. Leave 0 to calculate from baseOrthographicSize and FOV.")]
+    [Tooltip("Khoang cach toi tam nhin khi khong gan perspectiveFocus. De 0 de tu tinh theo baseOrthographicSize va FOV.")]
     public float perspectiveFocusDistance = 0f;
-    [Tooltip("Padding so the content is not too close to the screen edges.")]
+    [Tooltip("He so du phong de noi dung khong sat mep man hinh.")]
     public float perspectivePadding = 1.05f;
-    [Tooltip("Fit perspective camera against real renderer bounds. Assign boundsRoot or boundsRenderers.")]
+    [Tooltip("Bat neu muon fit theo Renderer bounds that. Can gan boundsRoot hoac boundsRenderers.")]
     public bool fitRendererBounds = false;
     public Transform boundsRoot;
     public List<Renderer> boundsRenderers = new List<Renderer>();
@@ -101,35 +93,42 @@ public class UIManager : Ply_Singleton<UIManager>
     private Vector3 perspectiveFocusPoint;
     private bool hasPerspectiveCache;
 
+    private void OnValidate()
+    {
+        verticalUIHeightOnWidthRatio = Mathf.Max(0.01f, verticalUIHeightOnWidthRatio);
+        screenVerticalHeightOnWidthRatio = Mathf.Max(0.01f, screenVerticalHeightOnWidthRatio);
+        baseAspect = Mathf.Max(0.01f, baseAspect);
+        baseOrthographicSize = Mathf.Max(0.01f, baseOrthographicSize);
+        landscapeSizeRatio = Mathf.Max(0.01f, landscapeSizeRatio);
+        defaultPortraitSizeRatio = Mathf.Max(0.01f, defaultPortraitSizeRatio);
+        perspectivePadding = Mathf.Max(1f, perspectivePadding);
+
+        if (!scaleCameraOnValidate)
+        {
+            return;
+        }
+
+        GetScreenSize();
+        GetSreenType();
+        hasPerspectiveCache = false;
+
+        float targetOrthographicSize = Mathf.Max(GetTargetOrthographicSize(), 0.01f);
+        ApplyCameraScale(targetOrthographicSize);
+    }
+
     protected void Start()
     {
-        // downloadBtnVertical.onClick.AddListener(GoToStore);
-        // dowloadBtnHorizontal.onClick.AddListener(GoToStore);
-
         winUI.SetActive(false);
         loseUI.SetActive(false);
-        tutorial.SetActive(false);
-        
         ActiveDownloadButtons(!isGoogleBuild);
-        
+        CachePerspectiveCamera();
         UpdateUI();
-        
-        if (cam != null)
-        {
-            CachePerspectiveCamera();
-        }
-        if (progressText != null)
-        {
-            originalTextColor = progressText.color;
-        }
     }
 
     private void Update()
     {
-        // Kiểm tra xem kích thước màn hình có thay đổi không (ví dụ: người chơi xoay thiết bị)
         if (Screen.width != screenWidth || Screen.height != screenHeight)
         {
-            // Cập nhật ngay biến tạm để tránh việc gọi Coroutine liên tục trong các frame tiếp theo
             screenWidth = Screen.width;
             screenHeight = Screen.height;
             StartCoroutine(DelayUpdateUIRoutine());
@@ -138,15 +137,12 @@ public class UIManager : Ply_Singleton<UIManager>
 
     private IEnumerator DelayUpdateUIRoutine()
     {
-        yield return null; // Đợi 1 frame để Luna Engine và Canvas cập nhật xong tỷ lệ nội bộ
+        yield return null;
         UpdateUI();
     }
 
     public void UpdateUI()
     {
-        winUI.SetActive(false);
-        loseUI.SetActive(false);
-        // tutorial.SetActive(true);
         GetScreenSize();
         GetSreenType();
         ScreenScale();
@@ -157,14 +153,13 @@ public class UIManager : Ply_Singleton<UIManager>
         screenHeight = Screen.height;
         screenWidth = Screen.width;
     }
-    
+
     private void GetSreenType()
     {
-        scaleHeightOnWidth = screenWidth > 0f ? screenHeight / screenWidth : 1f;
+        scaleHeightOnWidth = GetScreenHeightOnWidthRatio();
         isVertical = scaleHeightOnWidth >= verticalUIHeightOnWidthRatio;
         isScreenVertical = scaleHeightOnWidth >= screenVerticalHeightOnWidthRatio;
     }
-
 
     private void ScreenScale()
     {
@@ -178,18 +173,8 @@ public class UIManager : Ply_Singleton<UIManager>
             horizontalUI.SetActive(!isVertical);
         }
 
-        float targetOrthographicSize = Mathf.Max(GetTargetOrthographicSize(), baseOrthographicSize);
+        float targetOrthographicSize = Mathf.Max(GetTargetOrthographicSize(), 0.01f);
         ApplyCameraScale(targetOrthographicSize);
-
-        if (cam != null && cam.orthographic)
-        {
-            CacheDefaultOrthographicSize(targetOrthographicSize);
-
-            if (isIntroZoomedOut)
-            {
-                cam.orthographicSize = defaultOrthographicSize * introZoomOutMultiplier;
-            }
-        }
     }
 
     private float GetTargetOrthographicSize()
@@ -198,18 +183,18 @@ public class UIManager : Ply_Singleton<UIManager>
         {
             if (!isScreenVertical)
             {
-                return landscapeSize;
+                return GetLandscapeSize();
             }
 
-            return baseOrthographicSize * (scaleHeightOnWidth / baseAspect);
+            return GetDefaultPortraitSize() * (scaleHeightOnWidth / baseAspect);
         }
 
         if (!isScreenVertical)
         {
-            return landscapeSize;
+            return GetLandscapeSize();
         }
 
-        float matchedSize = defaultPortraitSize;
+        float matchedSize = GetDefaultPortraitSize();
         float highestMatchedRatio = 0f;
 
         if (discreteScaleSteps != null)
@@ -225,6 +210,21 @@ public class UIManager : Ply_Singleton<UIManager>
         }
 
         return matchedSize;
+    }
+
+    private float GetScreenHeightOnWidthRatio()
+    {
+        return screenWidth > 0f ? screenHeight / screenWidth : 1f;
+    }
+
+    private float GetLandscapeSize()
+    {
+        return baseOrthographicSize * landscapeSizeRatio;
+    }
+
+    private float GetDefaultPortraitSize()
+    {
+        return baseOrthographicSize * defaultPortraitSizeRatio;
     }
 
     private void ApplyCameraScale(float targetOrthographicSize)
@@ -398,15 +398,17 @@ public class UIManager : Ply_Singleton<UIManager>
     {
         winUI.SetActive(isActive);
     }
+
     public void ActiveGameLoseUI(bool isActive)
     {
         loseUI.SetActive(isActive);
     }
+
     public void ActiveTutorialUI(bool isActive)
     {
         tutorial.SetActive(isActive);
     }
-    
+
     public void ActiveDownloadButtons(bool isActive)
     {
         if (isGoogleBuild)
@@ -414,93 +416,38 @@ public class UIManager : Ply_Singleton<UIManager>
             isActive = false;
         }
 
-        if (downloadBtnVertical != null)
+        if (downloadBtn != null)
         {
-            downloadBtnVertical.gameObject.SetActive(isActive);
+            downloadBtn.gameObject.SetActive(isActive);
         }
 
-        if (dowloadBtnHorizontal != null)
+        if (horizontalDownloadBtn == null && horizontalUI != null)
         {
-            dowloadBtnHorizontal.gameObject.SetActive(isActive);
+            horizontalDownloadBtn = FindChildByName(horizontalUI.transform, "DownloadBtn");
+        }
+
+        if (horizontalDownloadBtn != null && horizontalDownloadBtn != downloadBtn)
+        {
+            horizontalDownloadBtn.gameObject.SetActive(isActive);
         }
         textAnim.enabled = isActive;
     }
 
-    public void ZoomInCamera()
+    private Transform FindChildByName(Transform root, string childName)
     {
-        if (cam == null)
+        if (root == null)
         {
-            cam = Camera.main;
+            return null;
         }
 
-        if (cam == null || !cam.orthographic)
+        foreach (Transform child in root.GetComponentsInChildren<Transform>(true))
         {
-            return;
+            if (child.name == childName)
+            {
+                return child;
+            }
         }
 
-        if (!hasDefaultOrthographicSize)
-        {
-            CacheDefaultOrthographicSize(cam.orthographicSize);
-        }
-
-        isIntroZoomedOut = false;
-        cam.DOKill();
-
-        if (Mathf.Abs(cam.orthographicSize - defaultOrthographicSize) > 0.01f)
-        {
-            DOTween.To(() => cam.orthographicSize, x => cam.orthographicSize = x, defaultOrthographicSize, cameraZoomDuration)
-                .SetTarget(cam);
-        }
-    }
-
-    private void CacheDefaultOrthographicSize(float size)
-    {
-        defaultOrthographicSize = size;
-        hasDefaultOrthographicSize = true;
-    }
-
-    public void SetupProgressBar(int total)
-    {
-        totalItems = total;
-        placedItems = 0;
-
-        if (progressSlider != null)
-        {
-            progressSlider.maxValue = maxProgressItems;
-            progressSlider.value = startProgressItems;
-        }
-        UpdateProgressText();
-    }
-
-    public void UpdateProgress()
-    {
-        placedItems++;
-
-        if (progressSlider != null)
-        {
-            progressSlider.DOValue(startProgressItems + placedItems, 0.3f);
-        }
-
-        UpdateProgressText();
-
-        if (progressText != null)
-        {
-            progressText.transform.DOKill();
-            var sequence = DOTween.Sequence();
-            sequence.Append(progressText.transform.DOScale(1.2f, 0.1f).SetEase(Ease.OutBack));
-            // sequence.Join(progressText.DOColor(Color.green, 0.1f));
-            sequence.AppendInterval(0.3f);
-            sequence.Append(progressText.transform.DOScale(1f, 0.1f));
-            // sequence.Join(progressText.DOColor(originalTextColor, 0.1f));
-        }
-    }
-
-    private void UpdateProgressText()
-    {
-        if (progressText != null)
-        {
-            int currentProgress = startProgressItems + placedItems;
-            progressText.text = $"{currentProgress}/{maxProgressItems}";
-        }
+        return null;
     }
 }

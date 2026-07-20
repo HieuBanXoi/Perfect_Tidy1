@@ -165,7 +165,7 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6b504921f7b99fe4a862af4fc963ffde, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1281906733420863429
@@ -1028,9 +1028,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ???
+  m_text: Ms. Wolf
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 66e5cae35d4785c4f8f1ad2ada2b2471, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6b504921f7b99fe4a862af4fc963ffde, type: 2}
   m_sharedMaterial: {fileID: 5375066065756455533, guid: 66e5cae35d4785c4f8f1ad2ada2b2471, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1096,6 +1096,6 @@ MonoBehaviour:
   m_margin: {x: 0, y: -2.0698376, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
