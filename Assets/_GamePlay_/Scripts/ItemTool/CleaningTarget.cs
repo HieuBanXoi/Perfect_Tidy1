@@ -153,6 +153,14 @@ public class CleaningTarget : MonoBehaviour
         {
             isFullyCompleted = true;
             onAllStatesComplete?.Invoke();
+
+            // Tắt collider của chính nó để ItemDraggable có thể "nhả" target này ra
+            // và paint tiếp các target khác mà không cần nhả chuột.
+            var ownCollider = GetComponent<Collider>();
+            if (ownCollider != null)
+            {
+                ownCollider.enabled = false;
+            }
             return;
         }
 
@@ -323,6 +331,8 @@ public class CleaningTarget : MonoBehaviour
 
         // Bắn event hoàn thành State
         state.onStateComplete?.Invoke();
+
+        GetComponent<Item>()?.SpawnHeart(false);
 
         // Chuyển sang State tiếp theo
         currentStateIndex++;

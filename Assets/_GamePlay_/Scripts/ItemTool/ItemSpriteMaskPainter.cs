@@ -9,12 +9,20 @@ public class ItemSpriteMaskPainter : MonoBehaviour
     {
         public SpriteMask mask;
         public BrushMaskUnit poolUnit;
+        public PoolType poolType;
     }
 
     [Header("--- BRUSH MASK ---")]
     public SpriteMask brushMaskPrefab;
+    [Tooltip("Prefab hình vuông/chữ nhật để vẽ nét nối. Nếu để trống sẽ dùng kiểu vẽ chấm bi cũ (nặng máy hơn).")]
+    public SpriteMask brushLinePrefab;
     public bool useBrushMaskPool = true;
     public PoolType brushMaskPoolType = PoolType.BrushMask;
+    
+    [Header("--- BRUSH LINE POOL ---")]
+    public bool useBrushLinePool = true;
+    public PoolType brushLinePoolType = PoolType.BrushLineMask;
+
     public Transform brushParent;
     [Header("--- BRUSH CONFIG ---")]
     public float brushRadius = 0.5f;
@@ -166,10 +174,48 @@ public class ItemSpriteMaskPainter : MonoBehaviour
         float distance = Vector3.Distance(from, to);
         int steps = Mathf.Max(1, Mathf.CeilToInt(distance / Mathf.Max(0.001f, brushSpacing)));
 
-        for (int i = 1; i <= steps; i++)
+        if (brushLinePrefab != null && distance > 0.01f)
         {
-            Vector3 point = Vector3.Lerp(from, to, i / (float)steps);
-            Stamp(point);
+            // 1. Sinh ra nét nối (Hình chữ nhật)
+            Vector3 midPoint = (from + to) / 2f;
+            Vector3 stampPos = midPoint + mainCam.transform.forward * brushZOffset;
+            
+            BrushStamp lineStamp = SpawnBrushLine(stampPos);
+            SpriteMask lineMask = lineStamp.mask;
+
+            if (lineMask != null)
+            {
+                float radiusScale = (brushRadius * 2f) / Mathf.Max(0.001f, brushDiameterAtScaleOne);
+                
+                // Đặt Scale: Trục X = độ dài nét kéo, Trục Y = độ dày nét vẽ (đường kính)
+                lineMask.transform.localScale = new Vector3(distance, radiusScale, lineMask.transform.localScale.z);
+                
+                // Xoay nét nối theo hướng kéo (quanh trục Z)
+                Vector3 direction = to - from;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                lineMask.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+                spawnedBrushes.Add(lineStamp);
+            }
+            
+            // 2. Vẫn sinh ra 1 hình tròn ở điểm cuối để nét được bo tròn
+            Stamp(to);
+
+            // 3. Vẫn đánh dấu các điểm bên dưới (để tính % làm sạch) mà không cần sinh rác
+            for (int i = 1; i <= steps; i++)
+            {
+                Vector3 pt = Vector3.Lerp(from, to, i / (float)steps);
+                MarkCoveredSamples(pt);
+            }
+        }
+        else
+        {
+            // Phương pháp cũ: Sinh ra hàng loạt hình tròn
+            for (int i = 1; i <= steps; i++)
+            {
+                Vector3 point = Vector3.Lerp(from, to, i / (float)steps);
+                Stamp(point);
+            }
         }
     }
 
@@ -211,7 +257,8 @@ public class ItemSpriteMaskPainter : MonoBehaviour
                 return new BrushStamp
                 {
                     mask = unitMask,
-                    poolUnit = brushMaskUnit
+                    poolUnit = brushMaskUnit,
+                    poolType = brushMaskPoolType
                 };
             }
         }
@@ -220,7 +267,36 @@ public class ItemSpriteMaskPainter : MonoBehaviour
 
         SpriteMask prefabMask = Instantiate(brushMaskPrefab, stampPos, Quaternion.identity, brushParent);
         ApplyMaskSortingOverride(prefabMask);
-        return new BrushStamp { mask = prefabMask };
+        return new BrushStamp { mask = prefabMask, poolUnit = null };
+    }
+
+    private BrushStamp SpawnBrushLine(Vector3 stampPos)
+    {
+        if (useBrushLinePool && Ply_Pool.Ins != null)
+        {
+            BrushMaskUnit lineUnit = Ply_Pool.Ins.Spawn<BrushMaskUnit>(brushLinePoolType, stampPos, Quaternion.identity);
+            if (lineUnit != null)
+            {
+                Transform lineTransform = lineUnit.transform;
+                lineTransform.SetParent(brushParent, true);
+                
+                SpriteMask unitMask = lineUnit.spriteMask != null ? lineUnit.spriteMask : lineUnit.GetComponent<SpriteMask>();
+                ApplyMaskSortingOverride(unitMask);
+
+                return new BrushStamp
+                {
+                    mask = unitMask,
+                    poolUnit = lineUnit,
+                    poolType = brushLinePoolType
+                };
+            }
+        }
+
+        if (brushLinePrefab == null) return default;
+
+        SpriteMask prefabMask = Instantiate(brushLinePrefab, stampPos, Quaternion.identity, brushParent);
+        ApplyMaskSortingOverride(prefabMask);
+        return new BrushStamp { mask = prefabMask, poolUnit = null };
     }
 
     private void ApplyMaskSortingOverride(SpriteMask mask)
@@ -245,7 +321,7 @@ public class ItemSpriteMaskPainter : MonoBehaviour
     {
         if (brushStamp.poolUnit != null && Ply_Pool.Ins != null)
         {
-            Ply_Pool.Ins.Despawn(brushMaskPoolType, brushStamp.poolUnit);
+            Ply_Pool.Ins.Despawn(brushStamp.poolType, brushStamp.poolUnit);
             return;
         }
 
