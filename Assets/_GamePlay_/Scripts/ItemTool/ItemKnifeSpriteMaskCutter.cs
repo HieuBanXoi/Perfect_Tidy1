@@ -153,11 +153,6 @@ public class ItemKnifeSpriteMaskCutter : MonoBehaviour
     {
         if (item == null) return;
 
-        if (cutPieceColor == CutPieceColor.Green)
-        {
-            item.SpawnGreenPiece();
-            return;
-        }
 
         item.SpawnYellowPiece();
     }

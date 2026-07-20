@@ -16,11 +16,18 @@ public class ItemSpriteMaskPainter : MonoBehaviour
     public bool useBrushMaskPool = true;
     public PoolType brushMaskPoolType = PoolType.BrushMask;
     public Transform brushParent;
-    public float brushRadius = 0.25f;
+    [Header("--- BRUSH CONFIG ---")]
+    public float brushRadius = 0.5f;
     public float brushDiameterAtScaleOne = 1f;
     public bool scaleBrushFromRadius = true;
-    public float brushSpacing = 0.12f;
-    public float brushZOffset = -0.01f;
+    public float brushSpacing = 0.1f;
+    public float brushZOffset = 0.01f;
+    
+    public bool IsPlayingPaintFx => isPlayingPaintFx;
+
+    [Header("--- MASK SORTING OVERRIDE ---")]
+    public bool overrideMaskSorting = false;
+    public string maskSortingLayerName = "Default";
 
     [Header("--- PAINT AREA ---")]
     public Collider paintAreaCollider;
@@ -144,15 +151,22 @@ public class ItemSpriteMaskPainter : MonoBehaviour
             Stamp(point);
             lastPaintPoint = point;
             hasLastPoint = true;
+            
+            onPaint?.Invoke();
+            CheckComplete();
         }
         else
         {
-            StampLine(lastPaintPoint, point);
-            lastPaintPoint = point;
+            float distance = Vector3.Distance(lastPaintPoint, point);
+            if (distance >= brushSpacing)
+            {
+                StampLine(lastPaintPoint, point);
+                lastPaintPoint = point;
+                
+                onPaint?.Invoke();
+                CheckComplete();
+            }
         }
-
-        onPaint?.Invoke();
-        CheckComplete();
     }
 
     public void EndPaint()
@@ -205,9 +219,13 @@ public class ItemSpriteMaskPainter : MonoBehaviour
             {
                 Transform brushTransform = brushMaskUnit.transform;
                 brushTransform.SetParent(brushParent, true);
+                
+                SpriteMask unitMask = brushMaskUnit.spriteMask != null ? brushMaskUnit.spriteMask : brushMaskUnit.GetComponent<SpriteMask>();
+                ApplyMaskSortingOverride(unitMask);
+
                 return new BrushStamp
                 {
-                    mask = brushMaskUnit.spriteMask != null ? brushMaskUnit.spriteMask : brushMaskUnit.GetComponent<SpriteMask>(),
+                    mask = unitMask,
                     poolUnit = brushMaskUnit
                 };
             }
@@ -215,8 +233,22 @@ public class ItemSpriteMaskPainter : MonoBehaviour
 
         if (brushMaskPrefab == null) return default;
 
-        SpriteMask mask = Instantiate(brushMaskPrefab, stampPos, Quaternion.identity, brushParent);
-        return new BrushStamp { mask = mask };
+        SpriteMask prefabMask = Instantiate(brushMaskPrefab, stampPos, Quaternion.identity, brushParent);
+        ApplyMaskSortingOverride(prefabMask);
+        return new BrushStamp { mask = prefabMask };
+    }
+
+    private void ApplyMaskSortingOverride(SpriteMask mask)
+    {
+        if (mask != null && overrideMaskSorting)
+        {
+            mask.isCustomRangeActive = true;
+            
+            int layerId = SortingLayer.NameToID(maskSortingLayerName);
+            mask.frontSortingLayerID = layerId;
+            mask.backSortingLayerID = layerId;
+        
+        }
     }
 
     private bool HasBrushSource()
@@ -348,4 +380,54 @@ public class ItemSpriteMaskPainter : MonoBehaviour
         if (totalSamples <= 0) return 0f;
         return coveredCount / (float)totalSamples;
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+        var collider = paintAreaCollider;
+        if (collider == null)
+        {
+            collider = GetComponent<Collider>();
+            if (collider == null) return;
+        }
+
+        Bounds currentBounds = collider.bounds;
+
+        // Draw the outline of the paint area
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(currentBounds.center, currentBounds.size);
+
+        if (sampleColumns <= 0 || sampleRows <= 0) return;
+
+        // Determine a reasonable size for the sample point gizmos
+        float gizmoRadius = Mathf.Min(currentBounds.size.x / sampleColumns, currentBounds.size.y / sampleRows) * 0.15f;
+
+        for (int y = 0; y < sampleRows; y++)
+        {
+            for (int x = 0; x < sampleColumns; x++)
+            {
+                // This logic is duplicated from GetSamplePoint to work in the editor without needing instance state
+                float u = sampleColumns <= 1 ? 0.5f : x / (float)(sampleColumns - 1);
+                float v = sampleRows <= 1 ? 0.5f : y / (float)(sampleRows - 1);
+                Vector3 samplePoint = new Vector3(
+                    Mathf.Lerp(currentBounds.min.x, currentBounds.max.x, u),
+                    Mathf.Lerp(currentBounds.min.y, currentBounds.max.y, v),
+                    currentBounds.center.z
+                );
+
+                // In play mode, color the gizmos based on whether they are covered
+                if (Application.isPlaying && coveredSamples != null && totalSamples > 0 && coveredSamples.Length == totalSamples)
+                {
+                    int index = y * sampleColumns + x;
+                    Gizmos.color = coveredSamples[index] ? Color.green : Color.red;
+                }
+                else
+                {
+                    Gizmos.color = Color.yellow;
+                }
+                Gizmos.DrawSphere(samplePoint, gizmoRadius);
+            }
+        }
+    }
+#endif
 }

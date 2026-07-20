@@ -1,7 +1,7 @@
 {
     "version": "7.1.0",
     "projectId": "54ab6df5d24ca13458b7b8f24e7d8130",
-    "applicationID": 26861,
+    "applicationID": 0,
     "creativeName": "PLY_PerfectTidy_V132",
     "pgServer": "EU",
     "window": {
@@ -1880,10 +1880,6 @@
                 "excluded": true
             },
             {
-                "name": "UnityEngine.TrailModule",
-                "excluded": true
-            },
-            {
                 "name": "UnityEngine.TrailRenderer.Parameters",
                 "excluded": true
             },
@@ -2296,10 +2292,6 @@
                 "excluded": true
             },
             {
-                "name": "UnityEngine.CapsuleCollider",
-                "excluded": true
-            },
-            {
                 "name": "UnityEngine.CapsuleCollider2D",
                 "excluded": true
             },
@@ -2349,10 +2341,6 @@
             },
             {
                 "name": "UnityEngine.SpringJoint",
-                "excluded": true
-            },
-            {
-                "name": "UnityEngine.SpriteMask",
                 "excluded": true
             },
             {
@@ -6613,11 +6601,11 @@
             },
             {
                 "name": "UnityEngine.UI.CoroutineTween.ColorTween.ColorTweenCallback",
-                "excluded": true
+                "excluded": false
             },
             {
                 "name": "UnityEngine.UI.CoroutineTween.ColorTween.ColorTweenMode",
-                "excluded": true
+                "excluded": false
             },
             {
                 "name": "UnityEngine.UI.CoroutineTween.FloatTween.FloatTweenCallback",
@@ -8092,18 +8080,6 @@
                 "excluded": false
             },
             {
-                "name": "ItemHolder",
-                "excluded": false
-            },
-            {
-                "name": "ItemState",
-                "excluded": false
-            },
-            {
-                "name": "Ply_GameUnit",
-                "excluded": false
-            },
-            {
                 "name": "PoolType",
                 "excluded": false
             },
@@ -9160,8 +9136,100 @@
                 "excluded": false
             },
             {
-                "name": "ItemSpawnMode",
+                "name": "ItemDragRaycastTarget",
+                "excluded": true
+            },
+            {
+                "name": "ItemSound",
+                "excluded": true
+            },
+            {
+                "name": "ItemTypeDoneManager.ItemTypeGroup",
+                "excluded": true
+            },
+            {
+                "name": "PaperBox",
+                "excluded": true
+            },
+            {
+                "name": "StirMilestone",
+                "excluded": true
+            },
+            {
+                "name": "ClockTimer",
+                "excluded": true
+            },
+            {
+                "name": "FlourSmoke",
+                "excluded": true
+            },
+            {
+                "name": "ProgressBar",
+                "excluded": true
+            },
+            {
+                "name": "StarExploreFX",
+                "excluded": true
+            },
+            {
+                "name": "WaterSplash",
+                "excluded": true
+            },
+            {
+                "name": "YellowPiece",
+                "excluded": true
+            },
+            {
+                "name": "Paper",
+                "excluded": true
+            },
+            {
+                "name": "TrashCan",
+                "excluded": true
+            },
+            {
+                "name": "ConveyorScrollDirection",
+                "excluded": true
+            },
+            {
+                "name": "FlySide",
                 "excluded": false
+            },
+            {
+                "name": "ItemKnifeSpriteMaskCutter.CutPieceColor",
+                "excluded": true
+            },
+            {
+                "name": "ItemType",
+                "excluded": false
+            },
+            {
+                "name": "MaskInteractionConfig",
+                "excluded": false
+            },
+            {
+                "name": "MoveType",
+                "excluded": true
+            },
+            {
+                "name": "PhaseData",
+                "excluded": true
+            },
+            {
+                "name": "PhaseTransitionType",
+                "excluded": true
+            },
+            {
+                "name": "StirMovementMode",
+                "excluded": true
+            },
+            {
+                "name": "ItemRaycastTargetEvent",
+                "excluded": true
+            },
+            {
+                "name": "SoapFX",
+                "excluded": true
             }
         ],
         "unusedMethods": [
@@ -13037,7 +13105,7 @@
                     },
                     {
                         "name": "ctor",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "Dispose",
@@ -13065,7 +13133,7 @@
                     },
                     {
                         "name": "$clone",
-                        "excluded": true
+                        "excluded": false
                     }
                 ]
             },
@@ -15665,7 +15733,7 @@
                     },
                     {
                         "name": "UnsafeRemoveListener",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "GetPersistentEventCount",
@@ -15913,7 +15981,7 @@
                     },
                     {
                         "name": "LerpUnclamped",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "Approximately",
@@ -16455,7 +16523,7 @@
                     },
                     {
                         "name": "NameToID",
-                        "excluded": true
+                        "excluded": false
                     }
                 ]
             },
@@ -17063,7 +17131,7 @@
                     },
                     {
                         "name": "AddListener",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "RemoveListener",
@@ -17621,7 +17689,7 @@
                     },
                     {
                         "name": "localEulerAngles#set",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "eulerAngles#get",
@@ -19455,7 +19523,7 @@
                 "instanceMethods": [
                     {
                         "name": "Start",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "Init",
@@ -19463,7 +19531,7 @@
                     },
                     {
                         "name": "StartTween",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "StopTween",
@@ -23875,7 +23943,7 @@
                     },
                     {
                         "name": "TurnOffTut",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "WinGame",
@@ -23886,56 +23954,16 @@
                         "excluded": false
                     },
                     {
-                        "name": "OnItemPlaced",
-                        "excluded": false
+                        "name": "SetIsPlaying",
+                        "excluded": true
                     },
                     {
-                        "name": "TriggerTutorial",
-                        "excluded": false
+                        "name": "ChangeTrashTarget",
+                        "excluded": true
                     },
                     {
-                        "name": "AddItemToTutorial",
-                        "excluded": false
-                    },
-                    {
-                        "name": "RemoveItemFromTutorial",
-                        "excluded": false
-                    },
-                    {
-                        "name": "ResetInactivityTimer",
-                        "excluded": false
-                    },
-                    {
-                        "name": "ShowHandTutorial",
-                        "excluded": false
-                    },
-                    {
-                        "name": "OnItemPlaced$1",
-                        "excluded": false
-                    },
-                    {
-                        "name": "Awake",
-                        "excluded": false
-                    },
-                    {
-                        "name": "RestartHandTutorial",
-                        "excluded": false
-                    },
-                    {
-                        "name": "HideCurrentGuidedItemShadowIfAllowed",
-                        "excluded": false
-                    },
-                    {
-                        "name": "ResetInactivityTimer$1",
-                        "excluded": false
-                    },
-                    {
-                        "name": "StopHandTutorial",
-                        "excluded": false
-                    },
-                    {
-                        "name": "StartGameTimer",
-                        "excluded": false
+                        "name": "ChangePaperBoxTarget",
+                        "excluded": true
                     }
                 ]
             },
@@ -23952,15 +23980,27 @@
                         "excluded": false
                     },
                     {
-                        "name": "Awake",
-                        "excluded": false
-                    },
-                    {
                         "name": "Update",
                         "excluded": false
                     },
                     {
-                        "name": "HandleClick",
+                        "name": "HandleMouseDown",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetFrontmostInteractableItem",
+                        "excluded": false
+                    },
+                    {
+                        "name": "CanInteract",
+                        "excluded": false
+                    },
+                    {
+                        "name": "HandleMouseDrag",
+                        "excluded": false
+                    },
+                    {
+                        "name": "HandleMouseUp",
                         "excluded": false
                     }
                 ]
@@ -24041,7 +24081,7 @@
                     },
                     {
                         "name": "PlayFxLoop",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "PlayFxLoop$1",
@@ -24049,7 +24089,7 @@
                     },
                     {
                         "name": "StopFxLoop",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "StopFxLoop$1",
@@ -24119,22 +24159,6 @@
                     },
                     {
                         "name": "ActiveTutorialUI",
-                        "excluded": true
-                    },
-                    {
-                        "name": "ZoomInCamera",
-                        "excluded": false
-                    },
-                    {
-                        "name": "SetupProgressBar",
-                        "excluded": false
-                    },
-                    {
-                        "name": "UpdateProgress",
-                        "excluded": false
-                    },
-                    {
-                        "name": "UpdateProgressText",
                         "excluded": false
                     },
                     {
@@ -24182,12 +24206,28 @@
                         "excluded": true
                     },
                     {
-                        "name": "CacheDefaultOrthographicSize",
+                        "name": "ActiveDownloadButtons",
                         "excluded": false
                     },
                     {
-                        "name": "ActiveDownloadButtons",
+                        "name": "OnValidate",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetScreenHeightOnWidthRatio",
                         "excluded": false
+                    },
+                    {
+                        "name": "GetLandscapeSize",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetDefaultPortraitSize",
+                        "excluded": false
+                    },
+                    {
+                        "name": "FindChildByName",
+                        "excluded": true
                     }
                 ]
             },
@@ -26299,7 +26339,7 @@
                     },
                     {
                         "name": "Cancel",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "Update",
@@ -26341,7 +26381,7 @@
                     },
                     {
                         "name": "RemoveListener",
-                        "excluded": true
+                        "excluded": false
                     }
                 ]
             },
@@ -27343,7 +27383,7 @@
                     },
                     {
                         "name": "SetColor",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "DisableRectClipping",
@@ -29025,7 +29065,7 @@
                     },
                     {
                         "name": "startColor#set",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "targetColor#get",
@@ -29033,7 +29073,7 @@
                     },
                     {
                         "name": "targetColor#set",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "tweenMode#get",
@@ -29041,39 +29081,39 @@
                     },
                     {
                         "name": "tweenMode#set",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "duration#get",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "duration#set",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "ignoreTimeScale#get",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "ignoreTimeScale#set",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "init",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "ctor",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "TweenValue",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "AddOnChangedCallback",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "GetIgnoreTimescale",
@@ -29085,7 +29125,7 @@
                     },
                     {
                         "name": "ValidTarget",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "getHashCode",
@@ -29097,7 +29137,7 @@
                     },
                     {
                         "name": "$clone",
-                        "excluded": true
+                        "excluded": false
                     }
                 ]
             },
@@ -33112,96 +33152,112 @@
                         "excluded": false
                     },
                     {
-                        "name": "Start",
+                        "name": "Awake",
                         "excluded": false
                     },
                     {
-                        "name": "ChangeState",
+                        "name": "Reset$1",
+                        "excluded": true
+                    },
+                    {
+                        "name": "OnValidate",
+                        "excluded": true
+                    },
+                    {
+                        "name": "CacheComponents$1",
                         "excluded": false
                     },
                     {
-                        "name": "SetSortingOrder",
+                        "name": "ChangeItemType",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ChangeAnim",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ChangeSprite",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetInPlate",
+                        "excluded": true
+                    },
+                    {
+                        "name": "KnifeIn",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SpawnHeart",
                         "excluded": false
                     },
                     {
-                        "name": "Update",
+                        "name": "OnDragFailReturnComplete",
                         "excluded": false
                     },
                     {
-                        "name": "StartDrag",
+                        "name": "ShouldPlayBobEffectAfterReturn",
+                        "excluded": true
+                    },
+                    {
+                        "name": "TeleportToStart",
+                        "excluded": true
+                    },
+                    {
+                        "name": "DoneAnimation",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SpawnHeartDone",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ItemDone",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SpawnYellowPiece",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SpawnWaterSplash",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SpawnBlinkEffect",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SpawnMergeEffect",
+                        "excluded": true
+                    },
+                    {
+                        "name": "TurnOffActiveEffect",
                         "excluded": false
                     },
                     {
-                        "name": "OnDrag",
+                        "name": "CacheActiveEffect",
                         "excluded": false
                     },
                     {
-                        "name": "ReleaseItem",
+                        "name": "GetEffectSpawnPosition",
                         "excluded": false
                     },
                     {
-                        "name": "GetMouseWorldPos",
-                        "excluded": false
+                        "name": "GetMinChildZ",
+                        "excluded": true
                     },
                     {
-                        "name": "OnGoal",
-                        "excluded": false
+                        "name": "ResetFxSpawnZPos",
+                        "excluded": true
                     },
                     {
-                        "name": "MoveToCorrectPos",
-                        "excluded": false
+                        "name": "PlayMoveToTargetFinishSound",
+                        "excluded": true
                     },
                     {
-                        "name": "Waitting",
-                        "excluded": false
-                    },
-                    {
-                        "name": "SpawnVFX",
-                        "excluded": false
-                    },
-                    {
-                        "name": "ApplyChildSortingOffset",
-                        "excluded": false
-                    },
-                    {
-                        "name": "RestoreDefaultSorting",
-                        "excluded": false
-                    },
-                    {
-                        "name": "CacheChildSortingOrders",
-                        "excluded": false
-                    },
-                    {
-                        "name": "EnsureDefaultSortingOrder",
-                        "excluded": false
-                    },
-                    {
-                        "name": "GetWaitingScale",
-                        "excluded": false
-                    },
-                    {
-                        "name": "ApplySpawnScale",
-                        "excluded": false
-                    },
-                    {
-                        "name": "DisableAnimatorOnSpawn",
-                        "excluded": false
-                    },
-                    {
-                        "name": "EnableAnimatorWhenPlaced",
-                        "excluded": false
-                    },
-                    {
-                        "name": "EnsureAnimator",
-                        "excluded": false
-                    },
-                    {
-                        "name": "PlaySoundOnPlace",
-                        "excluded": false
-                    },
-                    {
-                        "name": "CanPlaced",
-                        "excluded": false
+                        "name": "DoOneStep",
+                        "excluded": true
                     }
                 ]
             },
@@ -34011,7 +34067,7 @@
                     },
                     {
                         "name": "bounds#get",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "isTrigger#get",
@@ -34035,7 +34091,7 @@
                     },
                     {
                         "name": "ClosestPoint",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "ClosestPointOnBounds",
@@ -35607,7 +35663,7 @@
                     },
                     {
                         "name": "DOLocalRotate",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "DOLocalRotateQuaternion",
@@ -36701,7 +36757,7 @@
                     },
                     {
                         "name": "Kill",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "ManualUpdate",
@@ -37027,7 +37083,7 @@
                     },
                     {
                         "name": "normal#get",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "normal#set",
@@ -37055,7 +37111,7 @@
                     },
                     {
                         "name": "GetDistanceToPoint",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "GetSide",
@@ -37190,6 +37246,22 @@
                     {
                         "name": "DeSpawn",
                         "excluded": false
+                    },
+                    {
+                        "name": "init",
+                        "excluded": false
+                    },
+                    {
+                        "name": "SetScale",
+                        "excluded": true
+                    },
+                    {
+                        "name": "CacheDefaultScale",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ResetScale",
+                        "excluded": true
                     }
                 ]
             },
@@ -37212,15 +37284,9 @@
                     {
                         "name": "Tick",
                         "excluded": false
-                    }
-                ]
-            },
-            {
-                "className": "ItemSetupTool",
-                "staticMethods": [],
-                "instanceMethods": [
+                    },
                     {
-                        "name": "init",
+                        "name": "Tick\",this)}this.c$-=t;if(this.c$<=0){pc.Application.getApplication().events.off(\"update",
                         "excluded": false
                     }
                 ]
@@ -37297,84 +37363,6 @@
                     },
                     {
                         "name": "Reset",
-                        "excluded": false
-                    }
-                ]
-            },
-            {
-                "className": "CameraController",
-                "staticMethods": [],
-                "instanceMethods": [
-                    {
-                        "name": "init",
-                        "excluded": false
-                    },
-                    {
-                        "name": "Awake",
-                        "excluded": false
-                    },
-                    {
-                        "name": "Start",
-                        "excluded": false
-                    },
-                    {
-                        "name": "Update",
-                        "excluded": false
-                    },
-                    {
-                        "name": "HandleZoom",
-                        "excluded": false
-                    },
-                    {
-                        "name": "HandlePinchZoom",
-                        "excluded": true
-                    },
-                    {
-                        "name": "HandleDrag",
-                        "excluded": false
-                    },
-                    {
-                        "name": "HandleMouseDrag",
-                        "excluded": false
-                    },
-                    {
-                        "name": "HandleTouchDrag",
-                        "excluded": false
-                    },
-                    {
-                        "name": "StartCameraDrag",
-                        "excluded": false
-                    },
-                    {
-                        "name": "DragCamera",
-                        "excluded": false
-                    },
-                    {
-                        "name": "TryGetWorldPoint",
-                        "excluded": false
-                    },
-                    {
-                        "name": "ClampCameraPosition",
-                        "excluded": false
-                    },
-                    {
-                        "name": "SetOrthographicSize",
-                        "excluded": true
-                    },
-                    {
-                        "name": "RefreshZoomLimits",
-                        "excluded": false
-                    },
-                    {
-                        "name": "IsItemDragging",
-                        "excluded": false
-                    },
-                    {
-                        "name": "IsPointerOverGameplayObject",
-                        "excluded": false
-                    },
-                    {
-                        "name": "SetInputEnabled",
                         "excluded": false
                     }
                 ]
@@ -37581,11 +37569,11 @@
                     },
                     {
                         "name": "init",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "ctor",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "GetParticles",
@@ -37605,7 +37593,7 @@
                     },
                     {
                         "name": "Play",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "Play$1",
@@ -38498,106 +38486,22 @@
                     {
                         "name": "DeSpawn",
                         "excluded": false
-                    }
-                ]
-            },
-            {
-                "className": "PSD_Tool",
-                "staticMethods": [],
-                "instanceMethods": [
-                    {
-                        "name": "init",
-                        "excluded": false
-                    },
-                    {
-                        "name": "FindAllChildGameObjects",
-                        "excluded": true
-                    },
-                    {
-                        "name": "FindNameAndChangeSpriteObjectPSD",
-                        "excluded": true
-                    },
-                    {
-                        "name": "FindNameSpriteAndChangeSpriteObjectPSD",
-                        "excluded": true
-                    }
-                ]
-            },
-            {
-                "className": "ItemSpawnManager",
-                "staticMethods": [],
-                "instanceMethods": [
-                    {
-                        "name": "inherits",
-                        "excluded": false
                     },
                     {
                         "name": "init",
                         "excluded": false
                     },
                     {
-                        "name": "OnDrawGizmosSelected",
+                        "name": "SetScale",
                         "excluded": true
                     },
                     {
-                        "name": "Start",
-                        "excluded": false
-                    },
-                    {
-                        "name": "HasItems",
-                        "excluded": false
-                    },
-                    {
-                        "name": "SpawnNextItemToVacatedTarget",
+                        "name": "CacheDefaultScale",
                         "excluded": true
                     },
                     {
-                        "name": "RevealInitialItems",
-                        "excluded": false
-                    },
-                    {
-                        "name": "ShowInitialItem",
+                        "name": "ResetScale",
                         "excluded": true
-                    },
-                    {
-                        "name": "RevealNextItem",
-                        "excluded": true
-                    },
-                    {
-                        "name": "RevealNextItemAtPosition",
-                        "excluded": false
-                    },
-                    {
-                        "name": "SpawnRandomItem",
-                        "excluded": false
-                    },
-                    {
-                        "name": "SpawnBatchWhenTargetsEmpty",
-                        "excluded": true
-                    },
-                    {
-                        "name": "RevealBatch",
-                        "excluded": true
-                    },
-                    {
-                        "name": "GetNextDynamicItem",
-                        "excluded": false
-                    },
-                    {
-                        "name": "GetSpawnTargetByPosition",
-                        "excluded": true
-                    },
-                    {
-                        "name": "SetSpawnedShadowsVisible",
-                        "excluded": true
-                    },
-                    {
-                        "name": "CompactItemsToLeft",
-                        "excluded": true
-                    },
-                    {
-                        "name": "TryPlayEndAnimation",
-                        "excluded": false
                     }
                 ]
             },
@@ -38693,6 +38597,1404 @@
                     },
                     {
                         "name": "EvaluateAndApply",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "Ply_GameUnit",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "CacheComponents",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Reset",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Awake",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "HandTutManager",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "inherits",
+                        "excluded": false
+                    },
+                    {
+                        "name": "HasPlayerInput",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ShouldBlockGameplayInput#get",
+                        "excluded": false
+                    },
+                    {
+                        "name": "init",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Awake",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Start",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Update",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ShowNextHandTut",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetFirstTutorialReadyItem",
+                        "excluded": false
+                    },
+                    {
+                        "name": "CanShowTutorialForItem",
+                        "excluded": true
+                    },
+                    {
+                        "name": "IsClickableReady",
+                        "excluded": true
+                    },
+                    {
+                        "name": "IsDraggableReady",
+                        "excluded": true
+                    },
+                    {
+                        "name": "IsKnifeSpriteMaskCutterReady",
+                        "excluded": true
+                    },
+                    {
+                        "name": "IsStirringReady",
+                        "excluded": true
+                    },
+                    {
+                        "name": "IsDragSpriteMaskPainterReady",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PlayClickHint",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PlayMoveHint",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PlayMoveHint$1",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PlayStirringHint",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PlayCircleHint",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PrepareHand",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Get2DHandPosition",
+                        "excluded": true
+                    },
+                    {
+                        "name": "HideHandTut",
+                        "excluded": false
+                    },
+                    {
+                        "name": "SetHandAlpha",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ResetIdleTimer",
+                        "excluded": false
+                    },
+                    {
+                        "name": "RemoveDoneAndNullItems",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ItemDone",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ItemDone$2",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ItemDone$1",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "ItemTypeDoneManager",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "inherits",
+                        "excluded": false
+                    },
+                    {
+                        "name": "init",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ItemDone",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetGroup",
+                        "excluded": true
+                    },
+                    {
+                        "name": "RemoveFromHandTut",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ClearTarget",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "PhaseManager",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "inherits",
+                        "excluded": false
+                    },
+                    {
+                        "name": "CurrentPhaseObject#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "init",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Start",
+                        "excluded": true
+                    },
+                    {
+                        "name": "OnDisable",
+                        "excluded": true
+                    },
+                    {
+                        "name": "DoOneStep",
+                        "excluded": true
+                    },
+                    {
+                        "name": "IsCurrentPhaseStepComplete",
+                        "excluded": true
+                    },
+                    {
+                        "name": "TryEndCurrentPhase",
+                        "excluded": true
+                    },
+                    {
+                        "name": "DelayGoToNextPhase",
+                        "excluded": true
+                    },
+                    {
+                        "name": "HasNextPhase",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PlayPhaseObjectTransition",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SwitchToNextPhaseBehindTransition",
+                        "excluded": true
+                    },
+                    {
+                        "name": "FinishPhaseTransition",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GoToNextPhase",
+                        "excluded": true
+                    },
+                    {
+                        "name": "FinishGameByPhase",
+                        "excluded": true
+                    },
+                    {
+                        "name": "StartHandTutAfterPhaseReady",
+                        "excluded": true
+                    },
+                    {
+                        "name": "OnDrawGizmosSelected",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "Ply_TransformConveyor",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "inherits",
+                        "excluded": false
+                    },
+                    {
+                        "name": "init",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Start",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Update",
+                        "excluded": true
+                    },
+                    {
+                        "name": "OnDrawGizmos",
+                        "excluded": true
+                    },
+                    {
+                        "name": "MoveOut",
+                        "excluded": true
+                    },
+                    {
+                        "name": "MoveIn",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "ProgressSlider",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "inherits",
+                        "excluded": false
+                    },
+                    {
+                        "name": "init",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Start",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SetupProgressBar",
+                        "excluded": true
+                    },
+                    {
+                        "name": "AddProgressSlide",
+                        "excluded": true
+                    },
+                    {
+                        "name": "UpdateProgressText",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ResetProgress",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "UnityEngine.CapsuleCollider",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "center#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "center#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "radius#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "radius#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "height#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "height#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "direction#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "direction#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ctor",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "UnityEngine.SpriteMask",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "frontSortingLayerID#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "frontSortingLayerID#set",
+                        "excluded": false
+                    },
+                    {
+                        "name": "frontSortingOrder#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "frontSortingOrder#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "backSortingLayerID#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "backSortingLayerID#set",
+                        "excluded": false
+                    },
+                    {
+                        "name": "backSortingOrder#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "backSortingOrder#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "alphaCutoff#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "alphaCutoff#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "sprite#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "sprite#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "isCustomRangeActive#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "isCustomRangeActive#set",
+                        "excluded": false
+                    },
+                    {
+                        "name": "spriteSortPoint#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "spriteSortPoint#set",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ctor",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "CleaningTarget",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Awake",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ApplyCurrentState",
+                        "excluded": false
+                    },
+                    {
+                        "name": "CanProcess",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Process",
+                        "excluded": true
+                    },
+                    {
+                        "name": "EndProcess",
+                        "excluded": true
+                    },
+                    {
+                        "name": "OnPaintComplete",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "CleaningTarget.CleaningState",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "ItemClickable",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PerformClick",
+                        "excluded": true
+                    },
+                    {
+                        "name": "CanClick",
+                        "excluded": true
+                    },
+                    {
+                        "name": "EnableClick",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PlayPopSound",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "ItemDragChildRotator",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Awake",
+                        "excluded": true
+                    },
+                    {
+                        "name": "OnEnable",
+                        "excluded": true
+                    },
+                    {
+                        "name": "OnDisable",
+                        "excluded": true
+                    },
+                    {
+                        "name": "RotateOnDrag",
+                        "excluded": true
+                    },
+                    {
+                        "name": "RotateBack",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ResetToOriginalRotation",
+                        "excluded": true
+                    },
+                    {
+                        "name": "HandleDropFail",
+                        "excluded": true
+                    },
+                    {
+                        "name": "CacheOriginalRotation",
+                        "excluded": true
+                    },
+                    {
+                        "name": "RotateTo",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetRotateTarget",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "ItemDraggable",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "SetWorldScale",
+                        "excluded": false
+                    },
+                    {
+                        "name": "IsDragging#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "IsReturningToStart#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "init",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Start",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ReturnToStart",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ReturnToStart$1",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ReturnToStartWithoutHeart",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ForceDropFailReturnToStart",
+                        "excluded": false
+                    },
+                    {
+                        "name": "TeleportToStart",
+                        "excluded": true
+                    },
+                    {
+                        "name": "RefreshDragParentContext",
+                        "excluded": true
+                    },
+                    {
+                        "name": "BeginDrag",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Drag",
+                        "excluded": false
+                    },
+                    {
+                        "name": "EndDrag",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ConsumeCurrentDropFail",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetMouseWorldPos",
+                        "excluded": false
+                    },
+                    {
+                        "name": "IsDraggable",
+                        "excluded": true
+                    },
+                    {
+                        "name": "CanDrag",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ChangeReturnPoint",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SetShadowActive",
+                        "excluded": false
+                    },
+                    {
+                        "name": "PlayBobEffectIfEnabled",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ResetScale",
+                        "excluded": false
+                    },
+                    {
+                        "name": "PlayDragScale",
+                        "excluded": false
+                    },
+                    {
+                        "name": "PlayBeginDragSound",
+                        "excluded": false
+                    },
+                    {
+                        "name": "OnDisable",
+                        "excluded": true
+                    },
+                    {
+                        "name": "FinalizeFailedDrag",
+                        "excluded": false
+                    },
+                    {
+                        "name": "OnReturnToStartComplete",
+                        "excluded": false
+                    },
+                    {
+                        "name": "PlayReturnToStartFinishSound",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ChangeTargetItemType",
+                        "excluded": true
+                    },
+                    {
+                        "name": "UnDraggable",
+                        "excluded": true
+                    },
+                    {
+                        "name": "TurnOnSpawnBreakHeartOnFailed",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "ItemDragSpriteMaskPainter",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "IsPaintComplete#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "init",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Awake",
+                        "excluded": false
+                    },
+                    {
+                        "name": "CanPaint",
+                        "excluded": false
+                    },
+                    {
+                        "name": "OnEnable",
+                        "excluded": false
+                    },
+                    {
+                        "name": "OnDisable",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Update",
+                        "excluded": false
+                    },
+                    {
+                        "name": "HandleBeginDrag",
+                        "excluded": false
+                    },
+                    {
+                        "name": "HandleEndDrag",
+                        "excluded": false
+                    },
+                    {
+                        "name": "BeginPaint",
+                        "excluded": false
+                    },
+                    {
+                        "name": "EndPaint",
+                        "excluded": false
+                    },
+                    {
+                        "name": "HandlePaintComplete",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetValidPaintersCount",
+                        "excluded": false
+                    },
+                    {
+                        "name": "RegisterPaintComplete",
+                        "excluded": false
+                    },
+                    {
+                        "name": "UnregisterPaintComplete",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetTutorialStart",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetTutorialTarget",
+                        "excluded": true
+                    },
+                    {
+                        "name": "UpdateActivePaintingState",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "ItemKnifeSpriteMaskCutter",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Awake",
+                        "excluded": true
+                    },
+                    {
+                        "name": "OnEnable",
+                        "excluded": true
+                    },
+                    {
+                        "name": "OnDisable",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ResetCut",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PerformCut",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SpawnCutPiece",
+                        "excluded": true
+                    },
+                    {
+                        "name": "UpdateMasks",
+                        "excluded": true
+                    },
+                    {
+                        "name": "CompleteCut",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ApplyKnifeChildMask",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetProgress01",
+                        "excluded": true
+                    },
+                    {
+                        "name": "OnDrawGizmos",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetPreviewCutX",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetLocalPointInRoot",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetLocalPoint",
+                        "excluded": true
+                    },
+                    {
+                        "name": "DrawLocalVerticalLine",
+                        "excluded": true
+                    },
+                    {
+                        "name": "DrawLocalHorizontalLine",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "ItemMoveToTarget",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Awake",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ExecuteMove",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ExecuteMove3D",
+                        "excluded": true
+                    },
+                    {
+                        "name": "FinishAction",
+                        "excluded": true
+                    },
+                    {
+                        "name": "TeleportToTarget",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SetDefaultTarget",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SetWorldScale",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SetEndScale",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "ItemSpriteMaskPainter",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Awake",
+                        "excluded": false
+                    },
+                    {
+                        "name": "OnEnable",
+                        "excluded": false
+                    },
+                    {
+                        "name": "OnDisable",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ResetPaint",
+                        "excluded": false
+                    },
+                    {
+                        "name": "BeginPaint",
+                        "excluded": true
+                    },
+                    {
+                        "name": "BeginPaintAtWorldPoint",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Paint",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PaintAtWorldPoint",
+                        "excluded": false
+                    },
+                    {
+                        "name": "BeginPaintSession",
+                        "excluded": false
+                    },
+                    {
+                        "name": "PaintAtPoint",
+                        "excluded": false
+                    },
+                    {
+                        "name": "EndPaint",
+                        "excluded": true
+                    },
+                    {
+                        "name": "StampLine",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Stamp",
+                        "excluded": false
+                    },
+                    {
+                        "name": "SpawnBrush",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ApplyMaskSortingOverride",
+                        "excluded": false
+                    },
+                    {
+                        "name": "HasBrushSource",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ReleaseBrush",
+                        "excluded": false
+                    },
+                    {
+                        "name": "CacheSamples",
+                        "excluded": false
+                    },
+                    {
+                        "name": "MarkCoveredSamples",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetSamplePoint",
+                        "excluded": false
+                    },
+                    {
+                        "name": "CheckComplete",
+                        "excluded": false
+                    },
+                    {
+                        "name": "StartPaintFx",
+                        "excluded": false
+                    },
+                    {
+                        "name": "StopPaintFx",
+                        "excluded": false
+                    },
+                    {
+                        "name": "CreatePaintPlane",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetMouseOnPaintPlane",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ProjectPointToPaintPlane",
+                        "excluded": false
+                    },
+                    {
+                        "name": "IsPointInsidePaintArea",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetProgress01",
+                        "excluded": false
+                    },
+                    {
+                        "name": "IsPlayingPaintFx#get",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "ItemSpriteMaskPainter.BrushStamp",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "getDefaultValue",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ctor",
+                        "excluded": false
+                    },
+                    {
+                        "name": "getHashCode",
+                        "excluded": true
+                    },
+                    {
+                        "name": "equals",
+                        "excluded": true
+                    },
+                    {
+                        "name": "$clone",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "ItemStirring",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "IsDone#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "init",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Start",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Reset",
+                        "excluded": true
+                    },
+                    {
+                        "name": "OnValidate",
+                        "excluded": true
+                    },
+                    {
+                        "name": "CacheReferences",
+                        "excluded": true
+                    },
+                    {
+                        "name": "BeginStir",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ResetStir",
+                        "excluded": true
+                    },
+                    {
+                        "name": "StopAnimBeforeStir",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Stir",
+                        "excluded": true
+                    },
+                    {
+                        "name": "EndStir",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetTutorialCenterPosition",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetTutorialRadius",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetTutorialLineStartPosition",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetTutorialLineEndPosition",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetMouseOnPlane",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetStirrerPosition",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetLineDirection",
+                        "excluded": true
+                    },
+                    {
+                        "name": "UpdateFlipScaleY",
+                        "excluded": true
+                    },
+                    {
+                        "name": "UpdateRollingSound",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetAnimationProgress",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ResetTargetAnimation",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SetAnimatorSpeed",
+                        "excluded": true
+                    },
+                    {
+                        "name": "UpdateAnimatorSpeedFromDrag",
+                        "excluded": true
+                    },
+                    {
+                        "name": "CompleteStir",
+                        "excluded": true
+                    },
+                    {
+                        "name": "OnDisable",
+                        "excluded": true
+                    },
+                    {
+                        "name": "StartStirringFx",
+                        "excluded": true
+                    },
+                    {
+                        "name": "StopStirringFx",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PlayRollingFx",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SpawnStirProgressBar",
+                        "excluded": true
+                    },
+                    {
+                        "name": "UpdateStirProgressBar",
+                        "excluded": true
+                    },
+                    {
+                        "name": "UpdateStirProgressBar$1",
+                        "excluded": true
+                    },
+                    {
+                        "name": "StopStirProgressBar",
+                        "excluded": true
+                    },
+                    {
+                        "name": "OnDrawGizmos",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "Ply_BobEffect",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "IsPlaying#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "init",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Awake",
+                        "excluded": true
+                    },
+                    {
+                        "name": "OnEnable",
+                        "excluded": true
+                    },
+                    {
+                        "name": "OnDisable",
+                        "excluded": true
+                    },
+                    {
+                        "name": "CacheStartPosition",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Play",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Stop",
+                        "excluded": true
+                    },
+                    {
+                        "name": "Stop$1",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "SortChildByZPos",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
+                        "excluded": false
+                    },
+                    {
+                        "name": "SortChildrenByZPosition",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "BrushMaskUnit",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "Awake",
+                        "excluded": false
+                    },
+                    {
+                        "name": "OnValidate",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "HeartBreakEffect",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
+                        "excluded": false
+                    },
+                    {
+                        "name": "DeSpawnByTime",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PlaySpawn",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PlaySpawn$1",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PlaySpawn$2",
+                        "excluded": false
+                    },
+                    {
+                        "name": "PlaySpawnWithScale",
+                        "excluded": false
+                    },
+                    {
+                        "name": "DeSpawn",
+                        "excluded": false
+                    },
+                    {
+                        "name": "CacheDefaultState",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ResetState",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "HeartEffect",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
+                        "excluded": false
+                    },
+                    {
+                        "name": "DeSpawnByTime",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PlaySpawn",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PlaySpawn$1",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PlaySpawn$2",
+                        "excluded": true
+                    },
+                    {
+                        "name": "PlaySpawnWithScale",
+                        "excluded": true
+                    },
+                    {
+                        "name": "DeSpawn",
+                        "excluded": true
+                    },
+                    {
+                        "name": "CacheDefaultState",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ResetState",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "ToolObject",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
+                        "excluded": false
+                    },
+                    {
+                        "name": "FlyIn",
+                        "excluded": true
+                    },
+                    {
+                        "name": "MoveToTarget",
+                        "excluded": true
+                    },
+                    {
+                        "name": "CallBackAfterMove",
+                        "excluded": true
+                    },
+                    {
+                        "name": "FlyOut",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetHomePosition",
+                        "excluded": true
+                    },
+                    {
+                        "name": "GetOutsidePosition",
+                        "excluded": true
+                    },
+                    {
+                        "name": "EnsureHomePosition",
+                        "excluded": true
+                    },
+                    {
+                        "name": "UnActiveItem",
+                        "excluded": true
+                    },
+                    {
+                        "name": "OnDrawGizmosSelected",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "UnityEngine.TrailModule",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "enabled#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "enabled#set",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "DirtFX",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "OnEnable",
+                        "excluded": false
+                    },
+                    {
+                        "name": "DeSpawnByTime",
+                        "excluded": false
+                    },
+                    {
+                        "name": "DeSpawn",
                         "excluded": false
                     }
                 ]

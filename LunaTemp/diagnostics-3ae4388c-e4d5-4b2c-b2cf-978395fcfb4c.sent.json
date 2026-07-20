@@ -1,0 +1,206 @@
+{
+    "BuildID": "3ae4388c-e4d5-4b2c-b2cf-978395fcfb4c",
+    "Command": "project:build",
+    "ProjectID": "54ab6df5d24ca13458b7b8f24e7d8130",
+    "ProjectStateHash": "6d4c71a4e2bd21708ceef84185ef4b9cb9ac16827c728e9dbfc8c3a2c118cbf8",
+    "StageCompletedAt": 3,
+    "EarliestFatalError": 0,
+    "StartTime": 1784534679398,
+    "EndTime": 1784534710408,
+    "PlaygroundUserID": 33919,
+    "OperatingSystem": "win32",
+    "UnityPackageID": null,
+    "TargetPlatform": "develop",
+    "UnityVersion": "6000.0.38f1\r",
+    "LunaVersion": "7.1.0",
+    "LogCount": 8,
+    "Logs": [
+        {
+            "LogID": "31cd8c87-a3ee-415b-ac20-167386a7a9b7",
+            "Order": 7,
+            "Timestamp": 1784534711376,
+            "Stage": 3,
+            "ErrorType": 3,
+            "ErrorCode": "LP3007",
+            "Description": "You are not using any custom events",
+            "Details": [
+                "You are not using any custom events. It is recommended to use custom events to have a better understanding of the playable."
+            ],
+            "DescriptionValues": [
+                ""
+            ],
+            "DetailsValues": [
+                ""
+            ],
+            "LogCount": 1,
+            "LinePosition": null,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "9d093ab8-5d2f-4345-8157-2afa76ad9cc4",
+            "Order": 7,
+            "Timestamp": 1784534711377,
+            "Stage": 3,
+            "ErrorType": 3,
+            "ErrorCode": "LP3012",
+            "Description": "You are not using the minimum recommended amount of LunaPlaygroundFields attributes.",
+            "Details": [
+                "You are not using the minimum recommended amount of LunaPlaygroundFields attributes, you are using: 2 and we recommend using a minimum of: 3. It allows you to configure your playable to different concepts to find the best variation, which can drastically improve playable performance on all ad networks."
+            ],
+            "DescriptionValues": [
+                "2",
+                "3"
+            ],
+            "DetailsValues": [
+                "2",
+                "3"
+            ],
+            "LogCount": 1,
+            "LinePosition": null,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "a9c0c637-267d-4c0a-83af-04b90b8f9475",
+            "Order": 0,
+            "Timestamp": 1784534684371,
+            "Stage": 1,
+            "ErrorType": 2,
+            "ErrorCode": "LP1014",
+            "Description": "We recommend running Runtime Analysis to find and remove all unused code",
+            "Details": [
+                "Navigate to the Runtime Analysis → Code tab to enable code stripping. Before uploading the playable, please make sure to have played all scenario’s of the playable in a development build to make Runtime Analysis work properly."
+            ],
+            "DescriptionValues": [],
+            "DetailsValues": [],
+            "LogCount": 1,
+            "LinePosition": 0,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "ac328f15-73f9-4530-ba0c-5c53d04528e0",
+            "Order": 1,
+            "Timestamp": 1784534684371,
+            "Stage": 1,
+            "ErrorType": 2,
+            "ErrorCode": "LP1016",
+            "Description": "Extensive usage of ParticleSystem Component",
+            "Details": [
+                "There is extensive usage of the ParticleSystem component.\nExcessive usage of any component can be detrimental to performance on lower and in some cases higher end devices, consider reducing the amount the component is used.\nRecommended count: 10, current count 14."
+            ],
+            "DescriptionValues": [
+                "ParticleSystem"
+            ],
+            "DetailsValues": [
+                "ParticleSystem",
+                "10",
+                "14"
+            ],
+            "LogCount": 1,
+            "LinePosition": 0,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "6b92b44e-fb1c-4d52-8c72-6094b06bf2a5",
+            "Order": 2,
+            "Timestamp": 1784534684389,
+            "Stage": 1,
+            "ErrorType": 0,
+            "ErrorCode": "LP1027",
+            "Description": "This DOTween version is not supported",
+            "Details": [
+                "The incorrect DOTween version for this Unity version is in use, please update or downgrade to the recommended version {0} in the package manager. Go to Window → Package Manager."
+            ],
+            "DescriptionValues": [],
+            "DetailsValues": [
+                ""
+            ],
+            "LogCount": 1,
+            "LinePosition": 0,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "a1f60f73-5b5d-4275-86d0-c5bd6ad19938",
+            "Order": 3,
+            "Timestamp": 1784534684390,
+            "Stage": 1,
+            "ErrorType": 0,
+            "ErrorCode": "LP1015",
+            "Description": "This TMP version is not fully supported",
+            "Details": [
+                "The incorrect Text Mesh Pro for this Unity version is in use, please update or downgrade to the recommended version {0} in the package manager. Go to Window → Package Manager"
+            ],
+            "DescriptionValues": [],
+            "DetailsValues": [
+                ""
+            ],
+            "LogCount": 1,
+            "LinePosition": 0,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "476ceb71-1e60-4488-999e-ba939e61774e",
+            "Order": 4,
+            "Timestamp": 1784534684390,
+            "Stage": 1,
+            "ErrorType": 0,
+            "ErrorCode": "LP1032",
+            "Description": "Package(s) is not supported in Luna",
+            "Details": [
+                "Currently package(s) com.unity.timeline are not supported in Luna. We recommend you to remove it and workaround it's functionality."
+            ],
+            "DescriptionValues": [
+                "com.unity.timeline (1.8.7)"
+            ],
+            "DetailsValues": [
+                "com.unity.timeline"
+            ],
+            "LogCount": 1,
+            "LinePosition": 0,
+            "FilePath": "D:/Project/Perfect_Tidy/Packages\\manifest.json",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "6e74be62-64de-46f9-9f3f-8236688d3a9b",
+            "Order": 5,
+            "Timestamp": 1784534684392,
+            "Stage": 1,
+            "ErrorType": 2,
+            "ErrorCode": "LP1010",
+            "Description": "Looks like a collider was scaled, this might affect performance.",
+            "Details": [
+                "Looks like ShoeLeft collider on ShoeLeft game object was scaled, this might affect performance."
+            ],
+            "DescriptionValues": [],
+            "DetailsValues": [
+                "ShoeLeft",
+                "ShoeLeft"
+            ],
+            "LogCount": 1,
+            "LinePosition": 0,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        }
+    ]
+}

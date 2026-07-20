@@ -2,7 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PoolType { Piece, GroundPiece, PieceHolder, MergeVFX,BlinkFX }
+public enum PoolType
+{
+    HeartFX,
+    HeartBreakFX,
+    BlinkFX,
+    ProgressBar,
+    ClockTimer,
+    DirtFX,
+    YellowPiece,
+    MergeVFX,
+    StarExploreFX,
+    FlourSmoke,
+    WaterSplash,
+    Duck,
+    BrushMask,
+    Paper,
+    SoapFX,
+}
 
 public class Ply_Pool : Ply_Singleton<Ply_Pool>
 {
@@ -46,9 +63,21 @@ public class Ply_Pool : Ply_Singleton<Ply_Pool>
 
     public Ply_GameUnit Spawn(PoolType poolType, [Bridge.Ref] Vector3 pos, [Bridge.Ref] Quaternion rot)
     {
+        if (!dict.ContainsKey(poolType))
+        {
+            Ply_GameUnit prefab = GetPrefab(poolType);
+            if (prefab == null)
+            {
+                Debug.LogWarning($"Ply_Pool: No prefab found for PoolType {poolType}");
+                return null;
+            }
+
+            dict[poolType] = new Queue<Ply_GameUnit>();
+        }
+
         Ply_GameUnit gameUnit = dict[poolType].Count > 0 ? dict[poolType].Dequeue() : Instantiate(GetPrefab(poolType));
         gameUnit.transform.SetParent(poolHolder);
-        
+
         gameUnit.tf.SetPositionAndRotation(pos, rot);
         gameUnit.gameObject.SetActive(true);
 

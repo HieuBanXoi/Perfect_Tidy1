@@ -16,6 +16,7 @@ public class Item : Ply_GameUnit
     [HideInInspector] public ItemKnifeSpriteMaskCutter itemKnifeSpriteMaskCutter;
     [HideInInspector] public ItemSpriteMaskPainter itemSpriteMaskPainter;
     [HideInInspector] public ItemDragSpriteMaskPainter itemDragSpriteMaskPainter;
+    [HideInInspector] public ItemSpriteRevealPainter itemSpriteRevealPainter;
     [HideInInspector] public ItemMoveToTarget itemMoveToTarget;
     [HideInInspector] public Animator animator;
     public ItemType itemType;
@@ -66,6 +67,7 @@ public class Item : Ply_GameUnit
         if (refreshHiddenReferences || itemKnifeSpriteMaskCutter == null) itemKnifeSpriteMaskCutter = GetComponent<ItemKnifeSpriteMaskCutter>();
         if (refreshHiddenReferences || itemSpriteMaskPainter == null) itemSpriteMaskPainter = GetComponent<ItemSpriteMaskPainter>();
         if (refreshHiddenReferences || itemDragSpriteMaskPainter == null) itemDragSpriteMaskPainter = GetComponent<ItemDragSpriteMaskPainter>();
+        if (refreshHiddenReferences || itemSpriteRevealPainter == null) itemSpriteRevealPainter = GetComponent<ItemSpriteRevealPainter>();
     }
     
     public virtual void ChangeItemType(ItemType itemType)
@@ -177,14 +179,6 @@ public class Item : Ply_GameUnit
         isDone = true;
 
     }
-    public void SpawnGreenPiece()
-    {
-        TurnOffActiveEffect();
-        GreenPiece greenPiece = Ply_Pool.Ins.Spawn<GreenPiece>(PoolType.GreenPiece, GetEffectSpawnPosition(), transform.rotation);
-        if (greenPiece == null) return;
-        CacheActiveEffect(greenPiece, PoolType.GreenPiece, 1.5f);
-        greenPiece.DeSpawnByTime();
-    }
     public void SpawnYellowPiece()
     {
         TurnOffActiveEffect();
@@ -252,10 +246,6 @@ public class Item : Ply_GameUnit
         else if (activeEffect is MergeEffect mergeEffect)
         {
             mergeEffect.DeSpawn();
-        }
-        else if (activeEffect is GreenPiece greenPiece)
-        {
-            greenPiece.DeSpawn();
         }
         else if (activeEffect is YellowPiece yellowPiece)
         {

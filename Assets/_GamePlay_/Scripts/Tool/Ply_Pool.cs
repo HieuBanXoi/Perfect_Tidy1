@@ -9,7 +9,7 @@ public enum PoolType
     BlinkFX,
     ProgressBar,
     ClockTimer,
-    GreenPiece,
+    DirtFX,
     YellowPiece,
     MergeVFX,
     StarExploreFX,
@@ -17,7 +17,8 @@ public enum PoolType
     WaterSplash,
     Duck,
     BrushMask,
-    Paper
+    Paper,
+    SoapFX,
 }
 
 public class Ply_Pool : Ply_Singleton<Ply_Pool>

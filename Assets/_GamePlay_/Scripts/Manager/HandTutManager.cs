@@ -5,7 +5,7 @@ using UnityEngine;
 public class HandTutManager : Ply_Singleton<HandTutManager>
 {
     [Header("--- HAND TUTORIAL ---")]
-    public List<Item> items = new();
+    public List<Item> items;
     public GameObject handTutObject;
 
     [Header("--- TIMING ---")]

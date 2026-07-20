@@ -1,28 +1,39 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum FxType
 {
-    Click = 0,
-    Decor = 1,
-    Wooden = 2,
-    Plant = 3,
-    Metal,
-    Silk,
+    Click,
     Drop,
-    Girl,
-    Pop,
-    Paper,
-    Cat,
-    WoodenHeavy,
-    WoodenSmall,
-    Magic,
-    TrongHoa,
-    Lengkeng,
-    ChuongGio
-    
+    Jump,
+    Swipe,
+    Complete,
+    WaterDrop,
+    FoodToWater,
+    KnifeCut,
+    KnifeSwing,
+    KnifePlace,
+    PlaceVege,
+    LemonJuice,
+    FoodPlace,
+    Blink,
+    Failed,
+    Wipe,
+    Peer,
+    Cream,
+    CapyYay,
+    LeafOn,
+    Wipe2,
+    KnifeFlash,
+    TurnOn,
+    Frying,
+    PouringSalt,
+    PouringWater,
+    PaperClean,
+    Clock,
+    CreamWiping,
+    Stirring,
+    ItemPlace
 }
 
 public class Ply_SoundManager : Ply_Singleton<Ply_SoundManager>

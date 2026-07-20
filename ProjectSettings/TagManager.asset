@@ -15,9 +15,9 @@ TagManager:
   - Item
   - Box
   - Conveyor
-  - 
-  - 
-  - 
+  - Dirt
+  - Soap
+  - Wet
   - 
   - 
   - 
@@ -38,6 +38,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BG
+    uniqueID: 1692386601
+    locked: 0
+  - name: Base
+    uniqueID: 3234156785
+    locked: 0
+  - name: Soap
+    uniqueID: 303654083
+    locked: 0
+  - name: Wet
+    uniqueID: 48515193
+    locked: 0
+  - name: Dirt
+    uniqueID: 3418287217
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

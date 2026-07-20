@@ -1,92 +1,161 @@
 using UnityEngine;
-using DG.Tweening;
 
 public class InputManager : Ply_Singleton<InputManager>
 {
-    [Header("Components")]
-    [SerializeField] private Camera mainCamera;
 
-    [Header("Layer Settings")]
-    public LayerMask itemLayer;
-    public LayerMask targetLayer;
+    public LayerMask toggleButtonLayerMask;
     public LayerMask defaultLayer;
-    public LayerMask boxLayer;
-    public LayerMask conveyorLayer;
-    
+    public LayerMask itemLayer;
     public bool isDragging = false;
 
-    public override void Awake()
-    {
-        base.Awake();
-        if (mainCamera == null)
-        {
-            mainCamera = Camera.main;
-        }
+    private ItemDraggable currentDraggable;
+    private ItemStirring currentStirring;
+    private ItemSpriteMaskPainter currentSpriteMaskPainter;
 
-        if (mainCamera == null) 
-            Debug.LogError("InputManager: Main Camera is not assigned and could not be found. Please assign it in the Inspector or ensure a camera is tagged 'MainCamera'.", this);
-    }
+
 
     private void Update()
     {
-        if (!GameManager.Ins.isPlaying) return;
-
-        if (Input.GetMouseButtonDown(0) && !isDragging)
+        if (HandTutManager.Ins != null && HandTutManager.Ins.ShouldBlockGameplayInput)
         {
-            HandleClick();
+            return;
+        }
+
+        if (!GameManager.Ins.isPlaying && !isDragging)
+        {
+            return;
+        }
+
+        if (Input.GetMouseButtonDown(0) && GameManager.Ins.isPlaying)
+        {
+            HandleMouseDown();
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            HandleMouseDrag();
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            HandleMouseUp();
         }
     }
 
-    private void HandleClick()
+    private void HandleMouseDown()
     {
+        Camera mainCamera = Camera.main;
         if (mainCamera == null) return;
 
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        // Dùng RaycastAll để quét tất cả các item bị click trúng
+
         RaycastHit[] hits = Physics.RaycastAll(ray, 100f, itemLayer);
-        
-        if (hits.Length > 0)
+
+        if (hits.Length == 0) return;
+
+        Item interactableItem = GetFrontmostInteractableItem(hits);
+
+        if (interactableItem != null)
         {
-            Item topItem = null;
-            int highestSortingOrder = int.MinValue;
+            bool isInteracted = false;
 
-            // Lọc ra Item có sortingOrder cao nhất (nằm trên cùng)
-            for (int i = 0; i < hits.Length; i++)
+            if (interactableItem.itemDraggable != null && interactableItem.itemDraggable.CanDrag())
             {
-                Item clickedItem = ComponentCache<Item>.Get(hits[i].collider);
-                
-                if (clickedItem != null && clickedItem.currentState == ItemState.Waitting)
+                interactableItem.TurnOffActiveEffect();
+                currentDraggable = interactableItem.itemDraggable;
+                if (currentDraggable.BeginDrag())
                 {
-                    // Lấy sorting order hiện tại của item
-                    int currentOrder = clickedItem.spriteRenderer != null ? clickedItem.spriteRenderer.sortingOrder : 0;
-
-                    // So sánh để tìm ra item nằm trên cùng
-                    if (currentOrder > highestSortingOrder)
-                    {
-                        highestSortingOrder = currentOrder;
-                        topItem = clickedItem;
-                    }
+                    isDragging = true;
+                    isInteracted = true;
                 }
             }
-
-            // Thực hiện kéo thả với Item trên cùng đã tìm được
-            if (topItem != null)
+            else if (interactableItem.itemStirring != null && interactableItem.itemStirring.enabled)
             {
-                GameManager.Ins.ResetInactivityTimer(topItem);
-                // Đưa orderLayer của item lên mức currentLayer hiện tại
-                topItem.SetSortingOrder(GameManager.Ins.currentLayer);
-                
-                // Cộng currentLayer lên 1 để lần click vào vật khác sau đó sẽ đè lên vật này
-                GameManager.Ins.currentLayer++; 
-
-                topItem.StartDrag();
+                interactableItem.TurnOffActiveEffect();
+                currentStirring = interactableItem.itemStirring;
+                currentStirring.BeginStir();
                 isDragging = true;
-                return;
+                isInteracted = true;
+            }
+            else if (interactableItem.itemSpriteMaskPainter != null && interactableItem.itemSpriteMaskPainter.enabled)
+            {
+                interactableItem.TurnOffActiveEffect();
+                currentSpriteMaskPainter = interactableItem.itemSpriteMaskPainter;
+                currentSpriteMaskPainter.BeginPaint();
+                isDragging = true;
+                isInteracted = true;
+            }
+            else if (interactableItem.itemKnifeSpriteMaskCutter != null && interactableItem.itemKnifeSpriteMaskCutter.enabled)
+            {
+                interactableItem.TurnOffActiveEffect();
+                interactableItem.itemKnifeSpriteMaskCutter.PerformCut();
+                isInteracted = true;
+            }
+            else if (interactableItem.itemClickable != null && interactableItem.itemClickable.enabled)
+            {
+                interactableItem.TurnOffActiveEffect();
+                interactableItem.itemClickable.PerformClick();
+                isInteracted = true;
+            }
+
+            if (isInteracted)
+            {
+                if (GameManager.Ins != null) GameManager.Ins.TurnOffTut();
+                if (Ply_TransformConveyor.Ins != null) Ply_TransformConveyor.Ins.isMoving = true;
+            }
+        }
+    }
+
+    private Item GetFrontmostInteractableItem(RaycastHit[] hits)
+    {
+        Item interactableItem = null;
+        float minZ = float.MaxValue;
+        float minDistance = float.MaxValue;
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            Item hitItem = hits[i].collider.GetComponentInParent<Item>();
+            if (hitItem == null || !CanInteract(hitItem)) continue;
+
+            float itemZ = hitItem.transform.position.z;
+            bool isCloserToScreen = itemZ < minZ;
+            bool isSameZAndCloserHit = Mathf.Approximately(itemZ, minZ)
+                && hits[i].distance < minDistance;
+
+            if (isCloserToScreen || isSameZAndCloserHit)
+            {
+                minZ = itemZ;
+                minDistance = hits[i].distance;
+                interactableItem = hitItem;
             }
         }
 
-        // Nếu không click trúng item hoặc box, coi như click vào nền
-        GameManager.Ins.ResetInactivityTimer(null);
+        return interactableItem;
+    }
+
+    private bool CanInteract(Item item)
+    {
+        return item.itemDraggable != null && item.itemDraggable.CanDrag()
+            || item.itemStirring != null && item.itemStirring.enabled
+            || item.itemSpriteMaskPainter != null && item.itemSpriteMaskPainter.enabled
+            || item.itemKnifeSpriteMaskCutter != null && item.itemKnifeSpriteMaskCutter.enabled
+            || item.itemClickable != null && item.itemClickable.enabled;
+    }
+
+
+    private void HandleMouseDrag()
+    {
+        if (currentDraggable != null) currentDraggable.Drag();
+        else if (currentStirring != null) currentStirring.Stir();
+        else if (currentSpriteMaskPainter != null) currentSpriteMaskPainter.Paint();
+    }
+
+    private void HandleMouseUp()
+    {
+        if (currentDraggable != null) { currentDraggable.EndDrag(); currentDraggable = null; }
+        if (currentStirring != null) { currentStirring.EndStir(); currentStirring = null; }
+        if (currentSpriteMaskPainter != null) { currentSpriteMaskPainter.EndPaint(); currentSpriteMaskPainter = null; }
+        isDragging = false;
     }
 }

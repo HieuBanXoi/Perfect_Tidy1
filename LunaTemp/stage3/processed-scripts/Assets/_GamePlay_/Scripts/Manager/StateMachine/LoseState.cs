@@ -6,12 +6,8 @@ public class LoseState : IGameState
     {
         UIManager.Ins.ActiveGameLoseUI(true);
         gameManager.isGotoStore = true;
+        gameManager.isPlaying = false;
 
-        CameraController cameraController = Object.FindObjectOfType<CameraController>();
-        if (cameraController != null)
-        {
-            cameraController.SetInputEnabled(false);
-        }
     }
 
     public void OnExecute(GameManager gameManager)

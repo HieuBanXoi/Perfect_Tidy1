@@ -16,41 +16,92 @@
   ],
   "groups": [
     [
-      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Box/ItemSpawnManager.cs",
-      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/Item.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/BlinkEffect.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/ItemTool/Item.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/InfinityItems/Paper.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/InfinityItems/PaperBox.cs",
       "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/GameManager.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/ItemTool/ItemMoveToTarget.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/ItemTool/ItemDraggable.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/ItemTool/ItemDragChildRotator.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/ItemTool/ItemDragRaycastTarget.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/ItemTool/ItemType.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/InfinityItems/TrashCan.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/ItemTypeDoneManager.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_Singleton.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/HandTutManager.cs",
       "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/InputManager.cs",
       "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Spine/ItemConveyor.cs",
-      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/CameraController.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/ItemTool/ItemStirring.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/ProgressBar.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_GameUnit.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/BrushMaskUnit.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/ItemTool/ItemSpriteMaskPainter.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/ItemTool/CleaningTarget.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/ItemTool/ItemDragSpriteMaskPainter.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_SoundManager.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/ClockTimer.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_Pool.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/DirtFX.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/FlourSmoke.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/HeartBreakEffect.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/HeartEffect.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/MergeEffect.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/SoapFX.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/StarExplore.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/WaterSplash.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/YellowPiece.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/ItemTool/ItemClickable.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/ItemTool/ItemSound.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/PhaseManager.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/ProgressSlider.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_ScrollingConveyor.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/UIManager.cs",
       "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/StateMachine/LoseState.cs",
       "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/StateMachine/IGameState.cs",
       "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/StateMachine/OnPlayState.cs",
       "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/StateMachine/WaitingState.cs",
-      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/UIManager.cs",
       "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Manager/StateMachine/WinState.cs",
-      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_Singleton.cs",
-      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_Pool.cs",
-      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/BlinkEffect.cs",
-      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_GameUnit.cs",
-      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/MergeEffect.cs",
-      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_SoundManager.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/ItemTool/ItemKnifeSpriteMaskCutter.cs",
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_BobEffect.cs",
       "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/CacheComponent.cs",
-      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/ItemHolder.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/ToolObject.cs"
+    ],
+    [
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/ContinuousRotation.cs"
     ],
     [
       "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Effect/DelayStartAnim.cs"
     ],
     [
-      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/ItemSetupTool.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/ItemHolder.cs"
     ],
     [
-      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Item/ItemSetupToolEditor.cs"
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/ItemTool/CleanlingStatus.cs"
+    ],
+    [
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/ItemTool/ItemToolSetup.cs"
     ],
     [
       "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Spine/ScreenHeightPositionAnchor.cs"
     ],
     [
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/BakeParticle.cs"
+    ],
+    [
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_TimerEvent.cs"
+    ],
+    [
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_ToggleEvent.cs"
+    ],
+    [
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Ply_TweenJuice.cs"
+    ],
+    [
       "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/PSD_Tool.cs"
+    ],
+    [
+      "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/SortChildByZPos.cs"
     ],
     [
       "D:/Project/Perfect_Tidy/LunaTemp/stage3/processed-scripts/Assets/_GamePlay_/Scripts/Tool/Yielders.cs"
