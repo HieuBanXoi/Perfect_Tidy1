@@ -96,10 +96,16 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
         {
             if (CanPaint(targetPainters[i]))
             {
-                targetPainters[i].PaintAtWorldPoint(brushSpawnPoint.position);
-                if (targetPainters[i].IsPlayingPaintFx)
+                CleaningTarget ct = targetPainters[i] != null ? targetPainters[i].GetComponent<CleaningTarget>() : null;
+                if (ct != null)
                 {
-                    isPaintingAnywhere = true;
+                    ct.Process(brushSpawnPoint.position);
+                    if (ct.IsPlayingPaintFx) isPaintingAnywhere = true;
+                }
+                else
+                {
+                    targetPainters[i].PaintAtWorldPoint(brushSpawnPoint.position);
+                    if (targetPainters[i].IsPlayingPaintFx) isPaintingAnywhere = true;
                 }
             }
         }
@@ -157,7 +163,11 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
         {
             if (CanPaint(targetPainters[i]))
             {
-                targetPainters[i].BeginPaintAtWorldPoint(brushSpawnPoint.position);
+                CleaningTarget ct = targetPainters[i] != null ? targetPainters[i].GetComponent<CleaningTarget>() : null;
+                if (ct == null)
+                {
+                    targetPainters[i].BeginPaintAtWorldPoint(brushSpawnPoint.position);
+                }
             }
         }
     }
@@ -172,7 +182,15 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
                 {
                     if (CanPaint(targetPainters[i]))
                     {
-                        targetPainters[i].EndPaint();
+                        CleaningTarget ct = targetPainters[i] != null ? targetPainters[i].GetComponent<CleaningTarget>() : null;
+                        if (ct != null)
+                        {
+                            ct.EndProcess();
+                        }
+                        else
+                        {
+                            targetPainters[i].EndPaint();
+                        }
                     }
                 }
             }

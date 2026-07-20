@@ -37,7 +37,7 @@ public class ItemSpriteRevealPainter : MonoBehaviour
 
     [Header("--- PAINT AREA ---")]
     public Collider paintAreaCollider;
-    public bool resetOnEnable = true;
+    public bool resetOnEnable = false;
 
     [Header("--- EVENTS ---")]
     public UnityEvent onPaintBegin;
@@ -45,6 +45,8 @@ public class ItemSpriteRevealPainter : MonoBehaviour
     public UnityEvent onPaintComplete;
 
     public bool IsPlayingPaintFx => isPlayingPaintFx;
+
+    public bool IsPainting => isPainting;
 
     private Camera mainCam;
     private bool isPainting;
@@ -90,26 +92,11 @@ public class ItemSpriteRevealPainter : MonoBehaviour
         }
     }
 
-    public void BeginPaint()
-    {
-        if (!enabled || isComplete) return;
-        BeginPaintSession();
-        Paint();
-    }
-
     public void BeginPaintAtWorldPoint(Vector3 worldPoint)
     {
         if (!enabled || isComplete) return;
-        BeginPaintSession();
+        if (!isPainting) BeginPaintSession();
         PaintAtWorldPoint(worldPoint);
-    }
-
-    public void Paint()
-    {
-        if (!isPainting || isComplete) return;
-
-        Vector3 point = GetMouseOnPaintPlane();
-        PaintAtPoint(point);
     }
 
     public void PaintAtWorldPoint(Vector3 worldPoint)
@@ -133,6 +120,7 @@ public class ItemSpriteRevealPainter : MonoBehaviour
     {
         if (!IsPointInsidePaintArea(point))
         {
+            Debug.Log($"[RevealPainter] Point {point} is NOT inside paint area!");
             StopPaintFx();
             return;
         }
@@ -152,12 +140,14 @@ public class ItemSpriteRevealPainter : MonoBehaviour
 
         if (hitAny)
         {
+            // Debug.Log("[RevealPainter] Hit a target and revealed!");
             StartPaintFx();
             onPaint?.Invoke();
             CheckComplete();
         }
         else
         {
+            Debug.Log($"[RevealPainter] Did not hit any target at {point}");
             StopPaintFx();
         }
     }
@@ -170,7 +160,11 @@ public class ItemSpriteRevealPainter : MonoBehaviour
         Vector2 spritePos2D = target.targetSprite.transform.position;
         Vector2 paintPos2D  = paintPoint;
         float distSqr = (spritePos2D - paintPos2D).sqrMagnitude;
-        return distSqr <= target.hitRadius * target.hitRadius;
+        bool isHit = distSqr <= target.hitRadius * target.hitRadius;
+        if (!isHit) {
+            Debug.Log($"[RevealPainter] Distance to {target.targetSprite.name}: {Mathf.Sqrt(distSqr)}, required: {target.hitRadius}");
+        }
+        return isHit;
     }
 
     private void RevealTargets(RevealTarget target)

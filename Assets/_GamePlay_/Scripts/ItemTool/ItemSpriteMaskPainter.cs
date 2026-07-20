@@ -43,6 +43,7 @@ public class ItemSpriteMaskPainter : MonoBehaviour
     public UnityEvent onPaintComplete;
 
     private readonly List<BrushStamp> spawnedBrushes = new List<BrushStamp>();
+    public bool IsPainting => isPainting;
     private bool[] coveredSamples;
     private Bounds paintBounds;
     private Plane paintPlane;
@@ -93,28 +94,12 @@ public class ItemSpriteMaskPainter : MonoBehaviour
         CacheSamples();
     }
 
-    public void BeginPaint()
-    {
-        if (!enabled || isComplete || !HasBrushSource()) return;
-
-        BeginPaintSession();
-        Paint();
-    }
-
     public void BeginPaintAtWorldPoint(Vector3 worldPoint)
     {
         if (!enabled || isComplete || !HasBrushSource()) return;
 
         BeginPaintSession();
         PaintAtWorldPoint(worldPoint);
-    }
-
-    public void Paint()
-    {
-        if (!isPainting || isComplete || !HasBrushSource()) return;
-
-        Vector3 point = GetMouseOnPaintPlane();
-        PaintAtPoint(point);
     }
 
     public void PaintAtWorldPoint(Vector3 worldPoint)

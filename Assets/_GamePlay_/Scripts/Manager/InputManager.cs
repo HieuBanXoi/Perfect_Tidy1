@@ -10,9 +10,6 @@ public class InputManager : Ply_Singleton<InputManager>
 
     private ItemDraggable currentDraggable;
     private ItemStirring currentStirring;
-    private ItemSpriteMaskPainter currentSpriteMaskPainter;
-
-
 
     private void Update()
     {
@@ -78,14 +75,6 @@ public class InputManager : Ply_Singleton<InputManager>
                 isDragging = true;
                 isInteracted = true;
             }
-            else if (interactableItem.itemSpriteMaskPainter != null && interactableItem.itemSpriteMaskPainter.enabled)
-            {
-                interactableItem.TurnOffActiveEffect();
-                currentSpriteMaskPainter = interactableItem.itemSpriteMaskPainter;
-                currentSpriteMaskPainter.BeginPaint();
-                isDragging = true;
-                isInteracted = true;
-            }
             else if (interactableItem.itemKnifeSpriteMaskCutter != null && interactableItem.itemKnifeSpriteMaskCutter.enabled)
             {
                 interactableItem.TurnOffActiveEffect();
@@ -138,7 +127,6 @@ public class InputManager : Ply_Singleton<InputManager>
     {
         return item.itemDraggable != null && item.itemDraggable.CanDrag()
             || item.itemStirring != null && item.itemStirring.enabled
-            || item.itemSpriteMaskPainter != null && item.itemSpriteMaskPainter.enabled
             || item.itemKnifeSpriteMaskCutter != null && item.itemKnifeSpriteMaskCutter.enabled
             || item.itemClickable != null && item.itemClickable.enabled;
     }
@@ -148,14 +136,12 @@ public class InputManager : Ply_Singleton<InputManager>
     {
         if (currentDraggable != null) currentDraggable.Drag();
         else if (currentStirring != null) currentStirring.Stir();
-        else if (currentSpriteMaskPainter != null) currentSpriteMaskPainter.Paint();
     }
 
     private void HandleMouseUp()
     {
         if (currentDraggable != null) { currentDraggable.EndDrag(); currentDraggable = null; }
         if (currentStirring != null) { currentStirring.EndStir(); currentStirring = null; }
-        if (currentSpriteMaskPainter != null) { currentSpriteMaskPainter.EndPaint(); currentSpriteMaskPainter = null; }
         isDragging = false;
     }
 }

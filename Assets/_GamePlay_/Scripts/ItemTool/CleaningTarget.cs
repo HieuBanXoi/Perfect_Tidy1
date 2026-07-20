@@ -18,6 +18,21 @@ public class CleaningTarget : MonoBehaviour
     }
 
     [Serializable]
+    public class DirtTarget
+    {
+        [Tooltip("Sprite dirt sẽ hiện lên khi paint trúng và tự mờ đi khi không paint")]
+        public SpriteRenderer targetSprite;
+        [Tooltip("Bán kính kiểm tra khoảng cách 2D (XY)")]
+        [Min(0.01f)] public float hitRadius = 0.5f;
+        [Tooltip("Tốc độ hiện rõ (alpha / giây)")]
+        [Min(0.01f)] public float fadeSpeed = 3f;
+        [Tooltip("Tốc độ tự mờ dần (alpha / giây)")]
+        [Min(0.01f)] public float fadeOutSpeed = 1.5f;
+
+        [HideInInspector] public bool isBeingHit = false;
+    }
+
+    [Serializable]
     public class CleaningState
     {
         [Tooltip("Tên state, chỉ dùng để nhận biết trên Inspector")]
@@ -46,6 +61,9 @@ public class CleaningTarget : MonoBehaviour
         [Tooltip("Alpha ban đầu của các sprite (trước khi reveal)")]
         [Range(0f, 1f)] public float initialAlpha = 0f;
 
+        [Header("Dirt Under Config")]
+        public bool spawnDirtWhenPaint = false;
+
         // ---------- Common ----------
         [Header("On Complete Actions")]
         [Tooltip("Các SpriteRenderer sẽ bị trả Mask Interaction về None sau khi làm sạch xong")]
@@ -62,10 +80,29 @@ public class CleaningTarget : MonoBehaviour
     [Tooltip("Event gọi khi TẤT CẢ các state đã hoàn thành")]
     public UnityEvent onAllStatesComplete;
 
+    [Header("--- DIRT UNDER TARGETS ---")]
+    [Tooltip("Danh sách sprite Dirt dùng chung cho tất cả các state (nếu state có bật spawnDirtWhenPaint)")]
+    public List<DirtTarget> dirtTargets = new List<DirtTarget>();
+
     private ItemSpriteMaskPainter maskPainter;
     private ItemSpriteRevealPainter revealPainter;
     private int currentStateIndex = 0;
     private bool isFullyCompleted = false;
+
+    public bool IsPlayingPaintFx
+    {
+        get
+        {
+            if (currentStateIndex < states.Count && states[currentStateIndex].paintMode == PaintMode.MaskPainter)
+            {
+                return maskPainter != null && maskPainter.IsPlayingPaintFx;
+            }
+            else
+            {
+                return revealPainter != null && revealPainter.IsPlayingPaintFx;
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -79,6 +116,35 @@ public class CleaningTarget : MonoBehaviour
             revealPainter.onPaintComplete.AddListener(OnPaintComplete);
 
         ApplyCurrentState();
+    }
+
+    private void Update()
+    {
+        // Logic mờ dần các vết bẩn sẽ luôn chạy để đảm bảo chúng mờ đi sau khi một state hoàn thành,
+        // hoặc khi người dùng ngừng vẽ.
+        if (dirtTargets != null)
+        {
+            for (int i = 0; i < dirtTargets.Count; i++)
+            {
+                var target = dirtTargets[i];
+                if (target == null || target.targetSprite == null) continue;
+
+                // Nếu không được tô trúng, vết bẩn sẽ tự mờ đi.
+                if (!target.isBeingHit)
+                {
+                    Color c = target.targetSprite.color;
+                    if (c.a > 0f)
+                    {
+                        c.a = Mathf.MoveTowards(c.a, 0f, target.fadeOutSpeed * Time.deltaTime);
+                        target.targetSprite.color = c;
+                    }
+                }
+
+                // Reset cờ 'isBeingHit' cho frame tiếp theo.
+                // Cờ này sẽ được set thành true trong Process() nếu người dùng tô trúng.
+                target.isBeingHit = false;
+            }
+        }
     }
 
     private void ApplyCurrentState()
@@ -111,9 +177,10 @@ public class CleaningTarget : MonoBehaviour
             if (maskPainter != null) maskPainter.enabled = false;
             if (revealPainter != null)
             {
-                revealPainter.enabled = true;
+                // Gán data TRƯỚC khi enable để OnEnable không reset với list rỗng
                 revealPainter.initialAlpha = state.initialAlpha;
                 revealPainter.revealTargets = state.revealTargets;
+                revealPainter.enabled = true;
                 revealPainter.ResetPaint();
             }
         }
@@ -152,16 +219,64 @@ public class CleaningTarget : MonoBehaviour
         {
             if (maskPainter != null && maskPainter.isActiveAndEnabled)
             {
-                maskPainter.BeginPaintAtWorldPoint(worldPosition);
-                maskPainter.PaintAtWorldPoint(worldPosition);
+                // Chỉ gọi BeginPaint khi chưa bắt đầu paint (lần đầu tiên kéo vào)
+                if (!maskPainter.IsPainting)
+                {
+                    maskPainter.BeginPaintAtWorldPoint(worldPosition);
+                }
+                else // Các lần di chuyển tiếp theo chỉ cần cập nhật vị trí paint
+                {
+                    maskPainter.PaintAtWorldPoint(worldPosition);
+                }
             }
         }
         else
         {
+            // Debug log để kiểm tra xem có nhảy vào đây không
+            Debug.Log($"[CleaningTarget] Process called! revealPainter != null: {revealPainter != null}, isActiveAndEnabled: {(revealPainter != null ? revealPainter.isActiveAndEnabled.ToString() : "N/A")}");
             if (revealPainter != null && revealPainter.isActiveAndEnabled)
             {
-                revealPainter.BeginPaintAtWorldPoint(worldPosition);
-                revealPainter.PaintAtWorldPoint(worldPosition);
+                // Tương tự, áp dụng logic cho revealPainter
+                if (!revealPainter.IsPainting)
+                {
+                    revealPainter.BeginPaintAtWorldPoint(worldPosition);
+                }
+                else
+                {
+                    revealPainter.PaintAtWorldPoint(worldPosition);
+                }
+            }
+        }
+
+        // --- Handle Dirt Targets ---
+        if (currentStateIndex < states.Count)
+        {
+            var state = states[currentStateIndex];
+            if (state.spawnDirtWhenPaint && dirtTargets != null)
+            {
+                Camera mainCam = Camera.main;
+            if (mainCam != null)
+            {
+                Plane paintPlane = new Plane(-mainCam.transform.forward, transform.position);
+                Vector3 point = worldPosition - paintPlane.normal * paintPlane.GetDistanceToPoint(worldPosition);
+
+                for (int i = 0; i < dirtTargets.Count; i++)
+                {
+                    var target = dirtTargets[i];
+                    if (target == null || target.targetSprite == null) continue;
+
+                    Vector2 spritePos2D = target.targetSprite.transform.position;
+                    Vector2 paintPos2D = point;
+                    float distSqr = (spritePos2D - paintPos2D).sqrMagnitude;
+                    if (distSqr <= target.hitRadius * target.hitRadius)
+                    {
+                        target.isBeingHit = true;
+                        Color c = target.targetSprite.color;
+                        c.a = Mathf.MoveTowards(c.a, 1f, target.fadeSpeed * Time.deltaTime);
+                        target.targetSprite.color = c;
+                    }
+                    }
+                }
             }
         }
     }
