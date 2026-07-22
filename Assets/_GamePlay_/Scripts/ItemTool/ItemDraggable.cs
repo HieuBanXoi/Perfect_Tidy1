@@ -145,7 +145,14 @@ public class ItemDraggable : MonoBehaviour
 
         returnTween?.OnComplete(OnReturnToStartComplete);
     }
-
+    public void CacheOriginalPos()
+    {
+        originalParent = transform.parent;
+        originalLocalPos = transform.localPosition;
+        originalScale = transform.localScale;
+        hasOriginalScale = true;
+        originalZ = transform.position.z;
+    }
     public void TeleportToStart()
     {
         isReturningToStart = false;

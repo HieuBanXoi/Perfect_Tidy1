@@ -34,6 +34,7 @@ public class ToolObject : Item
         gameObject.SetActive(true);
         transform.DOMove(homePosition, flyInDuration).SetEase(flyEase).OnComplete(() =>
         {
+            itemDraggable?.CacheOriginalPos();
             onFlyIn?.Invoke();
         });
     }

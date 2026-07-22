@@ -21,6 +21,11 @@ public class HandTutManager : Ply_Singleton<HandTutManager>
     public float clickScaleMultiplier = 1.25f;
     public Ease moveEase = Ease.InOutSine;
 
+    [Header("--- SockStep ---")]
+    public int sockCount = 0;
+    public ToolObject[] toolObjects;
+    public Collider[] shoeColliders;
+
     private float idleTimer;
     private Vector3 defaultHandScale = Vector3.one;
     private SpriteRenderer handSpriteRenderer;
@@ -400,5 +405,26 @@ public class HandTutManager : Ply_Singleton<HandTutManager>
 
         Item item = ComponentCache<Item>.Get(itemObject.transform);
         ItemDone(item);
+    }
+    public void OneSockDone()
+    {
+        sockCount++;
+        if(sockCount >= 2)
+        {
+            for(int i = 0; i < toolObjects.Length; i++)
+            {
+                if(toolObjects[i] != null)
+                {
+                    toolObjects[i].FlyIn();
+                }
+            }
+            for(int i = 0; i < shoeColliders.Length; i++)
+            {
+                if(shoeColliders[i] != null)
+                {
+                    shoeColliders[i].enabled = true;
+                }
+            }
+        }
     }
 }

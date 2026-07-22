@@ -20,6 +20,7 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
     private bool hasBegunPaint;
     private bool hasCompletedPaint;
     private int completedPaintersCount;
+    private int initialPaintersCount;
 
     private void Awake()
     {
@@ -138,6 +139,7 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
         hasBegunPaint = false;
         hasCompletedPaint = false;
         completedPaintersCount = 0;
+        initialPaintersCount = GetValidPaintersCount();
         isActivelyPainting = false;
 
         if (paintOnBeginDrag)
@@ -207,7 +209,7 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
         completedPaintersCount++;
         
         // Đợi tất cả painter hoàn thành
-        if (completedPaintersCount >= GetValidPaintersCount())
+        if (initialPaintersCount > 0 && completedPaintersCount >= initialPaintersCount)
         {
             hasCompletedPaint = true;
             UpdateActivePaintingState(false);
@@ -241,8 +243,19 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
         {
             if (targetPainters[i] != null)
             {
-                targetPainters[i].onPaintComplete.RemoveListener(HandlePaintComplete);
-                targetPainters[i].onPaintComplete.AddListener(HandlePaintComplete);
+                CleaningTarget ct = targetPainters[i].GetComponent<CleaningTarget>();
+                if (ct != null)
+                {
+                    // Nếu có CleaningTarget, lắng nghe event khi TẤT CẢ state của nó hoàn thành
+                    ct.onAllStatesComplete.RemoveListener(HandlePaintComplete);
+                    ct.onAllStatesComplete.AddListener(HandlePaintComplete);
+                }
+                else
+                {
+                    // Nếu không, lắng nghe event hoàn thành của chính painter (cho trường hợp đơn giản)
+                    targetPainters[i].onPaintComplete.RemoveListener(HandlePaintComplete);
+                    targetPainters[i].onPaintComplete.AddListener(HandlePaintComplete);
+                }
             }
         }
     }
@@ -255,7 +268,15 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
         {
             if (targetPainters[i] != null)
             {
-                targetPainters[i].onPaintComplete.RemoveListener(HandlePaintComplete);
+                CleaningTarget ct = targetPainters[i].GetComponent<CleaningTarget>();
+                if (ct != null)
+                {
+                    ct.onAllStatesComplete.RemoveListener(HandlePaintComplete);
+                }
+                else
+                {
+                    targetPainters[i].onPaintComplete.RemoveListener(HandlePaintComplete);
+                }
             }
         }
     }
