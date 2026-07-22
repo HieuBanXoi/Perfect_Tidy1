@@ -11,7 +11,6 @@ public class GameManager : Ply_Singleton<GameManager>
     public int countMove = 0;
     public int currentLayer;
     public Transform trashCan;
-    public Transform step1;
     public PaperBox paperBox;
 
     private void Start()

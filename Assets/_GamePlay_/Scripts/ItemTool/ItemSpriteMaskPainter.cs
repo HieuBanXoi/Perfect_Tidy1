@@ -169,6 +169,25 @@ public class ItemSpriteMaskPainter : MonoBehaviour
         StopPaintFx();
     }
 
+    /// <summary>
+    /// Hàm xử lý tổng quát được gọi từ bên ngoài (ví dụ: ItemDragSpriteMaskPainter).
+    /// Tự động gọi BeginPaint hoặc Paint tùy theo trạng thái.
+    /// </summary>
+    /// <param name="worldPoint">Vị trí paint trong không gian thế giới.</param>
+    public void ProcessPaint(Vector3 worldPoint)
+    {
+        if (!enabled || isComplete) return;
+
+        if (!isPainting)
+        {
+            BeginPaintAtWorldPoint(worldPoint);
+        }
+        else
+        {
+            PaintAtWorldPoint(worldPoint);
+        }
+    }
+
     private void StampLine(Vector3 from, Vector3 to)
     {
         float distance = Vector3.Distance(from, to);

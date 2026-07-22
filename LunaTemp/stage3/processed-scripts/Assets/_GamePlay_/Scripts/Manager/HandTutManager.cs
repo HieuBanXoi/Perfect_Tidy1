@@ -20,6 +20,15 @@ public class HandTutManager : Ply_Singleton<HandTutManager>
     public float handZPosition = -9f;
     public float clickScaleMultiplier = 1.25f;
     public Ease moveEase = Ease.InOutSine;
+    [Header("--- Painter ---")]
+    public List<ItemDragSpriteMaskPainter> itemDragSpriteMaskPainters;
+    [Header("--- SockStep ---")]
+    public int sockCount = 0;
+    public ToolObject[] toolObjects;
+    public Sock[] socks;
+    [Header("--- EndLogic ---")]
+    public int brushedShoeCount = 0;
+    public GameObject lastHandTut;
 
     private float idleTimer;
     private Vector3 defaultHandScale = Vector3.one;
@@ -104,6 +113,13 @@ public class HandTutManager : Ply_Singleton<HandTutManager>
             return;
         }
 
+        Sock sock = targetItem.GetComponent<Sock>();
+        if (sock != null && sock.enabled && !sock.IsDetached)
+        {
+            PlaySockHint(sock);
+            return;
+        }
+
 
         if (IsClickableReady(targetItem))
         {
@@ -131,12 +147,46 @@ public class HandTutManager : Ply_Singleton<HandTutManager>
 
         if (IsDragSpriteMaskPainterReady(targetItem))
         {
-            PlayMoveHint(targetItem.itemDragSpriteMaskPainter.GetTutorialStart(), targetItem.itemDragSpriteMaskPainter.GetTutorialTarget());
+            // Lấy target hợp lệ tiếp theo thay vì luôn lấy target đầu tiên
+            Transform validTarget = GetNextValidPainterTarget(targetItem.itemDragSpriteMaskPainter);
+            if (validTarget != null)
+            {
+                PlayMoveHint(targetItem.tf, validTarget);
+            }
         }
     }
 
     private Item GetFirstTutorialReadyItem()
     {
+        // 1. Ưu tiên tất (socks)
+        if (socks != null)
+        {
+            for (int i = 0; i < socks.Length; i++)
+            {
+                Sock sock = socks[i];
+                if (sock != null && !sock.isDone && CanShowTutorialForItem(sock))
+                {
+                    return sock;
+                }
+            }
+        }
+
+        // 2. Tiếp theo là các itemDragSpriteMaskPainters
+        if (itemDragSpriteMaskPainters != null)
+        {
+            for (int i = 0; i < itemDragSpriteMaskPainters.Count; i++)
+            {
+                ItemDragSpriteMaskPainter painter = itemDragSpriteMaskPainters[i];
+                if (painter != null)
+                {
+                    Item item = painter.GetComponent<Item>();
+                    if (item != null && !item.isDone && CanShowTutorialForItem(item))
+                    {
+                        return item;
+                    }
+                }
+            }
+        }
 
         for (int i = 0; i < items.Count; i++)
         {
@@ -173,6 +223,12 @@ public class HandTutManager : Ply_Singleton<HandTutManager>
             {
                 return false;
             }
+        }
+
+        Sock sock = item.GetComponent<Sock>();
+        if (sock != null && sock.enabled && !sock.IsDetached)
+        {
+            return true;
         }
 
         if (IsClickableReady(item)) return true;
@@ -230,15 +286,42 @@ public class HandTutManager : Ply_Singleton<HandTutManager>
 
     private bool IsDragSpriteMaskPainterReady(Item item)
     {
-        return item != null
-            && item.gameObject.activeInHierarchy
-            && item.itemDragSpriteMaskPainter != null
-            && item.itemDragSpriteMaskPainter.enabled
-            && item.itemDragSpriteMaskPainter.gameObject.activeInHierarchy
-            && !item.itemDragSpriteMaskPainter.IsPaintComplete
-            && item.itemDragSpriteMaskPainter.GetTutorialTarget() != null
-            && item.itemDragSpriteMaskPainter.GetTutorialTarget().gameObject.activeInHierarchy
-            && IsDraggableReady(item);
+        if (item == null || !item.gameObject.activeInHierarchy) return false;
+
+        var dragPainter = item.itemDragSpriteMaskPainter;
+        if (dragPainter == null || !dragPainter.enabled || !dragPainter.gameObject.activeInHierarchy || dragPainter.IsPaintComplete)
+        {
+            return false;
+        }
+
+        if (!IsDraggableReady(item)) return false;
+
+        // Thay vì chỉ kiểm tra target đầu tiên, hãy tìm bất kỳ target nào hợp lệ.
+        return GetNextValidPainterTarget(dragPainter) != null;
+    }
+
+    /// <summary>
+    /// Lấy target hợp lệ tiếp theo cho một tool.
+    /// Một target được coi là hợp lệ nếu nó chưa hoàn thành và tool có thể "vẽ" lên nó (đúng state).
+    /// </summary>
+    private Transform GetNextValidPainterTarget(ItemDragSpriteMaskPainter dragPainter)
+    {
+        if (dragPainter == null || dragPainter.targetPainters == null) return null;
+
+        foreach (var targetPainterComponent in dragPainter.targetPainters)
+        {
+            if (targetPainterComponent == null || !targetPainterComponent.gameObject.activeInHierarchy) continue;
+
+            Item targetItem = targetPainterComponent.GetComponent<Item>();
+            if (targetItem != null && targetItem.isDone) continue;
+
+            if (dragPainter.CanPaint(targetPainterComponent))
+            {
+                return targetPainterComponent.transform;
+            }
+        }
+
+        return null;
     }
 
     private void PlayClickHint(Transform target)
@@ -316,6 +399,16 @@ public class HandTutManager : Ply_Singleton<HandTutManager>
         }, Mathf.PI * 2f, moveDuration).SetEase(Ease.Linear));
         handSequence.AppendInterval(waitAtEndDuration);
         handSequence.SetLoops(-1, LoopType.Restart);
+    }
+
+    private void PlaySockHint(Sock sock)
+    {
+        if (sock == null) return;
+
+        Vector3 startPos = sock.transform.position;
+        Vector3 endPos = startPos + Vector3.down * sock.detachDistance;
+
+        PlayMoveHint(startPos, endPos);
     }
 
     private void PrepareHand([Bridge.Ref] Vector3 position)
@@ -400,5 +493,31 @@ public class HandTutManager : Ply_Singleton<HandTutManager>
 
         Item item = ComponentCache<Item>.Get(itemObject.transform);
         ItemDone(item);
+    }
+    public void OneSockDone()
+    {
+        sockCount++;
+        if(sockCount >= 2)
+        {
+            for(int i = 0; i < toolObjects.Length; i++)
+            {
+                if(toolObjects[i] != null)
+                {
+                    toolObjects[i].FlyIn();
+                }
+            }
+        }
+    }
+    public void OneShoeBrushed()
+    {
+        brushedShoeCount++;
+        if (brushedShoeCount >= 4)
+        {
+            if(lastHandTut != null)
+            {
+                lastHandTut.SetActive(true);
+                GameManager.Ins.LoseGame();
+            }
+        }
     }
 }

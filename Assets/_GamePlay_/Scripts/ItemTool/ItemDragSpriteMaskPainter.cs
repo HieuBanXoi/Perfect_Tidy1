@@ -1,5 +1,11 @@
 using UnityEngine;
 
+public enum ItemDragSoundPlayback
+{
+    OnPaint,
+    OnDrag
+}
+
 [RequireComponent(typeof(ItemDraggable))]
 public class ItemDragSpriteMaskPainter : MonoBehaviour
 {
@@ -10,7 +16,11 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
     public bool returnToStartOnPaintComplete = true;
     public bool spawnHeartOnAutoDropFail = false;
     public GameObject paintTrailFx;
+
+    [Header("--- SOUND ---")]
     public FxType fxSoundType = FxType.Click;
+    [Tooltip("Khi nào thì phát âm thanh: 'OnPaint' - chỉ khi đang vẽ trúng, 'OnDrag' - trong suốt quá trình kéo.")]
+    public ItemDragSoundPlayback soundPlayback = ItemDragSoundPlayback.OnPaint;
 
     public bool IsPaintComplete => hasCompletedPaint;
 
@@ -21,6 +31,9 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
     private bool hasCompletedPaint;
     private int completedPaintersCount;
     private int initialPaintersCount;
+    private ItemSpriteMaskPainter activeTargetPainter;
+    private float lastHeartSpawnTime = -1f;
+    private const float heartSpawnCooldown = 3.0f;
 
     private void Awake()
     {
@@ -30,7 +43,7 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
         if (paintTrailFx != null) paintTrailFx.SetActive(false);
     }
 
-    private bool CanPaint(ItemSpriteMaskPainter painter)
+    public bool CanPaint(ItemSpriteMaskPainter painter)
     {
         if (painter == null) return false;
         
@@ -82,6 +95,7 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
     {
         if (!isDragging || targetPainters == null || targetPainters.Count == 0 || brushSpawnPoint == null)
         {
+            EndActiveTargetPaint();
             UpdateActivePaintingState(false);
             return;
         }
@@ -92,44 +106,69 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
             return;
         }
 
-        bool isPaintingAnywhere = false;
-        for (int i = 0; i < targetPainters.Count; i++)
+        ItemSpriteMaskPainter frontmostPainter = GetFrontmostPainterUnderPointer();
+
+        if (frontmostPainter != null)
         {
-            if (CanPaint(targetPainters[i]))
+            bool isDesignatedTarget = targetPainters.Contains(frontmostPainter);
+            bool canPaintOnTarget = CanPaint(frontmostPainter);
+
+            if (isDesignatedTarget && canPaintOnTarget)
             {
-                CleaningTarget ct = targetPainters[i] != null ? targetPainters[i].GetComponent<CleaningTarget>() : null;
-                if (ct != null)
+                if (activeTargetPainter != null && activeTargetPainter != frontmostPainter)
                 {
-                    ct.Process(brushSpawnPoint.position);
-                    if (ct.IsPlayingPaintFx) isPaintingAnywhere = true;
+                    EndActiveTargetPaint();
                 }
-                else
+
+                activeTargetPainter = frontmostPainter;
+                ProcessTargetPainter(activeTargetPainter);
+                UpdateActivePaintingState(IsTargetPainting(activeTargetPainter));
+            }
+            else
+            {
+                EndActiveTargetPaint();
+                UpdateActivePaintingState(false);
+
+                if (isDesignatedTarget && !canPaintOnTarget)
                 {
-                    targetPainters[i].PaintAtWorldPoint(brushSpawnPoint.position);
-                    if (targetPainters[i].IsPlayingPaintFx) isPaintingAnywhere = true;
+                    if (Time.time > lastHeartSpawnTime + heartSpawnCooldown)
+                    {
+                        Item painterItem = frontmostPainter.GetComponent<Item>();
+                        if (painterItem != null)
+                        {
+                            painterItem.SpawnHeart(true);
+                            lastHeartSpawnTime = Time.time;
+                        }
+                    }
                 }
             }
         }
-        
-        UpdateActivePaintingState(isPaintingAnywhere);
+        else
+        {
+            EndActiveTargetPaint();
+            UpdateActivePaintingState(false);
+        }
     }
 
     private bool isActivelyPainting;
 
     private void UpdateActivePaintingState(bool isActive)
     {
-        if (isActive == isActivelyPainting) return;
+        if (isActive == isActivelyPainting || Ply_SoundManager.Ins == null) return;
         isActivelyPainting = isActive;
 
         if (paintTrailFx != null) paintTrailFx.SetActive(isActive);
-        
-        if (isActive)
+
+        if (soundPlayback == ItemDragSoundPlayback.OnPaint)
         {
-            Ply_SoundManager.Ins.PlayFxLoop(fxSoundType);
-        }
-        else
-        {
-            Ply_SoundManager.Ins.StopFxLoop(fxSoundType);
+            if (isActive)
+            {
+                Ply_SoundManager.Ins.PlayFxLoop(fxSoundType);
+            }
+            else
+            {
+                Ply_SoundManager.Ins.StopFxLoop(fxSoundType);
+            }
         }
     }
 
@@ -142,6 +181,11 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
         initialPaintersCount = GetValidPaintersCount();
         isActivelyPainting = false;
 
+        if (soundPlayback == ItemDragSoundPlayback.OnDrag)
+        {
+            Ply_SoundManager.Ins.PlayFxLoop(fxSoundType);
+        }
+
         if (paintOnBeginDrag)
         {
             BeginPaint();
@@ -150,6 +194,11 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
 
     private void HandleEndDrag()
     {
+        if (soundPlayback == ItemDragSoundPlayback.OnDrag)
+        {
+            Ply_SoundManager.Ins.StopFxLoop(fxSoundType);
+        }
+
         UpdateActivePaintingState(false);
         EndPaint();
     }
@@ -160,46 +209,104 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
 
         RegisterPaintComplete();
         hasBegunPaint = true;
-        
-        for (int i = 0; i < targetPainters.Count; i++)
-        {
-            if (CanPaint(targetPainters[i]))
-            {
-                CleaningTarget ct = targetPainters[i] != null ? targetPainters[i].GetComponent<CleaningTarget>() : null;
-                if (ct == null)
-                {
-                    targetPainters[i].BeginPaintAtWorldPoint(brushSpawnPoint.position);
-                }
-            }
-        }
+
+    // Vòng lặp này không còn cần thiết.
+    // Logic BeginPaint giờ được xử lý trong Process() của CleaningTarget
+    // hoặc ProcessPaint() của ItemSpriteMaskPainter trong hàm Update().
     }
 
     private void EndPaint()
     {
-        if (hasBegunPaint)
-        {
-            if (targetPainters != null)
-            {
-                for (int i = 0; i < targetPainters.Count; i++)
-                {
-                    if (CanPaint(targetPainters[i]))
-                    {
-                        CleaningTarget ct = targetPainters[i] != null ? targetPainters[i].GetComponent<CleaningTarget>() : null;
-                        if (ct != null)
-                        {
-                            ct.EndProcess();
-                        }
-                        else
-                        {
-                            targetPainters[i].EndPaint();
-                        }
-                    }
-                }
-            }
-        }
+        EndActiveTargetPaint();
 
         isDragging = false;
         hasBegunPaint = false;
+    }
+
+    private void EndActiveTargetPaint()
+    {
+        if (activeTargetPainter == null) return;
+
+        CleaningTarget ct = activeTargetPainter.GetComponent<CleaningTarget>();
+        if (ct != null)
+        {
+            ct.EndProcess();
+        }
+        else
+        {
+            activeTargetPainter.EndPaint();
+        }
+
+        activeTargetPainter = null;
+    }
+
+    private void ProcessTargetPainter(ItemSpriteMaskPainter painter)
+    {
+        if (painter == null) return;
+
+        CleaningTarget ct = painter.GetComponent<CleaningTarget>();
+        if (ct != null)
+        {
+            ct.Process(brushSpawnPoint.position);
+        }
+        else
+        {
+            painter.ProcessPaint(brushSpawnPoint.position);
+        }
+    }
+
+    private bool IsTargetPainting(ItemSpriteMaskPainter painter)
+    {
+        if (painter == null) return false;
+
+        CleaningTarget ct = painter.GetComponent<CleaningTarget>();
+        if (ct != null)
+        {
+            return ct.IsPlayingPaintFx;
+        }
+
+        return painter.IsPlayingPaintFx;
+    }
+
+    private ItemSpriteMaskPainter GetFrontmostPainterUnderPointer()
+    {
+        Camera mainCamera = Camera.main;
+        if (mainCamera == null)
+        {
+            return null;
+        }
+
+        Ray ray = new Ray(brushSpawnPoint.position, mainCamera.transform.forward);
+        RaycastHit[] hits = Physics.RaycastAll(ray, 100f);
+        ItemSpriteMaskPainter bestPainter = null;
+        float bestZ = float.MaxValue;
+        float bestDistance = float.MaxValue;
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            ItemSpriteMaskPainter hitPainter = hits[i].collider.GetComponentInParent<ItemSpriteMaskPainter>();
+            if (hitPainter == null) continue;
+
+            float hitZ = hitPainter.transform.position.z;
+            bool isCloserToScreen = hitZ < bestZ;
+            bool isSameZAndCloserHit = Mathf.Approximately(hitZ, bestZ) && hits[i].distance < bestDistance;
+
+            if (isCloserToScreen || isSameZAndCloserHit)
+            {
+                bestZ = hitZ;
+                bestDistance = hits[i].distance;
+                bestPainter = hitPainter;
+            }
+        }
+
+        return bestPainter;
+    }
+
+    private void HandleSingleStateComplete()
+    {
+        // Một state vừa hoàn thành, và một trái tim thành công có thể đã được hiển thị.
+        // Reset lại cooldown để tránh spawn thêm trái tim thất bại ngay lập tức khi chuyển state.
+        lastHeartSpawnTime = Time.time;
     }
 
     private void HandlePaintComplete()
@@ -212,6 +319,12 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
         if (initialPaintersCount > 0 && completedPaintersCount >= initialPaintersCount)
         {
             hasCompletedPaint = true;
+
+            if (soundPlayback == ItemDragSoundPlayback.OnDrag)
+            {
+                Ply_SoundManager.Ins.StopFxLoop(fxSoundType);
+            }
+
             UpdateActivePaintingState(false);
             EndPaint();
 
@@ -246,13 +359,26 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
                 CleaningTarget ct = targetPainters[i].GetComponent<CleaningTarget>();
                 if (ct != null)
                 {
-                    // Nếu có CleaningTarget, lắng nghe event khi TẤT CẢ state của nó hoàn thành
+                // Lắng nghe event khi TẤT CẢ state của nó hoàn thành
                     ct.onAllStatesComplete.RemoveListener(HandlePaintComplete);
                     ct.onAllStatesComplete.AddListener(HandlePaintComplete);
+
+                // Lắng nghe event khi MỖI state hoàn thành để reset cooldown heart
+                if (ct.states != null)
+                {
+                    for (int j = 0; j < ct.states.Count; j++)
+                    {
+                        if (ct.states[j] != null)
+                        {
+                            ct.states[j].onStateComplete.RemoveListener(HandleSingleStateComplete);
+                            ct.states[j].onStateComplete.AddListener(HandleSingleStateComplete);
+                        }
+                    }
+                }
                 }
                 else
                 {
-                    // Nếu không, lắng nghe event hoàn thành của chính painter (cho trường hợp đơn giản)
+                // Nếu không có CleaningTarget, lắng nghe event hoàn thành của chính painter
                     targetPainters[i].onPaintComplete.RemoveListener(HandlePaintComplete);
                     targetPainters[i].onPaintComplete.AddListener(HandlePaintComplete);
                 }
@@ -272,6 +398,18 @@ public class ItemDragSpriteMaskPainter : MonoBehaviour
                 if (ct != null)
                 {
                     ct.onAllStatesComplete.RemoveListener(HandlePaintComplete);
+
+                    // Hủy đăng ký lắng nghe event của mỗi state
+                    if (ct.states != null)
+                    {
+                        for (int j = 0; j < ct.states.Count; j++)
+                        {
+                            if (ct.states[j] != null)
+                            {
+                                ct.states[j].onStateComplete.RemoveListener(HandleSingleStateComplete);
+                            }
+                        }
+                    }
                 }
                 else
                 {

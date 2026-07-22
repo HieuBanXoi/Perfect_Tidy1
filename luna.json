@@ -1,8 +1,8 @@
 {
     "version": "7.1.0",
     "projectId": "54ab6df5d24ca13458b7b8f24e7d8130",
-    "applicationID": 27599,
-    "creativeName": "PLY_PerfectTidy_V132",
+    "applicationID": 26861,
+    "creativeName": "PLY_PerfectTidy_V133",
     "pgServer": "EU",
     "window": {
         "‐⁙": true
@@ -1485,10 +1485,6 @@
             },
             {
                 "name": "UnityEditor.MenuItem",
-                "excluded": true
-            },
-            {
-                "name": "UnityEngine.AddComponentMenu",
                 "excluded": true
             },
             {
@@ -4065,7 +4061,7 @@
             },
             {
                 "name": "UnityEngine.HideInInspector",
-                "excluded": true
+                "excluded": false
             },
             {
                 "name": "UnityEngine.HorizontalWrapMode",
@@ -7160,10 +7156,6 @@
                 "excluded": true
             },
             {
-                "name": "DG.Tweening.Core.Easing.Bounce",
-                "excluded": true
-            },
-            {
                 "name": "DG.Tweening.Core.Easing.EaseCurve",
                 "excluded": true
             },
@@ -7245,10 +7237,6 @@
             },
             {
                 "name": "DG.Tweening.Plugins.Color2Plugin",
-                "excluded": true
-            },
-            {
-                "name": "DG.Tweening.Plugins.ColorPlugin",
                 "excluded": true
             },
             {
@@ -7513,10 +7501,6 @@
             },
             {
                 "name": "DG.Tweening.DOTweenModulePhysics2D",
-                "excluded": true
-            },
-            {
-                "name": "DG.Tweening.DOTweenModuleSprite",
                 "excluded": true
             },
             {
@@ -9132,10 +9116,6 @@
                 "excluded": false
             },
             {
-                "name": "Ply_SoundManager.FxAudio",
-                "excluded": false
-            },
-            {
                 "name": "ItemDragRaycastTarget",
                 "excluded": true
             },
@@ -9230,6 +9210,14 @@
             {
                 "name": "SoapFX",
                 "excluded": true
+            },
+            {
+                "name": "CleaningTarget.PaintMode",
+                "excluded": false
+            },
+            {
+                "name": "ItemDragSoundPlayback",
+                "excluded": false
             }
         ],
         "unusedMethods": [
@@ -9659,7 +9647,7 @@
                     },
                     {
                         "name": "toString",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "parse",
@@ -9889,7 +9877,7 @@
                 "instanceMethods": [
                     {
                         "name": "format",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "equals",
@@ -15961,7 +15949,7 @@
                     },
                     {
                         "name": "MoveTowards",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "LerpAngle",
@@ -23019,15 +23007,15 @@
                 "instanceMethods": [
                     {
                         "name": "getDefaultValue",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "ctor",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "Reset",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "getHashCode",
@@ -23039,7 +23027,7 @@
                     },
                     {
                         "name": "$clone",
-                        "excluded": true
+                        "excluded": false
                     }
                 ]
             },
@@ -24096,10 +24084,6 @@
                         "excluded": true
                     },
                     {
-                        "name": "GetAudioClip",
-                        "excluded": false
-                    },
-                    {
                         "name": "GetOrCreateFxSource",
                         "excluded": false
                     },
@@ -24117,6 +24101,10 @@
                     },
                     {
                         "name": "GetFxTypeCount",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetFxAudio",
                         "excluded": false
                     }
                 ]
@@ -25071,7 +25059,7 @@
                     },
                     {
                         "name": "RaycastAll$1",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "RaycastAll$2",
@@ -26425,7 +26413,7 @@
                 "instanceMethods": [
                     {
                         "name": "name#get",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "name#set",
@@ -32079,7 +32067,7 @@
                     },
                     {
                         "name": "ToAlpha",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "Punch",
@@ -32247,7 +32235,7 @@
                     },
                     {
                         "name": "IsTweening",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "TotalActiveTweens",
@@ -33258,6 +33246,10 @@
                     {
                         "name": "DoOneStep",
                         "excluded": true
+                    },
+                    {
+                        "name": "PlaySoundFX",
+                        "excluded": false
                     }
                 ]
             },
@@ -35667,7 +35659,7 @@
                     },
                     {
                         "name": "DOLocalRotateQuaternion",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "DOScale$1",
@@ -36145,7 +36137,7 @@
                     },
                     {
                         "name": "SetOptions$4",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "SetOptions$6",
@@ -37283,10 +37275,6 @@
                     },
                     {
                         "name": "Tick",
-                        "excluded": false
-                    },
-                    {
-                        "name": "Tick\",this)}this.c$-=t;if(this.c$<=0){pc.Application.getApplication().events.off(\"update",
                         "excluded": false
                     }
                 ]
@@ -38661,27 +38649,27 @@
                     },
                     {
                         "name": "CanShowTutorialForItem",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "IsClickableReady",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "IsDraggableReady",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "IsKnifeSpriteMaskCutterReady",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "IsStirringReady",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "IsDragSpriteMaskPainterReady",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "PlayClickHint",
@@ -38689,11 +38677,11 @@
                     },
                     {
                         "name": "PlayMoveHint",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "PlayMoveHint$1",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "PlayStirringHint",
@@ -38705,11 +38693,11 @@
                     },
                     {
                         "name": "PrepareHand",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "Get2DHandPosition",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "HideHandTut",
@@ -38738,6 +38726,22 @@
                     {
                         "name": "ItemDone$1",
                         "excluded": true
+                    },
+                    {
+                        "name": "PlaySockHint",
+                        "excluded": false
+                    },
+                    {
+                        "name": "OneSockDone",
+                        "excluded": false
+                    },
+                    {
+                        "name": "OneShoeBrushed",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetNextValidPainterTarget",
+                        "excluded": false
                     }
                 ]
             },
@@ -39051,14 +39055,22 @@
                     },
                     {
                         "name": "Process",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "EndProcess",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "OnPaintComplete",
+                        "excluded": false
+                    },
+                    {
+                        "name": "IsPlayingPaintFx#get",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Update",
                         "excluded": false
                     }
                 ]
@@ -39105,15 +39117,15 @@
                 "instanceMethods": [
                     {
                         "name": "init",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "Awake",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "OnEnable",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "OnDisable",
@@ -39121,11 +39133,11 @@
                     },
                     {
                         "name": "RotateOnDrag",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "RotateBack",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "ResetToOriginalRotation",
@@ -39133,19 +39145,19 @@
                     },
                     {
                         "name": "HandleDropFail",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "CacheOriginalRotation",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "RotateTo",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "GetRotateTarget",
-                        "excluded": true
+                        "excluded": false
                     }
                 ]
             },
@@ -39276,6 +39288,10 @@
                     {
                         "name": "TurnOnSpawnBreakHeartOnFailed",
                         "excluded": true
+                    },
+                    {
+                        "name": "CacheOriginalPos",
+                        "excluded": false
                     }
                 ]
             },
@@ -39285,7 +39301,7 @@
                 "instanceMethods": [
                     {
                         "name": "IsPaintComplete#get",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "init",
@@ -39349,10 +39365,30 @@
                     },
                     {
                         "name": "GetTutorialTarget",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "UpdateActivePaintingState",
+                        "excluded": false
+                    },
+                    {
+                        "name": "EndActiveTargetPaint",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ProcessTargetPainter",
+                        "excluded": false
+                    },
+                    {
+                        "name": "IsTargetPainting",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetFrontmostPainterUnderPointer",
+                        "excluded": false
+                    },
+                    {
+                        "name": "HandleSingleStateComplete",
                         "excluded": false
                     }
                 ]
@@ -39491,23 +39527,15 @@
                     },
                     {
                         "name": "OnDisable",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "ResetPaint",
                         "excluded": false
                     },
                     {
-                        "name": "BeginPaint",
-                        "excluded": true
-                    },
-                    {
                         "name": "BeginPaintAtWorldPoint",
                         "excluded": false
-                    },
-                    {
-                        "name": "Paint",
-                        "excluded": true
                     },
                     {
                         "name": "PaintAtWorldPoint",
@@ -39523,7 +39551,7 @@
                     },
                     {
                         "name": "EndPaint",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "StampLine",
@@ -39595,6 +39623,18 @@
                     },
                     {
                         "name": "IsPlayingPaintFx#get",
+                        "excluded": false
+                    },
+                    {
+                        "name": "IsPainting#get",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ProcessPaint",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SpawnBrushLine",
                         "excluded": false
                     }
                 ]
@@ -39901,23 +39941,23 @@
                     },
                     {
                         "name": "PlaySpawn$2",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "PlaySpawnWithScale",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "DeSpawn",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "CacheDefaultState",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "ResetState",
-                        "excluded": true
+                        "excluded": false
                     }
                 ]
             },
@@ -39931,7 +39971,7 @@
                     },
                     {
                         "name": "FlyIn",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "MoveToTarget",
@@ -39951,11 +39991,11 @@
                     },
                     {
                         "name": "GetOutsidePosition",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "EnsureHomePosition",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "UnActiveItem",
@@ -39995,6 +40035,260 @@
                     },
                     {
                         "name": "DeSpawn",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "CleaningTarget.DirtTarget",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "ItemSpriteRevealPainter",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "IsPlayingPaintFx#get",
+                        "excluded": false
+                    },
+                    {
+                        "name": "IsPainting#get",
+                        "excluded": false
+                    },
+                    {
+                        "name": "init",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Awake",
+                        "excluded": false
+                    },
+                    {
+                        "name": "OnEnable",
+                        "excluded": false
+                    },
+                    {
+                        "name": "OnDisable",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ResetPaint",
+                        "excluded": false
+                    },
+                    {
+                        "name": "BeginPaintAtWorldPoint",
+                        "excluded": false
+                    },
+                    {
+                        "name": "PaintAtWorldPoint",
+                        "excluded": false
+                    },
+                    {
+                        "name": "BeginPaintSession",
+                        "excluded": false
+                    },
+                    {
+                        "name": "PaintAtPoint",
+                        "excluded": false
+                    },
+                    {
+                        "name": "IsHittingTarget",
+                        "excluded": false
+                    },
+                    {
+                        "name": "RevealTargets",
+                        "excluded": false
+                    },
+                    {
+                        "name": "EndPaint",
+                        "excluded": false
+                    },
+                    {
+                        "name": "CheckComplete",
+                        "excluded": false
+                    },
+                    {
+                        "name": "StartPaintFx",
+                        "excluded": false
+                    },
+                    {
+                        "name": "StopPaintFx",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetMouseOnPaintPlane",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ProjectPointToPaintPlane",
+                        "excluded": false
+                    },
+                    {
+                        "name": "IsPointInsidePaintArea",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetProgress01",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "ItemSpriteRevealPainter.RevealTarget",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "Sock",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "IsDetached#get",
+                        "excluded": false
+                    },
+                    {
+                        "name": "init",
+                        "excluded": false
+                    },
+                    {
+                        "name": "Awake",
+                        "excluded": false
+                    },
+                    {
+                        "name": "BeginDrag",
+                        "excluded": false
+                    },
+                    {
+                        "name": "ProcessDrag",
+                        "excluded": false
+                    },
+                    {
+                        "name": "EndDrag",
+                        "excluded": false
+                    },
+                    {
+                        "name": "DetachAndMove",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "DG.Tweening.Plugins.ColorPlugin",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "Reset",
+                        "excluded": false
+                    },
+                    {
+                        "name": "SetFrom$1",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SetFrom",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ConvertToStartValue",
+                        "excluded": false
+                    },
+                    {
+                        "name": "SetRelativeEndValue",
+                        "excluded": true
+                    },
+                    {
+                        "name": "SetChangeValue",
+                        "excluded": false
+                    },
+                    {
+                        "name": "GetSpeedBasedDuration",
+                        "excluded": true
+                    },
+                    {
+                        "name": "EvaluateAndApply",
+                        "excluded": false
+                    }
+                ]
+            },
+            {
+                "className": "DG.Tweening.DOTweenModuleSprite",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "DOColor",
+                        "excluded": true
+                    },
+                    {
+                        "name": "DOFade",
+                        "excluded": false
+                    },
+                    {
+                        "name": "DOGradientColor",
+                        "excluded": true
+                    },
+                    {
+                        "name": "DOBlendableColor",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "DG.Tweening.Core.Easing.Bounce",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "EaseIn",
+                        "excluded": true
+                    },
+                    {
+                        "name": "EaseOut",
+                        "excluded": false
+                    },
+                    {
+                        "name": "EaseInOut",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "UnityEngine.AddComponentMenu",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "componentMenu#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "componentOrder#get",
+                        "excluded": true
+                    },
+                    {
+                        "name": "ctor",
+                        "excluded": false
+                    },
+                    {
+                        "name": "$ctor1",
+                        "excluded": true
+                    }
+                ]
+            },
+            {
+                "className": "Ply_SoundManager.FxAudio",
+                "staticMethods": [],
+                "instanceMethods": [
+                    {
+                        "name": "init",
                         "excluded": false
                     }
                 ]
@@ -40265,6 +40559,26 @@
                         "script": "",
                         "ext": "",
                         "name": "Assets/Assets/132/bg.png"
+                    },
+                    {
+                        "maxWidth": 2048,
+                        "maxHeight": 2048,
+                        "format": "png32",
+                        "compression": "quantSize",
+                        "quality": 65,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/Assets/AMin.spriteatlasv2"
+                    },
+                    {
+                        "maxWidth": 1615,
+                        "maxHeight": 1920,
+                        "format": "png32",
+                        "compression": "quantSize",
+                        "quality": 65,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/Assets/Lau gi├áy, giß║╖t tß║Ñt b├ím b├╣n/bg_1/bg_1.png"
                     }
                 ]
             },
@@ -40468,6 +40782,116 @@
                         "script": "",
                         "ext": "",
                         "name": "Assets/_GamePlay_/Sound/Sound Effect/─Éß╗ô vß║¡t/WindChime (mp3cut.net).mp3"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:30.000",
+                        "lengthInSeconds": 30.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/Sound Effect/Dreamy room/Water-Flow-Pool_SONICWATER077.wav"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:30.000",
+                        "lengthInSeconds": 30.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/Bg1.mp3"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:30.000",
+                        "lengthInSeconds": 30.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/brush-volume-up.ogg"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:30.000",
+                        "lengthInSeconds": 30.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/AudioClip/water-36883.ogg"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:30.000",
+                        "lengthInSeconds": 30.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/AudioClip/SoftClothDragLoop.ogg"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:30.000",
+                        "lengthInSeconds": 30.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/Lv689/Cat 6.mp3"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:30.000",
+                        "lengthInSeconds": 30.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/Sound Effect/Dreamy room/Pop.wav"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:00.000",
+                        "lengthInSeconds": 0.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/AudioClip/shavelegs.ogg"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:00.000",
+                        "lengthInSeconds": 0.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/heavy drop.mp3"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:00.000",
+                        "lengthInSeconds": 0.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/Lv689/MokugyoJapanese traditional sound (mp3cut.net).mp3"
+                    },
+                    {
+                        "channels": 1,
+                        "startTime": "00:00.000",
+                        "endTime": "00:30.000",
+                        "lengthInSeconds": 30.0,
+                        "bitrate": 64,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/_GamePlay_/Sound/AudioClip/BGM2.ogg"
                     }
                 ]
             },

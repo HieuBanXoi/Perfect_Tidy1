@@ -318,4 +318,9 @@ public class Item : Ply_GameUnit
 
 
     }
+    public void PlaySoundFX(FxType fxType)
+    {
+        if (Ply_SoundManager.Ins == null) return;
+        Ply_SoundManager.Ins.PlayFx(fxType);
+    }
 }

@@ -33,7 +33,10 @@ public enum FxType
     Clock,
     CreamWiping,
     Stirring,
-    ItemPlace
+    ItemPlace,
+    Dirt,
+    Brush,
+    Laundry
 }
 
 public class Ply_SoundManager : Ply_Singleton<Ply_SoundManager>
@@ -43,10 +46,10 @@ public class Ply_SoundManager : Ply_Singleton<Ply_SoundManager>
     {
         public FxType fxType;
         public AudioClip audioClip;
+        [Range(0f, 1f)] public float volume = 1f;
     }
 
     public FxAudio[] fxAudios;
-    [HideInInspector] public AudioClip[] audioClips;
     public AudioSource sound;
     private AudioSource[] fx;
 
@@ -70,8 +73,8 @@ public class Ply_SoundManager : Ply_Singleton<Ply_SoundManager>
     {
         if (!isMute)
         {
-            AudioClip clip = GetAudioClip(fxType);
-            if (clip == null) return;
+            FxAudio fxAudio = GetFxAudio(fxType);
+            if (fxAudio == null || fxAudio.audioClip == null) return;
 
             AudioSource source = GetOrCreateFxSource(fxType);
             if (source.loop)
@@ -79,8 +82,8 @@ public class Ply_SoundManager : Ply_Singleton<Ply_SoundManager>
                 source.loop = false;
                 source.Stop();
             }
-
-            source.PlayOneShot(clip);
+            
+            source.PlayOneShot(fxAudio.audioClip, fxAudio.volume);
         }
     }
     public void PlayFx(int fxType)
@@ -109,11 +112,12 @@ public class Ply_SoundManager : Ply_Singleton<Ply_SoundManager>
     {
         if (!isMute)
         {
-            AudioClip clip = GetAudioClip(fxType);
-            if (clip == null) return;
+            FxAudio fxAudio = GetFxAudio(fxType);
+            if (fxAudio == null || fxAudio.audioClip == null) return;
 
             AudioSource source = GetOrCreateFxSource(fxType);
-            source.clip = clip;
+            source.clip = fxAudio.audioClip;
+            source.volume = fxAudio.volume;
             source.loop = true;
             if (!source.isPlaying)
             {
@@ -142,17 +146,17 @@ public class Ply_SoundManager : Ply_Singleton<Ply_SoundManager>
         StopFxLoop((FxType)fxType);
     }
 
-    private AudioClip GetAudioClip(FxType fxType)
+    private FxAudio GetFxAudio(FxType fxType)
     {
         if (fxAudios == null || fxAudios.Length != GetFxTypeCount())
         {
             SyncFxAudios();
         }
-
+    
         int index = (int)fxType;
         if (fxAudios == null || index < 0 || index >= fxAudios.Length) return null;
-
-        return fxAudios[index].audioClip;
+    
+        return fxAudios[index];
     }
 
     private AudioSource GetOrCreateFxSource(FxType fxType)
@@ -192,27 +196,20 @@ public class Ply_SoundManager : Ply_Singleton<Ply_SoundManager>
     {
         FxType[] types = (FxType[])Enum.GetValues(typeof(FxType));
         FxAudio[] oldFxAudios = fxAudios;
-        AudioClip[] oldAudioClips = audioClips;
 
         fxAudios = new FxAudio[types.Length];
-        audioClips = new AudioClip[types.Length];
 
         for (int i = 0; i < types.Length; i++)
         {
             FxAudio fxAudio = FindFxAudio(oldFxAudios, types[i]);
             if (fxAudio == null)
             {
-                fxAudio = new FxAudio();
+                fxAudio = new FxAudio { volume = 1f };
             }
 
             fxAudio.fxType = types[i];
-            if (fxAudio.audioClip == null && oldAudioClips != null && i < oldAudioClips.Length)
-            {
-                fxAudio.audioClip = oldAudioClips[i];
-            }
 
             fxAudios[i] = fxAudio;
-            audioClips[i] = fxAudio.audioClip;
         }
     }
 

@@ -9,12 +9,20 @@ public class ItemSpriteMaskPainter : MonoBehaviour
     {
         public SpriteMask mask;
         public BrushMaskUnit poolUnit;
+        public PoolType poolType;
     }
 
     [Header("--- BRUSH MASK ---")]
     public SpriteMask brushMaskPrefab;
+    [Tooltip("Prefab hình vuông/chữ nhật để vẽ nét nối. Nếu để trống sẽ dùng kiểu vẽ chấm bi cũ (nặng máy hơn).")]
+    public SpriteMask brushLinePrefab;
     public bool useBrushMaskPool = true;
     public PoolType brushMaskPoolType = PoolType.BrushMask;
+    
+    [Header("--- BRUSH LINE POOL ---")]
+    public bool useBrushLinePool = true;
+    public PoolType brushLinePoolType = PoolType.BrushLineMask;
+
     public Transform brushParent;
     [Header("--- BRUSH CONFIG ---")]
     public float brushRadius = 0.5f;
@@ -43,6 +51,7 @@ public class ItemSpriteMaskPainter : MonoBehaviour
     public UnityEvent onPaintComplete;
 
     private readonly List<BrushStamp> spawnedBrushes = new List<BrushStamp>();
+    public bool IsPainting => isPainting;
     private bool[] coveredSamples;
     private Bounds paintBounds;
     private Plane paintPlane;
@@ -93,28 +102,12 @@ public class ItemSpriteMaskPainter : MonoBehaviour
         CacheSamples();
     }
 
-    public void BeginPaint()
-    {
-        if (!enabled || isComplete || !HasBrushSource()) return;
-
-        BeginPaintSession();
-        Paint();
-    }
-
     public void BeginPaintAtWorldPoint([Bridge.Ref] Vector3 worldPoint)
     {
         if (!enabled || isComplete || !HasBrushSource()) return;
 
         BeginPaintSession();
         PaintAtWorldPoint(worldPoint);
-    }
-
-    public void Paint()
-    {
-        if (!isPainting || isComplete || !HasBrushSource()) return;
-
-        Vector3 point = GetMouseOnPaintPlane();
-        PaintAtPoint(point);
     }
 
     public void PaintAtWorldPoint([Bridge.Ref] Vector3 worldPoint)
@@ -176,15 +169,72 @@ public class ItemSpriteMaskPainter : MonoBehaviour
         StopPaintFx();
     }
 
+    /// <summary>
+    /// Hàm xử lý tổng quát được gọi từ bên ngoài (ví dụ: ItemDragSpriteMaskPainter).
+    /// Tự động gọi BeginPaint hoặc Paint tùy theo trạng thái.
+    /// </summary>
+    /// <param name="worldPoint">Vị trí paint trong không gian thế giới.</param>
+    public void ProcessPaint([Bridge.Ref] Vector3 worldPoint)
+    {
+        if (!enabled || isComplete) return;
+
+        if (!isPainting)
+        {
+            BeginPaintAtWorldPoint(worldPoint);
+        }
+        else
+        {
+            PaintAtWorldPoint(worldPoint);
+        }
+    }
+
     private void StampLine([Bridge.Ref] Vector3 from, [Bridge.Ref] Vector3 to)
     {
         float distance = Vector3.Distance(from, to);
         int steps = Mathf.Max(1, Mathf.CeilToInt(distance / Mathf.Max(0.001f, brushSpacing)));
 
-        for (int i = 1; i <= steps; i++)
+        if (brushLinePrefab != null && distance > 0.01f)
         {
-            Vector3 point = Vector3.Lerp(from, to, i / (float)steps);
-            Stamp(point);
+            // 1. Sinh ra nét nối (Hình chữ nhật)
+            Vector3 midPoint = (from + to) / 2f;
+            Vector3 stampPos = midPoint + mainCam.transform.forward * brushZOffset;
+            
+            BrushStamp lineStamp = SpawnBrushLine(stampPos);
+            SpriteMask lineMask = lineStamp.mask;
+
+            if (lineMask != null)
+            {
+                float radiusScale = (brushRadius * 2f) / Mathf.Max(0.001f, brushDiameterAtScaleOne);
+                
+                // Đặt Scale: Trục X = độ dài nét kéo, Trục Y = độ dày nét vẽ (đường kính)
+                lineMask.transform.localScale = new Vector3(distance, radiusScale, lineMask.transform.localScale.z);
+                
+                // Xoay nét nối theo hướng kéo (quanh trục Z)
+                Vector3 direction = to - from;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                lineMask.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+                spawnedBrushes.Add(lineStamp);
+            }
+            
+            // 2. Vẫn sinh ra 1 hình tròn ở điểm cuối để nét được bo tròn
+            Stamp(to);
+
+            // 3. Vẫn đánh dấu các điểm bên dưới (để tính % làm sạch) mà không cần sinh rác
+            for (int i = 1; i <= steps; i++)
+            {
+                Vector3 pt = Vector3.Lerp(from, to, i / (float)steps);
+                MarkCoveredSamples(pt);
+            }
+        }
+        else
+        {
+            // Phương pháp cũ: Sinh ra hàng loạt hình tròn
+            for (int i = 1; i <= steps; i++)
+            {
+                Vector3 point = Vector3.Lerp(from, to, i / (float)steps);
+                Stamp(point);
+            }
         }
     }
 
@@ -226,7 +276,8 @@ public class ItemSpriteMaskPainter : MonoBehaviour
                 return new BrushStamp
                 {
                     mask = unitMask,
-                    poolUnit = brushMaskUnit
+                    poolUnit = brushMaskUnit,
+                    poolType = brushMaskPoolType
                 };
             }
         }
@@ -235,7 +286,36 @@ public class ItemSpriteMaskPainter : MonoBehaviour
 
         SpriteMask prefabMask = Instantiate(brushMaskPrefab, stampPos, Quaternion.identity, brushParent);
         ApplyMaskSortingOverride(prefabMask);
-        return new BrushStamp { mask = prefabMask };
+        return new BrushStamp { mask = prefabMask, poolUnit = null };
+    }
+
+    private BrushStamp SpawnBrushLine([Bridge.Ref] Vector3 stampPos)
+    {
+        if (useBrushLinePool && Ply_Pool.Ins != null)
+        {
+            BrushMaskUnit lineUnit = Ply_Pool.Ins.Spawn<BrushMaskUnit>(brushLinePoolType, stampPos, Quaternion.identity);
+            if (lineUnit != null)
+            {
+                Transform lineTransform = lineUnit.transform;
+                lineTransform.SetParent(brushParent, true);
+                
+                SpriteMask unitMask = lineUnit.spriteMask != null ? lineUnit.spriteMask : lineUnit.GetComponent<SpriteMask>();
+                ApplyMaskSortingOverride(unitMask);
+
+                return new BrushStamp
+                {
+                    mask = unitMask,
+                    poolUnit = lineUnit,
+                    poolType = brushLinePoolType
+                };
+            }
+        }
+
+        if (brushLinePrefab == null) return default(ItemSpriteMaskPainter.BrushStamp);
+
+        SpriteMask prefabMask = Instantiate(brushLinePrefab, stampPos, Quaternion.identity, brushParent);
+        ApplyMaskSortingOverride(prefabMask);
+        return new BrushStamp { mask = prefabMask, poolUnit = null };
     }
 
     private void ApplyMaskSortingOverride(SpriteMask mask)
@@ -260,7 +340,7 @@ public class ItemSpriteMaskPainter : MonoBehaviour
     {
         if (brushStamp.poolUnit != null && Ply_Pool.Ins != null)
         {
-            Ply_Pool.Ins.Despawn(brushMaskPoolType, brushStamp.poolUnit);
+            Ply_Pool.Ins.Despawn(brushStamp.poolType, brushStamp.poolUnit);
             return;
         }
 
@@ -380,4 +460,54 @@ public class ItemSpriteMaskPainter : MonoBehaviour
         if (totalSamples <= 0) return 0f;
         return coveredCount / (float)totalSamples;
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+        var collider = paintAreaCollider;
+        if (collider == null)
+        {
+            collider = GetComponent<Collider>();
+            if (collider == null) return;
+        }
+
+        Bounds currentBounds = collider.bounds;
+
+        // Draw the outline of the paint area
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(currentBounds.center, currentBounds.size);
+
+        if (sampleColumns <= 0 || sampleRows <= 0) return;
+
+        // Determine a reasonable size for the sample point gizmos
+        float gizmoRadius = Mathf.Min(currentBounds.size.x / sampleColumns, currentBounds.size.y / sampleRows) * 0.15f;
+
+        for (int y = 0; y < sampleRows; y++)
+        {
+            for (int x = 0; x < sampleColumns; x++)
+            {
+                // This logic is duplicated from GetSamplePoint to work in the editor without needing instance state
+                float u = sampleColumns <= 1 ? 0.5f : x / (float)(sampleColumns - 1);
+                float v = sampleRows <= 1 ? 0.5f : y / (float)(sampleRows - 1);
+                Vector3 samplePoint = new Vector3(
+                    Mathf.Lerp(currentBounds.min.x, currentBounds.max.x, u),
+                    Mathf.Lerp(currentBounds.min.y, currentBounds.max.y, v),
+                    currentBounds.center.z
+                );
+
+                // In play mode, color the gizmos based on whether they are covered
+                if (Application.isPlaying && coveredSamples != null && totalSamples > 0 && coveredSamples.Length == totalSamples)
+                {
+                    int index = y * sampleColumns + x;
+                    Gizmos.color = coveredSamples[index] ? Color.green : Color.red;
+                }
+                else
+                {
+                    Gizmos.color = Color.yellow;
+                }
+                Gizmos.DrawSphere(samplePoint, gizmoRadius);
+            }
+        }
+    }
+#endif
 }

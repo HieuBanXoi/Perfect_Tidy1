@@ -19,6 +19,7 @@ public enum PoolType
     BrushMask,
     Paper,
     SoapFX,
+    BrushLineMask,
 }
 
 public class Ply_Pool : Ply_Singleton<Ply_Pool>

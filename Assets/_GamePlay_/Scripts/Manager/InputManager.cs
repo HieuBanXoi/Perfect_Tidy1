@@ -10,6 +10,7 @@ public class InputManager : Ply_Singleton<InputManager>
 
     private ItemDraggable currentDraggable;
     private ItemStirring currentStirring;
+    private Sock currentSock;
 
     private void Update()
     {
@@ -57,7 +58,17 @@ public class InputManager : Ply_Singleton<InputManager>
         {
             bool isInteracted = false;
 
-            if (interactableItem.itemDraggable != null && interactableItem.itemDraggable.CanDrag())
+            // Ưu tiên xử lý Sock trước nếu có
+            Sock sock = interactableItem.GetComponent<Sock>();
+            if (sock != null && sock.enabled && !sock.IsDetached)
+            {
+                interactableItem.TurnOffActiveEffect();
+                currentSock = sock;
+                currentSock.BeginDrag();
+                isDragging = true;
+                isInteracted = true;
+            }
+            else if (interactableItem.itemDraggable != null && interactableItem.itemDraggable.CanDrag())
             {
                 interactableItem.TurnOffActiveEffect();
                 currentDraggable = interactableItem.itemDraggable;
@@ -125,23 +136,31 @@ public class InputManager : Ply_Singleton<InputManager>
 
     private bool CanInteract(Item item)
     {
-        return item.itemDraggable != null && item.itemDraggable.CanDrag()
+        // Thêm kiểm tra cho Sock để InputManager có thể nhận diện
+        Sock sock = item.GetComponent<Sock>();
+        if (sock != null && sock.enabled && !sock.IsDetached)
+        {
+            return true;
+        }
+
+        return (item.itemDraggable != null && item.itemDraggable.CanDrag())
             || item.itemStirring != null && item.itemStirring.enabled
             || item.itemKnifeSpriteMaskCutter != null && item.itemKnifeSpriteMaskCutter.enabled
             || item.itemClickable != null && item.itemClickable.enabled;
     }
 
-
     private void HandleMouseDrag()
     {
         if (currentDraggable != null) currentDraggable.Drag();
         else if (currentStirring != null) currentStirring.Stir();
+        else if (currentSock != null) currentSock.ProcessDrag();
     }
 
     private void HandleMouseUp()
     {
         if (currentDraggable != null) { currentDraggable.EndDrag(); currentDraggable = null; }
         if (currentStirring != null) { currentStirring.EndStir(); currentStirring = null; }
+        if (currentSock != null) { currentSock.EndDrag(); currentSock = null; }
         isDragging = false;
     }
 }

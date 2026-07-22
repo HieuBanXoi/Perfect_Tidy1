@@ -345,7 +345,7 @@ MonoBehaviour:
   brushZOffset: -0.01
   overrideMaskSorting: 0
   maskSortingLayerName: Default
-  paintAreaCollider: {fileID: 0}
+  paintAreaCollider: {fileID: 63359397}
   paintPlaneCenter: {fileID: 63359393}
   requiredPercent: 0.9
   sampleColumns: 22
@@ -369,7 +369,7 @@ Transform:
   m_GameObject: {fileID: 63359391}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5, y: 3.3124998, z: 0}
+  m_LocalPosition: {x: -1.5, y: 3, z: 0}
   m_LocalScale: {x: 0.74999994, y: 0.74999994, z: 0.74999994}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -428,18 +428,18 @@ MonoBehaviour:
     maskSortingLayerName: Wet
     revealTargets:
     - targetSprite: {fileID: 506549805}
-      hitRadius: 0.5
-      fadeSpeed: 1
+      hitRadius: 3
+      fadeSpeed: 3
       completeThreshold: 0
       isRevealed: 0
     - targetSprite: {fileID: 1048038878}
-      hitRadius: 0.5
-      fadeSpeed: 1
+      hitRadius: 3
+      fadeSpeed: 3
       completeThreshold: 0
       isRevealed: 0
     - targetSprite: {fileID: 1915083013}
-      hitRadius: 0.5
-      fadeSpeed: 1
+      hitRadius: 3
+      fadeSpeed: 5
       completeThreshold: 0.9
       isRevealed: 0
     initialAlpha: 0
@@ -504,6 +504,18 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1080033890}
+          m_TargetAssemblyTypeName: HandTutManager, Assembly-CSharp
+          m_MethodName: OneShoeBrushed
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -578,7 +590,7 @@ CapsuleCollider:
   m_Radius: 1.4447519
   m_Height: 6.58
   m_Direction: 1
-  m_Center: {x: 0.07921506, y: -0.73, z: -1}
+  m_Center: {x: 0.07921506, y: -0.73, z: 0}
 --- !u!114 &63359398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,13 +629,11 @@ MonoBehaviour:
   playMoveToTargetFinishSound: 0
   moveToTargetFinishFxType: 4
   fxSpawnZPos: 0
-  anchorPoint: {fileID: 1141722399}
   stretchTarget: {fileID: 63359393}
-  detachDistance: 7
-  stretchScaleMultiplier: 0.05
+  detachDistance: 4
+  stretchScaleMultiplier: 0.1
   returnToAnchorDuration: 0.3
   shrinkDuration: 0.2
-  cleaningTarget: {fileID: 63359394}
   defaultTarget: {fileID: 1023172334}
   moveDuration: 0.5
   moveEase: 6
@@ -1934,6 +1944,61 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &291302598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 291302599}
+  - component: {fileID: 291302600}
+  m_Layer: 0
+  m_Name: LastHandtut
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &291302599
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291302598}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2079264818}
+  m_Father: {fileID: 309240660}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &291302600
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291302598}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 013f8e8869b346a4cb343f2eac366cb2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &308150898
 GameObject:
   m_ObjectHideFlags: 0
@@ -2128,12 +2193,11 @@ Transform:
   m_Children:
   - {fileID: 995830828}
   - {fileID: 491349779}
+  - {fileID: 291302599}
   - {fileID: 491119784}
   - {fileID: 986255775}
-  - {fileID: 1141722399}
   - {fileID: 63359393}
   - {fileID: 1023172334}
-  - {fileID: 1194120538}
   - {fileID: 676145861}
   - {fileID: 375184776}
   - {fileID: 1747069577}
@@ -7699,18 +7763,18 @@ MonoBehaviour:
     maskSortingLayerName: Wet
     revealTargets:
     - targetSprite: {fileID: 1665553723}
-      hitRadius: 0.5
-      fadeSpeed: 1
+      hitRadius: 3
+      fadeSpeed: 3
       completeThreshold: 0
       isRevealed: 0
     - targetSprite: {fileID: 1621142001}
-      hitRadius: 0.5
-      fadeSpeed: 1
+      hitRadius: 3
+      fadeSpeed: 3
       completeThreshold: 0
       isRevealed: 0
     - targetSprite: {fileID: 931115887}
-      hitRadius: 0.5
-      fadeSpeed: 1
+      hitRadius: 3
+      fadeSpeed: 4
       completeThreshold: 0.9
       isRevealed: 0
     initialAlpha: 0
@@ -7789,6 +7853,18 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1080033890}
+          m_TargetAssemblyTypeName: HandTutManager, Assembly-CSharp
+          m_MethodName: OneShoeBrushed
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8134,7 +8210,8 @@ MonoBehaviour:
   returnToStartOnPaintComplete: 0
   spawnHeartOnAutoDropFail: 0
   paintTrailFx: {fileID: 1943586350}
-  fxSoundType: 0
+  fxSoundType: 32
+  soundPlayback: 0
 --- !u!1 &555127430
 GameObject:
   m_ObjectHideFlags: 0
@@ -13345,7 +13422,7 @@ MonoBehaviour:
   brushZOffset: -0.01
   overrideMaskSorting: 0
   maskSortingLayerName: Default
-  paintAreaCollider: {fileID: 0}
+  paintAreaCollider: {fileID: 676145865}
   paintPlaneCenter: {fileID: 676145861}
   requiredPercent: 0.9
   sampleColumns: 22
@@ -13369,7 +13446,7 @@ Transform:
   m_GameObject: {fileID: 676145859}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 3.2524998, z: 0}
+  m_LocalPosition: {x: 1.5, y: 3, z: 0}
   m_LocalScale: {x: 0.74999994, y: 0.74999994, z: 0.74999994}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -13428,18 +13505,18 @@ MonoBehaviour:
     maskSortingLayerName: Wet
     revealTargets:
     - targetSprite: {fileID: 92126876}
-      hitRadius: 0.5
-      fadeSpeed: 1
+      hitRadius: 3
+      fadeSpeed: 3
       completeThreshold: 0
       isRevealed: 0
     - targetSprite: {fileID: 1286986485}
-      hitRadius: 0.5
-      fadeSpeed: 1
+      hitRadius: 3
+      fadeSpeed: 3
       completeThreshold: 0
       isRevealed: 0
     - targetSprite: {fileID: 1381599280}
-      hitRadius: 0.5
-      fadeSpeed: 1
+      hitRadius: 3
+      fadeSpeed: 5
       completeThreshold: 0.9
       isRevealed: 0
     initialAlpha: 0
@@ -13504,6 +13581,18 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1080033890}
+          m_TargetAssemblyTypeName: HandTutManager, Assembly-CSharp
+          m_MethodName: OneShoeBrushed
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -13578,7 +13667,7 @@ CapsuleCollider:
   m_Radius: 1.4447519
   m_Height: 6.58
   m_Direction: 1
-  m_Center: {x: 0.07921506, y: -0.73, z: -1}
+  m_Center: {x: 0.07921506, y: -0.73, z: 0}
 --- !u!114 &676145866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13617,13 +13706,11 @@ MonoBehaviour:
   playMoveToTargetFinishSound: 0
   moveToTargetFinishFxType: 4
   fxSpawnZPos: 0
-  anchorPoint: {fileID: 1194120538}
   stretchTarget: {fileID: 676145861}
-  detachDistance: 7
-  stretchScaleMultiplier: 0.05
+  detachDistance: 4
+  stretchScaleMultiplier: 0.1
   returnToAnchorDuration: 0.3
   shrinkDuration: 0.2
-  cleaningTarget: {fileID: 676145862}
   defaultTarget: {fileID: 375184776}
   moveDuration: 0.5
   moveEase: 6
@@ -14458,6 +14545,7 @@ GameObject:
   - component: {fileID: 928350782}
   - component: {fileID: 928350781}
   - component: {fileID: 928350785}
+  - component: {fileID: 928350786}
   m_Layer: 7
   m_Name: WaterTap
   m_TagString: Untagged
@@ -14673,7 +14761,27 @@ MonoBehaviour:
   returnToStartOnPaintComplete: 0
   spawnHeartOnAutoDropFail: 0
   paintTrailFx: {fileID: 418004939}
-  fxSoundType: 0
+  fxSoundType: 5
+  soundPlayback: 1
+--- !u!114 &928350786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928350780}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa9fe13920c7c340b938f3745d0a4a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateTarget: {fileID: 0}
+  dragEulerAngles: {x: 0, y: 0, z: 45}
+  useLocalRotation: 1
+  rotateRelative: 0
+  rotateDuration: 0.15
+  rotateEase: 6
+  rotateMode: 0
 --- !u!1 &931115885
 GameObject:
   m_ObjectHideFlags: 0
@@ -14992,18 +15100,18 @@ MonoBehaviour:
     maskSortingLayerName: Wet
     revealTargets:
     - targetSprite: {fileID: 1024420473}
-      hitRadius: 0.5
-      fadeSpeed: 1
+      hitRadius: 3
+      fadeSpeed: 3
       completeThreshold: 0.9
       isRevealed: 0
     - targetSprite: {fileID: 82868554}
-      hitRadius: 0.5
-      fadeSpeed: 1
+      hitRadius: 3
+      fadeSpeed: 3
       completeThreshold: 0.9
       isRevealed: 0
     - targetSprite: {fileID: 170944651}
-      hitRadius: 0.5
-      fadeSpeed: 1
+      hitRadius: 3
+      fadeSpeed: 4
       completeThreshold: 0.9
       isRevealed: 0
     initialAlpha: 0
@@ -15082,6 +15190,18 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1080033890}
+          m_TargetAssemblyTypeName: HandTutManager, Assembly-CSharp
+          m_MethodName: OneShoeBrushed
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -15887,13 +16007,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1048038876}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.301, y: -0.51, z: -1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.007853894, w: 0.9999692}
+  m_LocalPosition: {x: 0.064, y: -0.852, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 787553803}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.9}
 --- !u!212 &1048038878
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16203,8 +16323,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items: []
   handTutObject: {fileID: 491349778}
-  idleDelay: 5
-  firstHandTutDelay: 5
+  idleDelay: 4
+  firstHandTutDelay: 0
   moveDuration: 1.2
   dragFadeDuration: 0.2
   clickScaleDuration: 0.35
@@ -16212,15 +16332,19 @@ MonoBehaviour:
   handZPosition: -9
   clickScaleMultiplier: 1.25
   moveEase: 4
+  itemDragSpriteMaskPainters:
+  - {fileID: 2102919544}
   sockCount: 0
   toolObjects:
   - {fileID: 1747069574}
   - {fileID: 529228426}
   - {fileID: 2102919540}
   - {fileID: 928350781}
-  shoeColliders:
-  - {fileID: 986255780}
-  - {fileID: 491119787}
+  socks:
+  - {fileID: 63359398}
+  - {fileID: 676145866}
+  brushedShoeCount: 0
+  lastHandTut: {fileID: 291302598}
 --- !u!1 &1089130076
 GameObject:
   m_ObjectHideFlags: 0
@@ -16286,37 +16410,6 @@ Transform:
   - {fileID: 469433504}
   - {fileID: 133622204}
   m_Father: {fileID: 63359393}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1141722398
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1141722399}
-  m_Layer: 0
-  m_Name: AnchorLeftSockPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1141722399
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1141722398}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.47, y: 4.52, z: 0}
-  m_LocalScale: {x: 0.74999994, y: 0.74999994, z: 0.74999994}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 309240660}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1179376568
 GameObject:
@@ -16468,37 +16561,6 @@ Transform:
   m_Children:
   - {fileID: 6157001269047338521}
   m_Father: {fileID: 2102919543}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1194120537
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1194120538}
-  m_Layer: 0
-  m_Name: AnchorRightSockPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1194120538
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194120537}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.53, y: 4.5200005, z: 0}
-  m_LocalScale: {x: 0.74999994, y: 0.74999994, z: 0.74999994}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 309240660}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1196831629
 GameObject:
@@ -29794,7 +29856,8 @@ MonoBehaviour:
   returnToStartOnPaintComplete: 0
   spawnHeartOnAutoDropFail: 0
   paintTrailFx: {fileID: 1350730710}
-  fxSoundType: 0
+  fxSoundType: 6
+  soundPlayback: 1
 --- !u!1 &1751885230
 GameObject:
   m_ObjectHideFlags: 0
@@ -44571,7 +44634,7 @@ Transform:
   m_GameObject: {fileID: 1824576054}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.92, z: -1.7}
+  m_LocalPosition: {x: 0, y: -0.92, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45037,7 +45100,7 @@ Transform:
   m_GameObject: {fileID: 1916811030}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.92, z: -1.7}
+  m_LocalPosition: {x: 0, y: -0.92, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50285,98 +50348,106 @@ MonoBehaviour:
   fxAudios:
   - fxType: 0
     audioClip: {fileID: 8300000, guid: bf74a3b18a1f229408958a6a47e6404f, type: 3}
+    volume: 1
   - fxType: 1
     audioClip: {fileID: 8300000, guid: 187cb58fc6d92d1499c28bd414aef136, type: 3}
+    volume: 1
   - fxType: 2
     audioClip: {fileID: 8300000, guid: 9ef4d43d4d91be947aefbfebd1f18772, type: 3}
+    volume: 1
   - fxType: 3
-    audioClip: {fileID: 8300000, guid: 72451e2dc04b1e142b568e7c5b1c79f1, type: 3}
+    audioClip: {fileID: 8300000, guid: cb0b97f58b32df9488994f8f97a17048, type: 3}
+    volume: 0.437
   - fxType: 4
-    audioClip: {fileID: 8300000, guid: f5f3732893e21cb4280a3f119e2b619b, type: 3}
+    audioClip: {fileID: 8300000, guid: 8609f75adf5f3e04d9e440f8a888ecc1, type: 3}
+    volume: 1
   - fxType: 5
-    audioClip: {fileID: 8300000, guid: 43262c018e3009446affb093bf268a6f, type: 3}
+    audioClip: {fileID: 8300000, guid: 300ac64cea5224548b55ff7aefdfed89, type: 3}
+    volume: 1
   - fxType: 6
-    audioClip: {fileID: 8300000, guid: 68f1b1cc94b0ec643a19b402fa58e072, type: 3}
+    audioClip: {fileID: 8300000, guid: e818f38c7adeabc4b9f4b4a795316695, type: 3}
+    volume: 1
   - fxType: 7
-    audioClip: {fileID: 8300000, guid: 5af53bb69f429a24c8bee759b532a804, type: 3}
+    audioClip: {fileID: 8300000, guid: faf98ac8bf27b3045b2b9795c9029051, type: 3}
+    volume: 1
   - fxType: 8
     audioClip: {fileID: 8300000, guid: b3712a8811a5dc14393faec9e706498f, type: 3}
+    volume: 1
   - fxType: 9
     audioClip: {fileID: 8300000, guid: 97d086a546a3b6742bff15700c178fc8, type: 3}
+    volume: 1
   - fxType: 10
     audioClip: {fileID: 8300000, guid: 91b12ce553fc9484b8e173b1b4092230, type: 3}
+    volume: 1
   - fxType: 11
     audioClip: {fileID: 8300000, guid: ed98644753c11da4592e863af0ba0030, type: 3}
+    volume: 1
   - fxType: 12
     audioClip: {fileID: 8300000, guid: 9ef4d43d4d91be947aefbfebd1f18772, type: 3}
+    volume: 1
   - fxType: 13
     audioClip: {fileID: 8300000, guid: 9ef4d43d4d91be947aefbfebd1f18772, type: 3}
+    volume: 1
   - fxType: 14
-    audioClip: {fileID: 8300000, guid: 90b6ac7ee2021204db8b8102ad8240ac, type: 3}
+    audioClip: {fileID: 8300000, guid: 9897720222c5776449262029d55d43c8, type: 3}
+    volume: 0.321
   - fxType: 15
     audioClip: {fileID: 8300000, guid: 5f3dbf14fbde4cd4abb524221cb15de7, type: 3}
+    volume: 1
   - fxType: 16
     audioClip: {fileID: 8300000, guid: 78fd8fd149df8304d84d98a56347403c, type: 3}
+    volume: 1
   - fxType: 17
     audioClip: {fileID: 0}
+    volume: 1
   - fxType: 18
     audioClip: {fileID: 0}
+    volume: 1
   - fxType: 19
     audioClip: {fileID: 0}
+    volume: 1
   - fxType: 20
     audioClip: {fileID: 0}
+    volume: 1
   - fxType: 21
     audioClip: {fileID: 0}
+    volume: 1
   - fxType: 22
     audioClip: {fileID: 0}
+    volume: 1
   - fxType: 23
     audioClip: {fileID: 0}
+    volume: 1
   - fxType: 24
     audioClip: {fileID: 0}
+    volume: 1
   - fxType: 25
     audioClip: {fileID: 0}
+    volume: 1
   - fxType: 26
     audioClip: {fileID: 0}
+    volume: 1
   - fxType: 27
     audioClip: {fileID: 0}
+    volume: 1
   - fxType: 28
     audioClip: {fileID: 0}
+    volume: 1
   - fxType: 29
     audioClip: {fileID: 0}
+    volume: 1
   - fxType: 30
     audioClip: {fileID: 0}
-  audioClips:
-  - {fileID: 8300000, guid: bf74a3b18a1f229408958a6a47e6404f, type: 3}
-  - {fileID: 8300000, guid: 187cb58fc6d92d1499c28bd414aef136, type: 3}
-  - {fileID: 8300000, guid: 9ef4d43d4d91be947aefbfebd1f18772, type: 3}
-  - {fileID: 8300000, guid: 72451e2dc04b1e142b568e7c5b1c79f1, type: 3}
-  - {fileID: 8300000, guid: f5f3732893e21cb4280a3f119e2b619b, type: 3}
-  - {fileID: 8300000, guid: 43262c018e3009446affb093bf268a6f, type: 3}
-  - {fileID: 8300000, guid: 68f1b1cc94b0ec643a19b402fa58e072, type: 3}
-  - {fileID: 8300000, guid: 5af53bb69f429a24c8bee759b532a804, type: 3}
-  - {fileID: 8300000, guid: b3712a8811a5dc14393faec9e706498f, type: 3}
-  - {fileID: 8300000, guid: 97d086a546a3b6742bff15700c178fc8, type: 3}
-  - {fileID: 8300000, guid: 91b12ce553fc9484b8e173b1b4092230, type: 3}
-  - {fileID: 8300000, guid: ed98644753c11da4592e863af0ba0030, type: 3}
-  - {fileID: 8300000, guid: 9ef4d43d4d91be947aefbfebd1f18772, type: 3}
-  - {fileID: 8300000, guid: 9ef4d43d4d91be947aefbfebd1f18772, type: 3}
-  - {fileID: 8300000, guid: 90b6ac7ee2021204db8b8102ad8240ac, type: 3}
-  - {fileID: 8300000, guid: 5f3dbf14fbde4cd4abb524221cb15de7, type: 3}
-  - {fileID: 8300000, guid: 78fd8fd149df8304d84d98a56347403c, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+    volume: 1
+  - fxType: 31
+    audioClip: {fileID: 8300000, guid: d0d80fb39f5a8c449ae157302aa53397, type: 3}
+    volume: 1
+  - fxType: 32
+    audioClip: {fileID: 8300000, guid: c62e90d69977f7a44ba4070587f132b9, type: 3}
+    volume: 1
+  - fxType: 33
+    audioClip: {fileID: 8300000, guid: 593803d5b4f2dc64bb719875b7c90ec9, type: 3}
+    volume: 1
   sound: {fileID: 2101441070}
 --- !u!1 &2002875920
 GameObject:
@@ -50502,6 +50573,93 @@ SpriteMask:
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
   m_MaskSource: 0
+--- !u!1 &2079264817
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2079264818}
+  - component: {fileID: 2079264819}
+  m_Layer: 0
+  m_Name: handImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2079264818
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079264817}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.56, y: -0.61, z: 0}
+  m_LocalScale: {x: 0.77000004, y: 0.77000004, z: 0.77000004}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 291302599}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &2079264819
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079264817}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 2200
+  m_Sprite: {fileID: 947821316, guid: 8a1bcf9c76489d045b29f3ad2104096e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.99, y: 2.19}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &2096850970
 GameObject:
   m_ObjectHideFlags: 0
@@ -50651,7 +50809,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2101441069
 Transform:
   m_ObjectHideFlags: 0
@@ -50677,10 +50835,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: fe52e9d49b9d9e44898637caef716f29, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 33cddb0972ab28b4d8a5ae4bf7e83a42, type: 3}
-  m_Resource: {fileID: 8300000, guid: 33cddb0972ab28b4d8a5ae4bf7e83a42, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2ef2c7ecee603a348ab60e345a259627, type: 3}
+  m_Resource: {fileID: 8300000, guid: 2ef2c7ecee603a348ab60e345a259627, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.28
+  m_Volume: 0.087
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -50929,14 +51087,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPainters:
-  - {fileID: 491119786}
   - {fileID: 986255779}
+  - {fileID: 491119786}
   brushSpawnPoint: {fileID: 1186836892}
   paintOnBeginDrag: 1
   returnToStartOnPaintComplete: 0
   spawnHeartOnAutoDropFail: 0
   paintTrailFx: {fileID: 6157001269047629827}
-  fxSoundType: 0
+  fxSoundType: 31
+  soundPlayback: 0
 --- !u!1 &2137147688
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,7 +28,7 @@ public class ToolObject : Item
     {
         if(gameObject.activeInHierarchy) return;
         EnsureHomePosition();
-        // PlaySoundFX(FxType.Swipe);
+        PlaySoundFX(FxType.Swipe);
         transform.DOKill();
         transform.position = GetOutsidePosition(flyInSide);
         gameObject.SetActive(true);
@@ -58,7 +58,7 @@ public class ToolObject : Item
     public void FlyOut()
     {
         EnsureHomePosition();
-        // PlaySoundFX(FxType.Swipe);
+        PlaySoundFX(FxType.Swipe);
 
         transform.DOKill();
         transform.DOMove(GetOutsidePosition(flyOutSide), flyOutDuration).SetEase(flyEase).OnComplete(() =>

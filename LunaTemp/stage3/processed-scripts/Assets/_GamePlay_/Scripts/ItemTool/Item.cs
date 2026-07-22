@@ -16,6 +16,7 @@ public class Item : Ply_GameUnit
     [HideInInspector] public ItemKnifeSpriteMaskCutter itemKnifeSpriteMaskCutter;
     [HideInInspector] public ItemSpriteMaskPainter itemSpriteMaskPainter;
     [HideInInspector] public ItemDragSpriteMaskPainter itemDragSpriteMaskPainter;
+    [HideInInspector] public ItemSpriteRevealPainter itemSpriteRevealPainter;
     [HideInInspector] public ItemMoveToTarget itemMoveToTarget;
     [HideInInspector] public Animator animator;
     public ItemType itemType;
@@ -66,6 +67,7 @@ public class Item : Ply_GameUnit
         if (refreshHiddenReferences || itemKnifeSpriteMaskCutter == null) itemKnifeSpriteMaskCutter = GetComponent<ItemKnifeSpriteMaskCutter>();
         if (refreshHiddenReferences || itemSpriteMaskPainter == null) itemSpriteMaskPainter = GetComponent<ItemSpriteMaskPainter>();
         if (refreshHiddenReferences || itemDragSpriteMaskPainter == null) itemDragSpriteMaskPainter = GetComponent<ItemDragSpriteMaskPainter>();
+        if (refreshHiddenReferences || itemSpriteRevealPainter == null) itemSpriteRevealPainter = GetComponent<ItemSpriteRevealPainter>();
     }
     
     public virtual void ChangeItemType(ItemType itemType)
@@ -315,5 +317,10 @@ public class Item : Ply_GameUnit
         PhaseManager.Ins.DoOneStep();
 
 
+    }
+    public void PlaySoundFX(FxType fxType)
+    {
+        if (Ply_SoundManager.Ins == null) return;
+        Ply_SoundManager.Ins.PlayFx(fxType);
     }
 }
